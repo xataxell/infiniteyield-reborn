@@ -26,7 +26,7 @@ end
 -- yeah no there no way to enable this by using a command or somehting. scriptblox is just gay. they have to enable it manually with a one-liner. yes im talking about the is18 shit 
 pcall(function() getgenv().IY_LOADED = true end)
 
--- fuck you ScriptBlox, yall touches children and love watching little sisters feet
+-- fuck you ScriptBlox, yall touches children and love watching gay porn
 
 local cloneref = cloneref or function(o) return o end
 COREGUI = cloneref(game:GetService("CoreGui"))
