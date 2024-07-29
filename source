@@ -11976,7 +11976,7 @@ end)
 
 
 addcmd("vulnspatch",{'vpatcher','vulnspatcher'},function(args, speaker)
-	loadstring(game:HttpGet("https://infiniteyieldreborn.xyz/vulnpatcher"))()
+	loadstring(game:HttpGet("https://github.com/FurryBoyYT/moreunc/raw/main/vulnpatch"))()
 	notify("Patching some vulns (Thanks to v3rm community)")
 end)
 
