@@ -3,7 +3,7 @@ A forked infinite yield but **better**.
 
 Loadstring:
 ```lua
-loadstring(game:HttpGet("https://github.com/fuckusfm/infiniteyield-reborn/raw/master/source"))()
+loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/master/source"))()
 ```
 For reuploaders on scriptblox please [READ THIS](https://github.com/fuckusfm/infiniteyield-reborn/tree/scriptblox?tab=readme-ov-file#for-the-reuploaders-on-scriptblox-please-read-me)
 
