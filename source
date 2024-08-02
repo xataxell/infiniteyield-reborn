@@ -4915,6 +4915,7 @@ CMDs[#CMDs + 1] = {NAME = 'norender', DESC = 'Disable 3d Rendering to decrease t
 CMDs[#CMDs + 1] = {NAME = 'render', DESC = 'Enable 3d Rendering'}
 CMDs[#CMDs + 1] = {NAME = 'use2022materials / 2022materials', DESC = 'Enables 2022 material textures'}
 CMDs[#CMDs + 1] = {NAME = 'unuse2022materials / un2022materials', DESC = 'Disables 2022 material textures'}
+CMDs[#CMDs + 1] = {NAME = 'r6 / faker6 / r31 / r6anim / r6reanim', DESC = 'Changes your R15 animations to R6'}
 CMDs[#CMDs + 1] = {NAME = 'promptr6', DESC = 'Prompts the game to switch your rig type to R6'}
 CMDs[#CMDs + 1] = {NAME = 'promptr15', DESC = 'Prompts the game to switch your rig type to R15'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
@@ -9623,6 +9624,17 @@ local function promptNewRig(speaker, rig)
     end
 end
 
+local function promptNewRig(speaker, rig)
+    local humanoid = speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid")
+    if humanoid then
+        AvatarEditorService:PromptSaveAvatar(humanoid.HumanoidDescription, Enum.HumanoidRigType[rig])
+        local result = AvatarEditorService.PromptSaveAvatarCompleted:Wait()
+        if result == Enum.AvatarPromptResult.Success then
+            execCmd("reset")
+        end
+    end
+end
+
 addcmd("promptr6", {}, function(args, speaker)
     promptNewRig(speaker, "R6")
 end)
@@ -9631,7 +9643,7 @@ addcmd("promptr15", {}, function(args, speaker)
     promptNewRig(speaker, "R15")
 end)
 
-addcmd("r6", {"r6anim", "r6reanim"}, function(args, speaker)
+addcmd("r6", {"r6anim", "r6reanim", "faker6", 'r31'}, function(args, speaker)
 if r15(speaker) then
 local plr = game:GetService("Players").LocalPlayer
 function RunCustomAnimation(Char)
