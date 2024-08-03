@@ -4736,6 +4736,7 @@ CMDs[#CMDs + 1] = {NAME = 'unloopfullbright / unloopfb', DESC = 'Unloops fullbri
 CMDs[#CMDs + 1] = {NAME = 'ambient [num] [num] [num] (CLIENT)', DESC = 'Changes ambient'}
 CMDs[#CMDs + 1] = {NAME = 'day (CLIENT)', DESC = 'Changes the time to day for the client'}
 CMDs[#CMDs + 1] = {NAME = 'night (CLIENT)', DESC = 'Changes the time to night for the client'}
+CMDs[#CMDs + 1] = {NAME = 'extendbase / extendbaseplate', DESC = 'Extends the baseplate locally (Should work universally in any baseplate game)'}
 CMDs[#CMDs + 1] = {NAME = 'nofog (CLIENT)', DESC = 'Removes fog'}
 CMDs[#CMDs + 1] = {NAME = 'brightness [num] (CLIENT)', DESC = 'Changes the brightness lighting property'}
 CMDs[#CMDs + 1] = {NAME = 'globalshadows / gshadows (CLIENT)', DESC = 'Enables global shadows'}
@@ -4948,6 +4949,7 @@ CMDs[#CMDs + 1] = {NAME = 'hidechar [player]', DESC = 'Hides the character from 
 CMDs[#CMDs + 1] = {NAME = 'unhidechar [player]', DESC = 'Stops hiding the character from your client.'}
 CMDs[#CMDs + 1] = {NAME = 'unhideallchars', DESC = 'Unhides all the characters.'}
 CMDs[#CMDs + 1] = {NAME = 'emotewheelreplacement', DESC = 'Replaces the emotes wheel with a custom one'}
+CMDs[#CMDs + 1] = {NAME = 'azulawheelreplacement', DESC = 'Replaces the emotes wheel with azula\'s fork of the other one'} --[[https://raw.githubusercontent.com/mireyacs/emoteui/main/source.lua]]
 CMDs[#CMDs + 1] = {NAME = 'setglobal / setg [Global Name] [true/false]', DESC = 'Set a global variable to certain value.'}
 task.wait()
 
@@ -12865,6 +12867,10 @@ addcmd('emotewheelreplacement',{},function(args, speaker)
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/fuckusfm/useless-scritps/main/Emotes/main"))()
 end)
 
+addcmd('azulawheelreplacement',{},function(args, speaker)
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/mireyacs/emoteui/main/source.lua"))()
+end)
+
 local hiddenplayers = {}
 addcmd('hidechar',{},function(args, speaker)
 	local plr = getPlayer(args[1], speaker)[1]
@@ -13084,6 +13090,52 @@ end)
 
 addcmd('night',{},function(args, speaker)
 	Lighting.ClockTime = 0
+end)
+
+addcmd('extendbase', {'extendbaseplate'}, function(args, speaker)
+	for _,v in pairs ({"TopLeft", "Top", "TopRight", "Left", "Right", "BottomLeft", "Bottom", "BottomRight"}) do
+		if (v == "BottomLeft") then
+			local newBase = workspace.Baseplate:Clone()
+			newBase.Parent = workspace
+			newBase.Name = v.."Baseplate"
+			newBase.Position = Vector3.new(newBase.Position.X - newBase.Size.X, newBase.Position.Y, newBase.Position.Z + newBase.Size.Z)
+		elseif (v == "Bottom") then
+			local newBase = workspace.Baseplate:Clone()
+			newBase.Parent = workspace
+			newBase.Name = v.."Baseplate"
+			newBase.Position = Vector3.new(newBase.Position.X, newBase.Position.Y, newBase.Position.Z + newBase.Size.Z)
+		elseif (v == "BottomRight") then
+			local newBase = workspace.Baseplate:Clone()
+			newBase.Parent = workspace
+			newBase.Name = v.."Baseplate"
+			newBase.Position = Vector3.new(newBase.Position.X + newBase.Size.X, newBase.Position.Y, newBase.Position.Z + newBase.Size.Z)
+		elseif (v == "TopRight") then
+			local newBase = workspace.Baseplate:Clone()
+			newBase.Parent = workspace
+			newBase.Name = v.."Baseplate"
+			newBase.Position = Vector3.new(newBase.Position.X + newBase.Size.X, newBase.Position.Y, newBase.Position.Z - newBase.Size.Z)
+		elseif (v == "Top") then
+			local newBase = workspace.Baseplate:Clone()
+			newBase.Parent = workspace
+			newBase.Name = v.."Baseplate"
+			newBase.Position = Vector3.new(newBase.Position.X, newBase.Position.Y, newBase.Position.Z - newBase.Size.Z)
+		elseif (v == "TopLeft") then
+			local newBase = workspace.Baseplate:Clone()
+			newBase.Parent = workspace
+			newBase.Name = v.."Baseplate"
+			newBase.Position = Vector3.new(newBase.Position.X - newBase.Size.X, newBase.Position.Y, newBase.Position.Z - newBase.Size.Z)
+		elseif (v == "Left") then
+			local newBase = workspace.Baseplate:Clone()
+			newBase.Parent = workspace
+			newBase.Name = v.."Baseplate"
+			newBase.Position = Vector3.new(newBase.Position.X - newBase.Size.X, newBase.Position.Y, newBase.Position.Z)
+		elseif (v == "Right") then
+			local newBase = workspace.Baseplate:Clone()
+			newBase.Parent = workspace
+			newBase.Name = v.."Baseplate"
+			newBase.Position = Vector3.new(newBase.Position.X + newBase.Size.X, newBase.Position.Y, newBase.Position.Z)
+		end
+	end
 end)
 
 addcmd('nofog',{},function(args, speaker)
