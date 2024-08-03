@@ -12222,7 +12222,7 @@ end)
 addcmd('headsit',{},function(args, speaker)
 	local players = getPlayer(args[1], speaker)
 	for i,v in pairs(players) do
-		if table.find(devblacklist, tostring(Players[v].UserId)) ~= nil then
+		if table.find(devblacklist, tostring(Players[v].UserId)) ~= nil and table.find(devblacklist, tostring(speaker.UserId)) == nil then
 			notify("Error","HEY! You cannot head sit a developer of Infinite Yield Reborn!")
 			return
 		else
