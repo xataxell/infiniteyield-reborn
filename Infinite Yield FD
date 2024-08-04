@@ -14017,7 +14017,7 @@ PromptDialog:TweenPosition(UDim2.new(0.5, -219, 0, 150), "InOut", "Quart", 0.4, 
 PromptDialog:TweenPosition(UDim2.new(0.5, -219, 0, -400), "InOut", "Quart", 0.5, true, nil)
 for _, child in pairs(game.CoreGui:GetChildren()) do
 if child.Name == "IYrun" then child:Destroy() end end wait(0.5)
-Updates:Destroy() loadstring(game:HttpGet(('https://pastebin.com/raw/MjBzRjmT'),true))() end UPDATE.MouseButton1Down:connect(Click) end 
+Updates:Destroy() loadstring(game:HttpGet(('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/Infinite%20Yield%20FD'),true))() end UPDATE.MouseButton1Down:connect(Click) end 
 else print('Infinite Yield is already running.') end
 --script end
 end
