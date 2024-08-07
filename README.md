@@ -19,7 +19,6 @@ For reuploaders on scriptblox please [READ THIS](https://github.com/fuckusfm/inf
 # Reborn developers
 ### Reborn: _Real
 
-### Developer: FurryBoy
 ### Developer: AwesomeDudeIsHere
 ### Developer: azula.cs
 
