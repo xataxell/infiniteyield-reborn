@@ -2,7 +2,7 @@ local reqenv = function() return ((getgenv and getgenv()) or shared or _G) end
 local NewPrefix = reqenv()._NewPrefix or "'" -- change your prefix here :3
 
 if not reqenv().IY_LOADED then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/source"))()
 end
 
 local function createCommandBar()
