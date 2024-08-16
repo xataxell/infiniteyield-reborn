@@ -83,11 +83,6 @@ LoadSettings = function()
 					else
 						_UserSettings.StartMinimized = false
 					end
-					if json.SafeMode ~= nil then
-						_UserSettings.SafeMode = json.SafeMode
-					else
-						_UserSettings.SafeMode = false
-					end
 					if json.NoNotifications ~= nil then
 						_UserSettings.NoNotifications = json.NoNotifications
 					else
@@ -126,7 +121,6 @@ LoadSettings = function()
 			else
 				NoSaving = true
 				_UserSettings.StartMinimized = false
-				_UserSettings.SafeMode = false
 				_UserSettings.NoNotifications = false
 				_UserSettings.SkipIntro = false
 				_UserSettings.Announcement = ""
@@ -134,7 +128,6 @@ LoadSettings = function()
 		end
 	else
 		_UserSettings.StartMinimized = false
-		_UserSettings.SafeMode = false
 		_UserSettings.NoNotifications = false
 		_UserSettings.SkipIntro = false
 		_UserSettings.Announcement = ""
@@ -145,7 +138,6 @@ local UpdateSettings = function()
 	if not NoSaving and canWrite() then
 		local update = {
 			["StartMinimized"] = _UserSettings.StartMinimized,
-			["SafeMode"] = _UserSettings.SafeMode,
 			["NoNotifications"] = _UserSettings.NoNotifications,
 			["SkipIntro"] = _UserSettings.SkipIntro,
 			["Announcement"] = _UserSettings.Announcement,
