@@ -5,85 +5,78 @@ if not reqenv().IY_LOADED then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/source"))()
 end
 
-local function createCommandBar()
-    local frame = Instance.new("Frame")
-    local arrow = Instance.new("TextLabel")
-    local input = Instance.new("TextBox")
-    local predict = Instance.new("TextLabel")
-    local shadow = Instance.new("ImageLabel")
+local commandBar = Instance.new("Frame")
+local arrow = Instance.new("TextLabel")
+local input = Instance.new("TextBox")
+local predict = Instance.new("TextLabel")
+local shadow = Instance.new("ImageLabel")
 
-    frame.Name = "CommandBar"
-    frame.Parent = nil
-    frame.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-    frame.BorderSizePixel = 0
-    frame.Position = UDim2.new(0.5, -100, 1, 5)
-    frame.Size = UDim2.new(0, 200, 0, 35)
-    frame.ZIndex = 0
-
-    arrow.Name = "Arrow"
-    arrow.Parent = frame
-    arrow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    arrow.BackgroundTransparency = 1.0
-    arrow.BorderSizePixel = 0
-    arrow.Size = UDim2.new(0, 25, 1, 0)
-    arrow.ZIndex = 0
-    arrow.Font = Enum.Font.GothamSemibold
-    arrow.Text = ">"
-    arrow.TextColor3 = Color3.fromRGB(220, 224, 234)
-    arrow.TextSize = 14
-    arrow.TextStrokeColor3 = Color3.fromRGB(220, 224, 234)
-    arrow.TextStrokeTransparency = 0.95
-
-    input.Name = "Input"
-    input.Parent = frame
-    input.Active = false
-    input.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    input.BackgroundTransparency = 1.0
-    input.BorderSizePixel = 0
-    input.Position = UDim2.new(0, 20, 0, 0)
-    input.Selectable = false
-    input.Size = UDim2.new(1, -25, 1, 0)
-    input.ZIndex = 5
-    input.Font = Enum.Font.Gotham
-    input.Text = ""
-    input.TextColor3 = Color3.fromRGB(220, 224, 234)
-    input.TextSize = 14
-    input.TextStrokeColor3 = Color3.fromRGB(220, 224, 234)
-    input.TextStrokeTransparency = 0.95
-    input.TextXAlignment = Enum.TextXAlignment.Left
-
-    predict.Name = "Predict"
-    predict.Parent = input
-    predict.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    predict.BackgroundTransparency = 1.0
-    predict.BorderSizePixel = 0
-    predict.Size = UDim2.new(1, 0, 1, 0)
-    predict.ZIndex = 0
-    predict.Font = Enum.Font.Gotham
-    predict.Text = ""
-    predict.TextColor3 = Color3.fromRGB(220, 224, 234)
-    predict.TextSize = 14
-    predict.TextStrokeColor3 = Color3.fromRGB(220, 224, 234)
-    predict.TextTransparency = 0.5
-    predict.TextXAlignment = Enum.TextXAlignment.Left
-
-    shadow.Name = "Shadow"
-    shadow.Parent = frame
-    shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    shadow.BackgroundTransparency = 1.0
-    shadow.Position = UDim2.new(0, -3, 0, -3)
-    shadow.Size = UDim2.new(1, 6, 1, 6)
-    shadow.ZIndex = -5
-    shadow.Image = "rbxassetid://222785823"
-    shadow.ScaleType = Enum.ScaleType.Slice
-    shadow.SliceCenter = Rect.new(100, 100, 100, 100)
-    shadow.SliceScale = 0.25
-
-    return frame
-end
-
-local commandBar = createCommandBar()
+commandBar.Name = "CommandBar"
 commandBar.Parent = PARENT
+commandBar.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+commandBar.BorderSizePixel = 0
+commandBar.Position = UDim2.new(0.5, -100, 1, 5)
+commandBar.Size = UDim2.new(0, 200, 0, 35)
+commandBar.ZIndex = 0
+
+arrow.Name = "Arrow"
+arrow.Parent = commandBar
+arrow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+arrow.BackgroundTransparency = 1.0
+arrow.BorderSizePixel = 0
+arrow.Size = UDim2.new(0, 25, 1, 0)
+arrow.ZIndex = 0
+arrow.Font = Enum.Font.GothamSemibold
+arrow.Text = ">"
+arrow.TextColor3 = Color3.fromRGB(220, 224, 234)
+arrow.TextSize = 14
+arrow.TextStrokeColor3 = Color3.fromRGB(220, 224, 234)
+arrow.TextStrokeTransparency = 0.95
+
+input.Name = "Input"
+input.Parent = commandBar
+input.Active = false
+input.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+input.BackgroundTransparency = 1.0
+input.BorderSizePixel = 0
+input.Position = UDim2.new(0, 20, 0, 0)
+input.Selectable = false
+input.Size = UDim2.new(1, -25, 1, 0)
+input.ZIndex = 5
+input.Font = Enum.Font.Gotham
+input.Text = ""
+input.TextColor3 = Color3.fromRGB(220, 224, 234)
+input.TextSize = 14
+input.TextStrokeColor3 = Color3.fromRGB(220, 224, 234)
+input.TextStrokeTransparency = 0.95
+input.TextXAlignment = Enum.TextXAlignment.Left
+
+predict.Name = "Predict"
+predict.Parent = input
+predict.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+predict.BackgroundTransparency = 1.0
+predict.BorderSizePixel = 0
+predict.Size = UDim2.new(1, 0, 1, 0)
+predict.ZIndex = 0
+predict.Font = Enum.Font.Gotham
+predict.Text = ""
+predict.TextColor3 = Color3.fromRGB(220, 224, 234)
+predict.TextSize = 14
+predict.TextStrokeColor3 = Color3.fromRGB(220, 224, 234)
+predict.TextTransparency = 0.5
+predict.TextXAlignment = Enum.TextXAlignment.Left
+
+shadow.Name = "Shadow"
+shadow.Parent = commandBar
+shadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+shadow.BackgroundTransparency = 1.0
+shadow.Position = UDim2.new(0, -3, 0, -3)
+shadow.Size = UDim2.new(1, 6, 1, 6)
+shadow.ZIndex = -5
+shadow.Image = "rbxassetid://222785823"
+shadow.ScaleType = Enum.ScaleType.Slice
+shadow.SliceCenter = Rect.new(100, 100, 100, 100)
+shadow.SliceScale = 0.25
 
 local function tween(instance, easingStyle, easingDirection, duration, properties)
     local tweenService = game:GetService("TweenService")
@@ -140,7 +133,6 @@ local function resolveTarget(target)
     end
 end
 
-local input = commandBar.Input
 local predictLabel = commandBar.Input.Predict
 local focusConnection = nil
 local function handleFocusLost(focused)
