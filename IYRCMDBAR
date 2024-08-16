@@ -85,7 +85,6 @@ end
 local commandBar = createCommandBar()
 commandBar.Parent = PARENT
 
--- Tween animation helper function
 local function tween(instance, easingStyle, easingDirection, duration, properties)
     local tweenService = game:GetService("TweenService")
     local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle[easingStyle], Enum.EasingDirection[easingDirection])
@@ -94,7 +93,6 @@ local function tween(instance, easingStyle, easingDirection, duration, propertie
     return tween
 end
 
--- Show or hide the command bar
 local function toggleCommandBar(show)
     if show then
         commandBar.Input:CaptureFocus()
@@ -111,7 +109,6 @@ local function toggleCommandBar(show)
     end
 end
 
--- Helper functions for command processing
 local function startsWith(prefix, str)
     return str:sub(1, #prefix) == prefix
 end
@@ -143,7 +140,6 @@ local function resolveTarget(target)
     end
 end
 
--- Input handling
 local input = commandBar.Input
 local predictLabel = commandBar.Input.Predict
 local focusConnection = nil
@@ -169,7 +165,6 @@ end
 
 input.FocusLost:Connect(handleFocusLost)
 
--- Auto-complete and command suggestions
 input:GetPropertyChangedSignal("Text"):Connect(function()
     input.Text = string.lower(input.Text)
     predictLabel.Text = ""
@@ -222,7 +217,6 @@ input:GetPropertyChangedSignal("Text"):Connect(function()
     end
 end)
 
--- Tab key functionality
 input.Focused:Connect(function()
     local userInputService = game:GetService("UserInputService")
     focusConnection = userInputService.InputBegan:Connect(function(input, gameProcessedEvent)
@@ -246,7 +240,6 @@ input.Focused:Connect(function()
     end)
 end)
 
--- Prefix key down event
 IYMouse.KeyDown:Connect(function(key)
     if tostring(string.lower(key)) == NewPrefix then
         spawn(function()
