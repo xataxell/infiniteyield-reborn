@@ -11,6 +11,10 @@
 local reqenv = function() return ((getgenv and getgenv()) or shared or _G) end
 local NewPrefix = reqenv()._NewPrefix or "'" -- change your prefix here :3
 
+if not reqenv().IY_LOADED then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/source"))()
+end
+
 local commandBar = Instance.new("Frame")
 local arrow = Instance.new("TextLabel")
 local input = Instance.new("TextBox")
@@ -259,10 +263,6 @@ end
 if not IY_LOADED then
 	LoadUrl("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/source")
 	wait(0.75)
-end
-
-if not reqenv().IY_LOADED then
-    LoadUrl("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/source"))()
 end
 
 local IS_Settings = {
