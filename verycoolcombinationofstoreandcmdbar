@@ -9,10 +9,14 @@
 ]]
 
 local reqenv = function() return ((getgenv and getgenv()) or shared or _G) end
-local NewPrefix = reqenv()._NewPrefix or "'" -- change your prefix here :3
+local NewPrefix = reqenv()._NewPrefix or "-" -- change your prefix here :3
+local LoadUrl = function(str)
+	return loadstring(game:HttpGet(str, true))()
+end
 
 if not reqenv().IY_LOADED then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/source"))()
+    LoadUrl("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/source")
+	wait(0.75)
 end
 
 local commandBar = Instance.new("Frame")
@@ -256,13 +260,6 @@ if getconnections then
 	for _, v in pairs(getconnections(game:GetService("ScriptContext").Error)) do
 		v:Disable()
 	end
-end
-local LoadUrl = function(str)
-	return loadstring(game:HttpGet(str, true))()
-end
-if not IY_LOADED then
-	LoadUrl("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/source")
-	wait(0.75)
 end
 
 local IS_Settings = {
