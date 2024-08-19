@@ -18,6 +18,7 @@ if not reqenv().IY_LOADED then
     LoadUrl("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/source")
 	wait(0.75)
 end
+
 local commandBar = Instance.new("Frame")
 local arrow = Instance.new("TextLabel")
 local input = Instance.new("TextBox")
