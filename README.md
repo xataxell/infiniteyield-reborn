@@ -16,7 +16,7 @@ IYRCMDLine **(Reconstructed)**:
 loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/master/IYRCMDBAR"))()
 ```
 
-For Reuploaders on ScriptBlox [READ THIS](https://github.com/fuckusfm/infiniteyield-reborn/tree/scriptblox?tab=readme-ov-file#for-the-reuploaders-on-scriptblox-please-read-me) (I don't have a ScriptBlox Branch sooooo... I'll make it later)
+For Reuploaders on ScriptBlox [READ THIS](https://github.com/RyXeleron/infiniteyield-reborn/tree/scriptblox?tab=readme-ov-file#for-the-reuploaders-on-scriptblox-please-read-me)
 
 ## +400 Commands
 
