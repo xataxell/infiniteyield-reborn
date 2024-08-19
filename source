@@ -19,7 +19,7 @@
 ]]--
 
 if IY_LOADED and not _G.IY_DEBUG == true then
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/fuckusfm/infiniteyield-reborn/master/uselessscriptthatexistsinthisrepoiwin'))()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/uselessscriptthatexistsinthisrepoiwin'))()
 	return
 end
 
@@ -6392,7 +6392,7 @@ local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if KeepInfYield and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/fuckusfm/infiniteyield-reborn/master/source'))()")
+		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Ryxeleron/infiniteyield-reborn/master/source'))()")
 	end
 end)
 
