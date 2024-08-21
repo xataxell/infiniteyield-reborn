@@ -365,7 +365,7 @@ local IS_Settings = {
 	["Version"] = "1.3.6",
 	["Invite"] = "VwCGhNu9Rb",
 	["Plugins"] = LoadUrl(
-		"https://cdn.jsdelivr.net/gh/Infinite-Store/Infinite-Store@main/sources.luau"
+		"https://cdn.jsdelivr.net/gh/RyXeleron/Infinite-Store@main/sources.luau"
 	),
 }
 
