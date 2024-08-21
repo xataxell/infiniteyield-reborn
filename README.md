@@ -6,7 +6,7 @@ Master branch's Loadstring:
 loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/master/source"))()
 ```
 
-IYStore x IYR **(NFSW Plugins Removed)**:
+IYStore x IYR **(NFSW Plugins Removed / Reorganized)**:
 ```lua
 loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/master/Infinite%20Store"))()
 ```
