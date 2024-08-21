@@ -1,7 +1,7 @@
 # Infinite Yield Reborn
 A forked infinite yield but **better**.
 
-Main Fork's Loadstring:
+Master branch's Loadstring:
 ```lua
 loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/master/source"))()
 ```
@@ -16,7 +16,7 @@ IYRCMDLine **(Reconstructed)**:
 loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/master/IYRCMDBAR"))()
 ```
 
-For Reuploaders on ScriptBlox [READ THIS](https://github.com/RyXeleron/infiniteyield-reborn/tree/scriptblox?tab=readme-ov-file#for-the-reuploaders-on-scriptblox-please-read-me)
+# For Reuploaders on ScriptBlox [READ THIS](https://github.com/RyXeleron/infiniteyield-reborn/tree/scriptblox?tab=readme-ov-file#for-the-reuploaders-on-scriptblox-please-read-me)
 
 ## +400 Commands
 
