@@ -34,5 +34,9 @@ loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/m
 ### Developer: AwesomeDudeIsHere
 ### Developer: azula.cs
 
+# Contributor
+
+### Ry
+
 ## Contributing
 There is no specific rules on contributing (as of now) just open a pull request and if it checks out we will merge it!
