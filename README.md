@@ -21,7 +21,7 @@ For reuploaders on scriptblox please [READ THIS](https://github.com/fuckusfm/inf
 
 ### Developer: FurryBoy
 ### Developer: AwesomeDudeIsHere
-### Developer: azula.cs
+### Developer: [azula.cs](https://api.infiniteyieldreborn.xyz/)
 
 ## Contributing
 There is no specific rules on contributing (as of now) just open a pull request and if it checks out we will merge it!
