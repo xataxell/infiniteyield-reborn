@@ -1,6 +1,8 @@
 # Infinite Yield Reborn
 A forked infinite yield but **better**.
 
+### THIS PROJECT WAS DISCONTINUE BECAUSE OF [AZULA.CS](https://api.infiniteyieldreborn.xyz/) HARVESTING DATAS FROM USERS
+
 Master branch's Loadstring:
 ```lua
 loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/master/source"))()
@@ -20,21 +22,21 @@ loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/m
 
 ## +400 Commands
 
-# IY Devs Credit 
+# IY Devs Credits
 ### Creator: Edge
 
 ### Developer: Moon
 ### Developer: Zwolf
 ### Developer: Toon
 
-# Reborn developers
+# IYR Devs Credits
 ### Reborn: [_Real](https://github.com/fuckusfm)
 
 ### Developer: FurryBoy
 ### Developer: AwesomeDudeIsHere
 ### Developer: [azula.cs](https://api.infiniteyieldreborn.xyz/)
 
-# Contributor
+# Contributors
 
 ### Ry
 
