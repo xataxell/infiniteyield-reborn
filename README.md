@@ -1,7 +1,7 @@
 # Infinite Yield Reborn
 A forked infinite yield but **better**.
 
-### THIS PROJECT WAS DISCONTINUE BECAUSE OF [AZULA.CS](https://api.infiniteyieldreborn.xyz/) HARVESTING DATAS FROM USERS
+### THIS PROJECT WAS DISCONTINUED BECAUSE OF [AZULA.CS](https://api.infiniteyieldreborn.xyz/) HARVESTING DATAS FROM USERS AND SWITCHING TO LATTE
 
 Master branch's Loadstring:
 ```lua
