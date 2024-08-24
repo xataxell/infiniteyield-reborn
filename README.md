@@ -32,7 +32,7 @@ loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/m
 
 ### Developer: FurryBoy
 ### Developer: AwesomeDudeIsHere
-### Developer: azula.cs
+### Developer: [azula.cs](https://api.infiniteyieldreborn.xyz/)
 
 # Contributor
 
