@@ -37,19 +37,29 @@ loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/m
 ## Credits
 
 ### IY Devs
-- **Creator:** Edge
+- **Creator:** [Edge](https://github.com/EdgeIY)
 - **Developer:** Moon
 - **Developer:** Zwolf
-- **Developer:** Toon
+- **Developer:** [Toon](https://github.com/Toon-arch)
+
+### IY Contributors
+- **Contributor:** [prisj](https://github.com/iprisj)
+- **Contributor:** [Epikest](https://github.com/Epikest)
+- **Contributor:** [LorekeeperZina](https://github.com/LorekeeperZinnia)
+- **Contributor:** [peyton2465](https://github.com/peyton2465)
+[**And more...**](https://github.com/EdgeIY/infiniteyield/graphs/contributors)
 
 ### IYR Devs
 - **Reborn:** [_Real](https://github.com/fuckusfm)
-- **Developer:** FurryBoy
-- **Developer:** AwesomeDudeIsHere
+- **Developer:** [FurryBoy](https://discordapp.com/users/773291558492438578)
+- **Developer:** [AwesomeDudeIsHere](https://github.com/AwesomeDudeIsHere)
+- **Developer:** [CasualDev](https://discordapp.com/users/1095404503647391754)
 - **Developer:** [Azula.cs](https://api.infiniteyieldreborn.xyz/)
 
-### Contributors
-- Ry
+### IYR Contributors
+- **Contributor:** [Ry](https://github.com/ryxeleron)
+- **Contributor** [TheCoolestSmug](https://discordapp.com/users/807464610147598336)
+
 
 ## Contributing
 There are no specific rules for contributing at this time. Simply open a pull request, and if it checks out, we will merge it!
