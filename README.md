@@ -1,5 +1,5 @@
 
-# Infinite Yield Reborn
+# <h1 align="center">Infinite Yield Reborn</h1>
 
 A forked version of Infinite Yield that’s **better**.
 
