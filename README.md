@@ -65,4 +65,3 @@ loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/m
 There are no specific rules for contributing at this time. Simply open a pull request, and if it checks out, we will merge it!
 
 ---
-\\
