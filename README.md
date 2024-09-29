@@ -26,7 +26,7 @@ loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/m
 ---
 
 ## For Reuploaders on ScriptBlox
-[Read this before reuploading to avoid getting banned](https://github.com/RyXeleron/infiniteyield-reborn/tree/scriptblox?tab=readme-ov-file#for-the-reuploaders-on-scriptblox-please-read-me).
+[READ THIS BEFORE UPLOADING TO AVOID GETTING BANNED](https://github.com/RyXeleron/infiniteyield-reborn/tree/scriptblox?tab=readme-ov-file#for-the-reuploaders-on-scriptblox-please-read-me).
 
 ---
 
