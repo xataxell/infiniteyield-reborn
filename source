@@ -15286,8 +15286,7 @@ local function fadeInAndMove()
                 fadeOutTextTween:Play()
                 fadeOutTween.Completed:Connect(
                     function()
-                        imageLabel:Destroy()
-                        textLabel:Destroy()
+                        screenGui:Destroy()
                     end
                 )
             end
