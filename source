@@ -18,9 +18,6 @@
 	If it prints without any errors, then the issue is probably different.
 ]]--
 
---[[
-	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
-]]
 local startTime = tick()
 
 if IY_LOADED and not _G.IY_DEBUG == true then
