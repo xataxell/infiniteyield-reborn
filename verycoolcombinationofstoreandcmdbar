@@ -18,7 +18,7 @@ if not reqenv().IY_LOADED then
     LoadUrl("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/source")
 	wait(0.75)
 else 
-    LoadUrl("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/alreadyexecuted")
+    LoadUrl("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/IYCMDBARALREADYEXECUTED")
 end
 
 local commandBar = Instance.new("Frame")
