@@ -12426,7 +12426,7 @@ end
 -- ;bang / ;rape command exists in the original IY
 -- and I. FB_REAL GET FUCKING BANNED BECAUSE OF 2 NSFW SCRIPTS ITS NOT EVEN "MORE" ITS JUST 1 EXTRA COMMAND
 -- the community is sped :broken_heart:
---[[
+
 local isbanging = false
 addcmd("Bang",{"rape"}, function(args, speaker)
 	if args[1] then
@@ -12505,7 +12505,7 @@ addcmd("facebang", {"facerape","facefuck"}, function(args, speaker)
 		end
 	end
 end)
-]]
+
 --------------------------------------------------------------------------------------------------------
 
 addcmd("antibang",{'antirape'},function(args, speaker)
