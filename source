@@ -4546,6 +4546,7 @@ end
 CMDs = {}
 CMDs[#CMDs + 1] = {NAME = 'discord / dc', DESC = 'Invite to the Discord server.'}
 CMDs[#CMDs + 1] = {NAME = 'console', DESC = 'Loads old Roblox console'}
+CMDs[#CMDs + 1] = {NAME = 'website', DESC = 'Open / copy the website link'}
 CMDs[#CMDs + 1] = {NAME = 'killroblox', DESC = 'Kills Roblox instance'}
 CMDs[#CMDs + 1] = {NAME = 'unc / unctest / unccheckevn', DESC = 'Tests all UNC Environment'}
 CMDs[#CMDs + 1] = {NAME = 'addunc / addmoreunc / adduncevn', DESC = 'Adds some UNC Environment(s)'}
@@ -6489,6 +6490,25 @@ addcmd('discord', {'dc'}, function(args, speaker)
 			})
 		})
 	end
+end)
+
+addcmd('website', {'site'}, function(args, speaker)
+local success, err =
+    pcall(function()
+        if game:GetService("BrowserService") and game:GetService("BrowserService").OpenBrowser then
+            game:GetService("BrowserService"):OpenBrowser("https://iyr.lol")
+        elseif syn and syn.openURL then
+            syn.openURL("http://iyr.lol")
+        elseif everyClipboard then
+            toClipboard("https://iyr.lol")
+		    notify('Website', 'Copied to clipboard!\nhttp://iyr.lol')
+        else
+            notify("No method to open URL or copy to clipboard is available.")
+        end
+    end)
+    if not success then
+        notify("Website Link", "https://iyr.lol")
+    end
 end)
 
 addcmd('clienttoken', {'ctoken', 'iyrtoken'}, function(args, speaker)
