@@ -1,7 +1,9 @@
 # <h1 align="center">![IYR1](https://github.com/user-attachments/assets/3a9ca248-b931-41a9-b46e-b503f3c051f0)
 </h1>
 
-A forked version of Infinite Yield that’s **better**.
+<p align="center">
+	Infinite Yield but 𝗯𝗲𝘁𝘁𝗲𝗿
+</p>
 
 ## Master Branch Loadstring
 
