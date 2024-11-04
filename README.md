@@ -3,7 +3,7 @@
 
 A forked version of Infinite Yield that’s **better**.
 
-### Although it might be slightly behind EdgeIY in updates, it's still a solid choice. Some features may have already been added to the script but not yet synced.
+### Although it might be slightly behind EdgeIY in updates, some features may have already been added to the script but didn't get synced.
 
 ## Master Branch Loadstring
 
@@ -32,7 +32,20 @@ loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/m
 
 ## Features
 
-- Over **400 commands**
+### What IY offers
+
+
+- Over 400 Commands at your fingertips
+- Very slow update
+- Easy to use
+- The starting point of every exploiter
+
+### What IYR offers
+- Frequency updates
+- Has support for TextChatService
+- Trimmed down unused or broken commands
+- Now includes counters for Plugins, Aliases, Keybinds, and Waypoints
+- Actually has an OnLeave detection.
 
 ## Credits
 
