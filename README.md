@@ -3,8 +3,6 @@
 
 A forked version of Infinite Yield that’s **better**.
 
-### Although it might be slightly behind EdgeIY in updates, some features may have already been added to the script but didn't get synced.
-
 ## Master Branch Loadstring
 
 ```lua
