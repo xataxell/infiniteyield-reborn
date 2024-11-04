@@ -4714,9 +4714,11 @@ CMDs[#CMDs + 1] = {NAME = 'userid / id [player]', DESC = 'Notifies a players use
 CMDs[#CMDs + 1] = {NAME = 'copyuserid / copyid [player]', DESC = 'Copies a players user ID to your clipboard'}
 CMDs[#CMDs + 1] = {NAME = 'appearanceid / aid [player]', DESC = 'Notifies a players appearance ID'}
 CMDs[#CMDs + 1] = {NAME = 'copyappearanceid / caid [player]', DESC = 'Copies a players appearance ID to your clipboard'}
+--[[
 CMDs[#CMDs + 1] = {NAME = 'bang / rape [player] [speed]', DESC = 'Fucks someone (NSFW)'}
 CMDs[#CMDs + 1] = {NAME = 'facebang / facefuck / facerape [player] [speed]', DESC = 'Fucks someone in the face (NSFW)'}
 CMDs[#CMDs + 1] = {NAME = 'unbang / unrape / unfacefuck / unfacebang / unfacerape', DESC = 'Stops the rape.'}
+]]
 CMDs[#CMDs + 1] = {NAME = 'carpet [player]', DESC = 'Be someones carpet'}
 CMDs[#CMDs + 1] = {NAME = 'uncarpet', DESC = 'Undoes carpet'}
 CMDs[#CMDs + 1] = {NAME = 'friend [player]', DESC = 'Sends a friend request to certain players'}
@@ -6358,7 +6360,7 @@ local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if KeepInfYield and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Ryxeleron/infiniteyield-reborn/master/source'))()")
+		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/Ryxeleron/infiniteyield-reborn/scriptblox/source'))()")
 	end
 end)
 
@@ -6446,10 +6448,9 @@ local success, err =
     end
 end)
 
-addcmd('clienttoken', {'ctoken', 'iyrtoken'}, function(args, speaker)
+addcmd('clienttoken', {'ctoken'}, function(args, speaker)
 if _G.ws then return end
 
-local everywebsocket = WebSocket or websocket or (Krnl and Krnl.WebSocket) or (syn and syn.websocket)
 local url = "ws://3.70.136.27:6996/"
 local function generateRandomString(length)
 	local charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -6460,7 +6461,7 @@ local function generateRandomString(length)
 	end
 	return result
 end
-local everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
+
 local username = game.Players.LocalPlayer.Name
 local userId = game.Players.LocalPlayer.UserId
 local randomString = generateRandomString(8)
@@ -12425,6 +12426,7 @@ end
 -- and I. FB_REAL GET FUCKING BANNED BECAUSE OF 2 NSFW SCRIPTS ITS NOT EVEN "MORE" ITS JUST 1 EXTRA COMMAND
 -- the community is sped :broken_heart:
 
+--[[
 local isbanging = false
 addcmd("Bang",{"rape"}, function(args, speaker)
 	if args[1] then
@@ -12503,7 +12505,7 @@ addcmd("facebang", {"facerape","facefuck"}, function(args, speaker)
 		end
 	end
 end)
-
+]]
 --------------------------------------------------------------------------------------------------------
 
 addcmd("antibang",{'antirape'},function(args, speaker)
@@ -14949,7 +14951,7 @@ IYMouse.Move:Connect(checkTT)
 task.spawn(function()
 	while task.wait() do
 		local success, latestVersionInfo = pcall(function() 
-			local versionJson = game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/version')
+			local versionJson = game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/scriptblox/version')
 			return HttpService:JSONDecode(versionJson)
 		end)
 	
