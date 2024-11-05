@@ -14946,7 +14946,7 @@ IYMouse.Move:Connect(checkTT)
 task.spawn(function()
 	while task.wait() do
 		local success, latestVersionInfo = pcall(function() 
-			local versionJson = game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/scriptblox/version')
+			local versionJson = game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/version')
 			return HttpService:JSONDecode(versionJson)
 		end)
 	
