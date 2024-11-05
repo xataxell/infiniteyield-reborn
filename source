@@ -1,13 +1,14 @@
 --[[
 	Hello! You might wonder why Infinite Yield Reborn is not executing.
         You may have also wondered if the script is obfuscated or not. As you can see, it isn't.
+        (Yeah this isn't Infinite Yield Reborn by Patrick's, because that one doesn't support most executors)
 
-	If IY Reborn is not executing, this can possibly mean that your executor does not support LuaU syntax.
+	If IY Reborn is not executing, your executor may not support LuaU syntax.
 
 	To check if it supports LuaU syntax, run this:
 	print(true and "Supported" or "This shouldn't be printed")
 
-	If you see the message "Supported" in console (F9 or /console in chat) then the issue is probably different.
+	The issue is probably different if you see the message "Supported" in the console (F9 or /console in chat).
 
 	You can also run these lines too:
 	local test = 1
