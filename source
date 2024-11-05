@@ -7409,6 +7409,10 @@ addcmd("clickfling", {"mousefling"}, function(args, speaker)
     end)
 end)
 
+addcmd("unwalkfling", {"unwfling"}, function(args, speaker)
+    hiddenfling = false
+end)
+
 addcmd("unclickfling", {"unclickfling"}, function(args, speaker)
     clickflingEnabled = false
 end)
