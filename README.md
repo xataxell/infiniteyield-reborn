@@ -8,19 +8,19 @@
 ## Master Branch Loadstring
 
 ```lua
-loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/master/source"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/master/source"))()
 ```
 
 ## IYStore x IYR (NFSW Plugins Removed / Reorganized)
 
 ```lua
-loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/master/Infinite%20Store"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/master/Infinite%20Store"))()
 ```
 
 ## IYRCMDLine (Reconstructed)
 
 ```lua
-loadstring(game:HttpGet("https://github.com/RyXeleron/infiniteyield-reborn/raw/master/IYRCMDBAR"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/master/IYRCMDBAR"))()
 ```
 
 ---
