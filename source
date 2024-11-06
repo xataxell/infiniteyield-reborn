@@ -4589,7 +4589,7 @@ CMDs[#CMDs + 1] = {NAME = 'unlocate / nolocate [player]', DESC = 'Removes locate
 CMDs[#CMDs + 1] = {NAME = 'xray', DESC = 'Makes all parts in workspace transparent'}
 CMDs[#CMDs + 1] = {NAME = 'unxray / noxray', DESC = 'Restores transparency'}
 CMDs[#CMDs + 1] = {NAME = 'loopxray', DESC = 'Makes all parts in workspace transparent but looped'}
-CMDs[#CMDs + 1] = {NAME = 'unloopunxray', DESC = 'Unloops xray'}
+CMDs[#CMDs + 1] = {NAME = 'unloopxray', DESC = 'Unloops xray'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'staffwatch', DESC = 'Notify if a staff member of the game joins the server'}
 CMDs[#CMDs + 1] = {NAME = 'unstaffwatch', DESC = 'Disable Staffwatch'}
@@ -14113,19 +14113,23 @@ addcmd("togglexray", {}, function(args, speaker)
 end)
 
 addcmd("loopxray", {}, function(args, speaker)
-	if xrayLoop then
-		xrayLoop:Disconnect()
-	end
-	xrayLoop = RunService.RenderStepped:Connect(function()
-		xrayEnabled = true
-		xray()
-	end)
+    if xrayLoop then
+        xrayLoop:Disconnect()
+    end
+    
+    xrayEnabled = true
+    xrayLoop = RunService.RenderStepped:Connect(function()
+        xray()
+    end)
 end)
 
 addcmd("unloopxray", {}, function(args, speaker)
-	if xrayLoop then
-		xrayLoop:Disconnect()
-	end
+    if xrayLoop then
+        xrayLoop:Disconnect()
+        xrayLoop = nil
+        xrayEnabled = false
+        xray()
+    end
 end)
 
 staffRoles = {"mod", "admin", "staff", "dev", "founder", "owner", "supervis", "manager", "management", "executive", "president", "chairman", "chairwoman", "chairperson", "director"}
