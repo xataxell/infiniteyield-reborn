@@ -11905,6 +11905,12 @@ addcmd('hugtool', {'kisstool', 'bidentool'}, function(args, speaker)
 
         Play_1:Play()
         Play_2:Play()
+
+        HugTool.Unequipped:Connect(function()
+        HugTool.Name = "Hug Tool\nOff"
+        Play_1:Stop()
+        Play_2:Stop()
+        end)
     end)
 end)
 
