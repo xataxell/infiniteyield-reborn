@@ -12579,7 +12579,7 @@ end
 -- the community is sped :broken_heart:
 
 local isbanging = false
-addcmd("Bang",{"rape"}, function(args, speaker)
+addcmd("bang", {"rape"}, function(args, speaker)
 	if args[1] then
 		local players = getPlayer(args[1], speaker)
 		for _, v in pairs(players) do
@@ -12612,7 +12612,7 @@ addcmd("Bang",{"rape"}, function(args, speaker)
 	end
 end)
 
-addcmd("facebang", {"facerape","facefuck"}, function(args, speaker)
+addcmd("facebang", {"facerape", "facefuck"}, function(args, speaker)
 	if args[1] then
 		local players = getPlayer(args[1], speaker)
 		for _, v in pairs(players) do
@@ -12650,7 +12650,7 @@ end)
 local ishugging = false
 local hug_1, hug_2, hugDied
 
-addcmd("hug", {"kiss" "biden"}, function(args, speaker)
+addcmd("hug", {"kiss", "biden"}, function(args, speaker)
     if args[1] then
         local players = getPlayer(args[1], speaker)
         local position = args[2] and args[2]:lower() or "back"
@@ -12713,7 +12713,7 @@ addcmd("hug", {"kiss" "biden"}, function(args, speaker)
     end
 end)
 
-addcmd("unhug", {"stophug", "releasehug" "unbiden"}, function(args, speaker)
+addcmd("unhug", {"stophug", "releasehug", "unbiden"}, function(args, speaker)
     if hugDied then
         hugDied:Disconnect()
     end
@@ -12726,7 +12726,6 @@ addcmd("unhug", {"stophug", "releasehug" "unbiden"}, function(args, speaker)
     end
     ishugging = false
 end)
-local Players = game:GetService("Players")
 
 local isAttached = false
 local attachAnim_1, attachAnim_2, sitAnim, anim_1, anim_2, sit, attachDied, jumpConnection
