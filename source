@@ -4685,7 +4685,7 @@ CMDs[#CMDs + 1] = {NAME = 'unbang / unrape / unfacefuck / unfacebang / unfacerap
 CMDs[#CMDs + 1] = {NAME = 'chokeon / suckon [player] [lower / upper]', DESC = 'Sucks someones private part(s) (NSFW)'}
 CMDs[#CMDs + 1] = {NAME = 'stopchokeon / unchokeon / stopsuckon / unsuckon', DESC = 'Stops the sucking.'}
 CMDs[#CMDs + 1] = {NAME = 'hug / kiss / biden [player] [front / back]', DESC = 'Hugs someone.'}
-CMDs[#CMDs + 1] = {NAME = 'unhug / stophug / releasehug / unbiden', DESC = 'Stops the hugging.'}
+CMDs[#CMDs + 1] = {NAME = 'unhug / unkiss / unbiden', DESC = 'Stops the hugging.'}
 CMDs[#CMDs + 1] = {NAME = 'backpack / attach [player]', DESC = 'Be someones backpack'}
 CMDs[#CMDs + 1] = {NAME = 'unbackpack / detach', DESC = 'Stops being a backpack'}
 CMDs[#CMDs + 1] = {NAME = 'carpet [player]', DESC = 'Be someones carpet'}
@@ -12784,7 +12784,7 @@ addcmd("hug", {"kiss", "biden"}, function(args, speaker)
     end
 end)
 
-addcmd("unhug", {"stophug", "unkiss", "releasehug", "unbiden"}, function(args, speaker)
+addcmd("unhug", {"unkiss", "unbiden"}, function(args, speaker)
     if hugDied then
         hugDied:Disconnect()
     end
