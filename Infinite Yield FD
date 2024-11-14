@@ -776,7 +776,7 @@ WL = {'IoIman616','Conceptual_Nullifier','Thomasbudge','N3xuI','MoonlightTears',
 function kickF(plr)
 spawn(function()
 if plr.Parent ~= nil then
-if FindTable(WL, plr.Name) then notify('Error: '..plr.Name..' is whitelisted') else
+if FindTable(WL, plr.Name) then Notify('Error: '..plr.Name..' is whitelisted') else
 local newChar = dummy:Clone() newChar.Parent = workspace
 newChar.HumanoidRootPart.Position = Vector3.new(math.random(999000, 1001000), 10000, 0)
 for i = 1,4 do
@@ -838,7 +838,7 @@ kickF(player)
 if FindTable(banT, player.userId) then
 	spawn(function()
 repeat wait() until player.Character
-notify('Banned player, ' .. player.Name .. ' attempted to join')
+Notify('Banned player, ' .. player.Name .. ' attempted to join')
 kickF(player)
 end)
 end
@@ -1361,7 +1361,7 @@ function(args,speaker)
             customAlias[alias] = v
 			if not aliasSave or aliasSave == nil then aliasSave = {} end
 			aliasSave[#aliasSave + 1] = {CMD = cmd, ALIAS = alias}
-            notify("Added "..alias.." as an alias to "..cmd)
+            Notify("Added "..alias.." as an alias to "..cmd)
 			updatefile()
 			updatealiases()
             break
@@ -1394,7 +1394,7 @@ function(args,speaker)
 		if v.ALIAS == tostring(alias) then
 		table.remove(aliasSave, i)
 		end end
-        notify("Removed the alias "..alias.." from "..cmd)
+        Notify("Removed the alias "..alias.." from "..cmd)
 		updatefile()
 		updatealiases()
     end
@@ -1406,7 +1406,7 @@ customAlias = {}
 aliasSave ={}
 updatefile()
 updatealiases()
-notify('Removed all aliases')
+Notify('Removed all aliases')
 end)
 
 addcmd('s','runs a script in the chat or cmdbar',{'script'},
@@ -2151,7 +2151,7 @@ function(args,speaker)
             execCmd(cmdText,speaker)
         end
     end,false,key)
-    notify("Binded "..cmdText.." to "..key)
+    Notify("Binded "..cmdText.." to "..key)
 end
 end)
 
@@ -2162,7 +2162,7 @@ function(args,speaker)
     if #args < 1 then return end
     local key = string.lower(args[1])
     game:GetService("ContextActionService"):UnbindAction("Keybind"..key)
-    notify("Unbinded "..key)
+    Notify("Unbinded "..key)
 end
 end)
 
@@ -2891,8 +2891,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		if not FindTable(loopkillT, _players[v].Name) then
 			table.insert(loopkillT, _players[v].Name)
-			if FindTable(SPC, args[1]) then notify('Loopkilling ' .. args[1]) else
-			notify('Loopkilling player(s)') end end end end)
+			if FindTable(SPC, args[1]) then Notify('Loopkilling ' .. args[1]) else
+			Notify('Loopkilling player(s)') end end end end)
 
 addcmd('unloopkill', 'un rip person',{'unlkill'},
 function(args, speaker)
@@ -2900,8 +2900,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		if FindTable(loopkillT, _players[v].Name) then
 			table.remove(loopkillT, GetInTable(loopkillT, _players[v].Name))
-			if FindTable(SPC, args[1]) then notify('No longer loopkilling ' .. args[1]) else
-			notify('No longer loopkilling player(s)') end end end end)
+			if FindTable(SPC, args[1]) then Notify('No longer loopkilling ' .. args[1]) else
+			Notify('No longer loopkilling player(s)') end end end end)
 
 addcmd('disabletools', 'removes their tools',{'loopremovetools'},
 function(args, speaker)
@@ -2909,8 +2909,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		if not FindTable(disabletoolsT, _players[v].Name) then
 			table.insert(disabletoolsT, _players[v].Name)
-			if FindTable(SPC, args[1]) then notify('Disabled tools for ' .. args[1]) else
-			notify('Disabled tools for player(s)') end end end end)
+			if FindTable(SPC, args[1]) then Notify('Disabled tools for ' .. args[1]) else
+			Notify('Disabled tools for player(s)') end end end end)
 
 addcmd('enabletools', 'lets them have tools',{},
 function(args, speaker)
@@ -2918,8 +2918,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		if FindTable(disabletoolsT, _players[v].Name) then
 			table.remove(disabletoolsT, GetInTable(disabletoolsT, _players[v].Name)) wait(0.1) refresh(_players[v])
-			if FindTable(SPC, args[1]) then notify('Enabled tools for ' ..args[1]) else
-			notify('Enabled tools for player(s)') end end end end)
+			if FindTable(SPC, args[1]) then Notify('Enabled tools for ' ..args[1]) else
+			Notify('Enabled tools for player(s)') end end end end)
 
 addcmd('refresh', 'refresh their player model',{'re'},
 function(args, speaker)
@@ -3178,8 +3178,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		if not FindTable(rainbowT, _players[v].Name) then
 			table.insert(rainbowT, _players[v].Name)
-			if FindTable(SPC, args[1]) then notify('Gave ' ..args[1].. ' rainbow name') else
-			notify('Gave player(s) rainbow name') end end end end)
+			if FindTable(SPC, args[1]) then Notify('Gave ' ..args[1].. ' rainbow name') else
+			Notify('Gave player(s) rainbow name') end end end end)
 
 addcmd('unrainbowname', 'removes their colorful name',{'unrname'},
 function(args, speaker)
@@ -3188,8 +3188,8 @@ function(args, speaker)
 		if FindTable(rainbowT, _players[v].Name) then
 			table.remove(rainbowT, GetInTable(rainbowT, _players[v].Name))
 			_players[v].Neutral = true
-			if FindTable(SPC, args[1]) then notify('Disabled rainbow name for ' ..args[1]) else
-			notify('Disabled rainbow name for player(s)') end end end end)
+			if FindTable(SPC, args[1]) then Notify('Disabled rainbow name for ' ..args[1]) else
+			Notify('Disabled rainbow name for player(s)') end end end end)
 
 addcmd('terrain', 'gives you terrain tools',{'tt'},
 function(args, speaker)
@@ -4796,8 +4796,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		pcall(function() gPlayers[v].Character:Remove() end)
 		gPlayers[v].Character = nil
-		if FindTable(SPC, args[1]) then notify('Made ' ..args[1].. ' nil') else
-			notify('Made player(s) nil') end end end)
+		if FindTable(SPC, args[1]) then Notify('Made ' ..args[1].. ' nil') else
+			Notify('Made player(s) nil') end end end)
 
 
 addcmd('addban', 'Adds a ban to the banlist if the player is offline.', {},
@@ -4805,11 +4805,11 @@ function(args, speaker)
 	local player = args[1]
 	local playerid = game:GetService("Players"):GetUserIdFromNameAsync(args[1])
 	if player ~= nil then
-	if FindTable(WL, player) then notify('Error: '..player..' is whitelisted') elseif not FindTable(banname, player) then
+	if FindTable(WL, player) then Notify('Error: '..player..' is whitelisted') elseif not FindTable(banname, player) then
 		table.insert(banT, playerid)
 		banname[#banname + 1] = {NAME = tostring(player), ID = tonumber(playerid), AGE = "-"}
 		updatebans()
-		notify("Added ban for: "..player)
+		Notify("Added ban for: "..player)
 	end
 	end	
 end)
@@ -4818,10 +4818,10 @@ addcmd('ban', 'goodbye ;)',{},
 function(args, speaker)
 local players = getPlayer(args[1], speaker)
 for i,v in pairs(players)do
-if FindTable(SPC, args[1]) then notify('Banned ' ..args[1]) else
-notify('Banned player(s)') end
+if FindTable(SPC, args[1]) then Notify('Banned ' ..args[1]) else
+Notify('Banned player(s)') end
 	spawn(function()
-if FindTable(WL, gPlayers[v].Name) then notify('Error: '..gPlayers[v].Name..' is whitelisted') else
+if FindTable(WL, gPlayers[v].Name) then Notify('Error: '..gPlayers[v].Name..' is whitelisted') else
 if not FindTable(banname, gPlayers[v].Name) then
 table.insert(banT, _players[v].userId)
 banname[#banname + 1] = {NAME = tostring(gPlayers[v].Name), ID = tonumber(gPlayers[v].userId), AGE = tonumber(gPlayers[v].AccountAge)}
@@ -4837,7 +4837,7 @@ addcmd('clearbans', 'welcome back!',{'clrbans'},
 function(args, speaker)
 	banT = {}
 	banname = {}
-	notify('Removed all bans')
+	Notify('Removed all bans')
 	updatebans()
 end)
 
@@ -4850,7 +4850,7 @@ function(args, speaker)
 		table.remove(banname, i)
 		updatebans()
 		end end
-		notify('Unbanned ' .. args[1])
+		Notify('Unbanned ' .. args[1])
 	end
 end)
 
@@ -4873,8 +4873,8 @@ lponly(speaker) else
 			table.insert(adminT, _players[v].userId)
 			adminname[#adminname + 1] = {NAME = tostring(gPlayers[v].Name)}
 			updateadmins()
-			if FindTable(SPC, args[1]) then notify('Gave ' ..args[1].. ' admin') else
-notify('Gave player(s) admin') end
+			if FindTable(SPC, args[1]) then Notify('Gave ' ..args[1].. ' admin') else
+Notify('Gave player(s) admin') end
 game:GetService('Chat'):Chat(gPlayers[v].Character, 'You are now an admin! The prefix is ' .. cmdprefix, 1)
 end end) end end end)
 
@@ -4893,8 +4893,8 @@ lponly(speaker) else
 		updateadmins()
 		end end
 		game:GetService('Chat'):Chat(gPlayers[v].Character, 'You are no longer an admin', 2)
-		if FindTable(SPC, args[1]) then notify('Removed admin from ' .. args[1]) else
-		notify('Removed admin from player(s)') end
+		if FindTable(SPC, args[1]) then Notify('Removed admin from ' .. args[1]) else
+		Notify('Removed admin from player(s)') end
 	end
 	end
 	end
@@ -5189,7 +5189,7 @@ for i,v in pairs(players)do
     end
     copy(gPlayers[v].Character)
 end
-notify('Copied tools to StarterGear')
+Notify('Copied tools to StarterGear')
 end)
 
 addcmd('nokeeptools', 'deletes tools in starterpack',{'unkeeptools','nokeeptools','nostartertools','unstartertools','nostools','unstools','noktools','unktools'},
@@ -5199,7 +5199,7 @@ function(args, speaker)
 	for i,c in pairs(gPlayers[v].StarterGear:GetChildren())do
 	if c:IsA('Tool') or c:IsA('HopperBin') then c:destroy()
 end end end
-notify('Cleared tools from StarterGear')
+Notify('Cleared tools from StarterGear')
 end)
 
 addcmd('tools', 'steals tools from serverstorage and lighting',{'gears'},
@@ -5256,7 +5256,7 @@ end)
 addcmd('gravity', 'workspace gravity',{''},
 function(args, speaker)
 workspace.Gravity = args[1]
-notify('Gravity set to ' .. args[1])
+Notify('Gravity set to ' .. args[1])
 end)
 
 local SINFOGUIopen = false
@@ -5764,8 +5764,8 @@ function(args, speaker)
 	  		Instance.new("HopperBin", gPlayers[v].Backpack).BinType = 2 -- Part Grab Tool
 			Instance.new("HopperBin", gPlayers[v].Backpack).BinType = 3 -- Clone Tool
 			Instance.new("HopperBin", gPlayers[v].Backpack).BinType = 4 -- Hammer Tool
-			if FindTable(SPC, args[1]) then notify('Gave building tools to ' ..args[1]) else
-			notify('Gave btools to player(s)') end end end end)
+			if FindTable(SPC, args[1]) then Notify('Gave building tools to ' ..args[1]) else
+			Notify('Gave btools to player(s)') end end end end)
 
 addcmd('sword', 'gives a player a sword',{},
 function(args, speaker)
@@ -6177,8 +6177,8 @@ function(args, speaker)
             pchar.Humanoid.MaxHealth = 10000000
 			wait()
 			pchar.Humanoid.Health = 10000000
-			if FindTable(SPC, args[1]) then notify('Silent godded ' ..args[1]) else
-			notify('Silent godded player(s)') end
+			if FindTable(SPC, args[1]) then Notify('Silent godded ' ..args[1]) else
+			Notify('Silent godded player(s)') end
         end)
     end
 end)
@@ -6228,7 +6228,7 @@ end)
 
 addcmd('decalspam', 'you can already guess...',{},
 function(args, speaker)
-notify('Decal Spammed ID: ' ..args[1])
+Notify('Decal Spammed ID: ' ..args[1])
 wait(4)
 decalID = args[1]
 function exPro(root)
@@ -6273,7 +6273,7 @@ end)
 
 addcmd('undecalspam', 'removes the mess',{},
 function(args, speaker)
-notify('Removing Decal Spam...')
+Notify('Removing Decal Spam...')
 wait(4)
 function exPro(root)
 for _, v in pairs(root:GetChildren()) do
@@ -6321,13 +6321,13 @@ for _, child in pairs( gLighting:GetChildren()) do
     end
 end
 Sky = Instance.new("Sky",game.Lighting)
-notify('Loading...')
+Notify('Loading...')
 playinggif = true
 for N,F in ipairs(GIF) do
 	game:GetService("ContentProvider"):Preload("http://www.roblox.com/asset/?id="..F)
 end
 gLighting.TimeOfDay = 12
-notify('Playing skybox')
+Notify('Playing skybox')
 playinggif = true
 wait(0.5)
 repeat
@@ -6347,7 +6347,7 @@ addcmd('unskygif', 'removes the sky animation',{'noskygif'},
 function(args, speaker)
 playinggif = false
 wait(0.5)
-notify('Stopped sky gif')
+Notify('Stopped sky gif')
 for _, child in pairs( gLighting:GetChildren()) do
     if child.ClassName == "Sky" then
         child:Destroy()
@@ -6472,7 +6472,7 @@ function(args, speaker)
         local p = game:GetService("Players")[v]
         table.insert(platforms, p.Name.."'s platform is: "..p.OsPlatform)
     end
-    notify(table.concat(platforms, ', '))
+    Notify(table.concat(platforms, ', '))
 end)
 
 addcmd('whiteify', 'Turns the target white.', {'white'},
@@ -6600,7 +6600,7 @@ function(args, speaker)
         end
     end
     dels(workspace)
-notify('Deleted ' ..GLS(false, 0))
+Notify('Deleted ' ..GLS(false, 0))
 end)
 
 addcmd('deleteclass', 'removes any part with a certain classname from the workspace',{'removeclass','deleteclassname','removeclassname','dc'},
@@ -6613,7 +6613,7 @@ function(args, speaker)
         end
     end
     dels(workspace)
-notify('Deleted items with ClassName ' ..GLS(false, 0))
+Notify('Deleted items with ClassName ' ..GLS(false, 0))
 end)
 
 addcmd('blur', 'adjusts blur',{},
@@ -6639,7 +6639,7 @@ function(args, speaker)
 			local d = Instance.new('DistortionSoundEffect')
 			d.Parent = v
 			d.Level = args[1]
-			notify('Changed distortion to ' .. args[1])
+			Notify('Changed distortion to ' .. args[1])
 		end
 	end
 end)
@@ -6649,7 +6649,7 @@ function(args, speaker)
 	for i,v in pairs(workspace:GetChildren())do
 		if v:IsA("Sound") and v.Name == "IYsound" then
 			v.Volume = args[1]
-			notify('Changed volume to ' .. args[1])
+			Notify('Changed volume to ' .. args[1])
 		end
 	end
 end)
@@ -6659,7 +6659,7 @@ function(args, speaker)
 	for i,v in pairs(workspace:GetChildren())do
 		if v:IsA("Sound") and v.Name == "IYsound" then
 			v.Pitch = args[1]
-			notify('Changed pitch to ' .. args[1])
+			Notify('Changed pitch to ' .. args[1])
 		end
 	end
 end)
@@ -6714,13 +6714,13 @@ for _, child in pairs( workspace:GetChildren()) do
 end
 if localp.Character:FindFirstChild'ForceField' then localp.Character.ForceField:Destroy() end
 if _G.msg ~= nil then
-notify('Loaded global message bypass')
+Notify('Loaded global message bypass')
 else
 execCmd("loadm")
 end
 end
 elseif MSGhook == true then
-notify('Messages already loaded!')
+Notify('Messages already loaded!')
 end
 end)
 
@@ -7031,7 +7031,7 @@ addcmd("savepos","sets a waypoint at the speaker's position",{'spos'},
 function(args, speaker)
 	local WPName = tostring(GLS(false, 0))
 	if speaker.Character:findFirstChild("HumanoidRootPart") then
-		notify("Created waypoint: "..GLS(false, 0))
+		Notify("Created waypoint: "..GLS(false, 0))
 		local torso = speaker.Character:findFirstChild("HumanoidRootPart")
 		WayPoints[#WayPoints + 1] = {NAME = WPName, COORD = {math.floor(torso.Position.X), math.floor(torso.Position.Y), math.floor(torso.Position.Z)}}
 		updatepositions()
@@ -7042,7 +7042,7 @@ addcmd("deletepos","sets a waypoint at the speaker's position",{'dpos'},
 function(args, speaker)
 		for i,v in pairs(WayPoints) do
 		if v.NAME == tostring(GLS(false, 0)) then
-		notify("Deleted waypoint: " .. v.NAME)
+		Notify("Deleted waypoint: " .. v.NAME)
 		table.remove(WayPoints, i)
 		updatepositions()
 		end end
@@ -7377,7 +7377,7 @@ end)
 addcmd('time', 'change the time of day',{},
 function(args, speaker)
     if not args[1]then return end
-	notify('Time set to ' .. args[1])
+	Notify('Time set to ' .. args[1])
     LightingService.ClockTime = args[1]
 end)
 
@@ -7393,31 +7393,31 @@ end)
 
 addcmd('globalshadows', 'changes the lighting property',{'gshadows'},
 function(args, speaker)
-	notify('Turned on global shadows')
+	Notify('Turned on global shadows')
     LightingService.GlobalShadows = true
 end)
 
 addcmd('unglobalshadows', 'changes the lighting property',{'nogshadows','ungshadows','noglobalshadows'},
 function(args, speaker)
-	notify('Turned off global shadows')
+	Notify('Turned off global shadows')
     LightingService.GlobalShadows = false
 end)
 
 addcmd('outlines', 'changes the lighting property',{},
 function(args, speaker)
-	notify('Turned on outlines')
+	Notify('Turned on outlines')
     LightingService.Outlines = true
 end)
 
 addcmd('unoutlines', 'changes the lighting property',{'nooutlines'},
 function(args, speaker)
-	notify('Turned off outlines')
+	Notify('Turned off outlines')
     LightingService.Outlines = false
 end)
 
 addcmd('brightness', 'changes the lighting property',{},
 function(args, speaker)
-	notify('Set brightness to ' .. args[1])
+	Notify('Set brightness to ' .. args[1])
     LightingService.Brightness = args[1]
 end)
 
@@ -7443,7 +7443,7 @@ function(args, speaker)
 if speaker.userId ~= LP.userId then
 lponly(speaker)
 else
-notify('Printing remotes')
+Notify('Printing remotes')
 function getem(o)
 for i,v in pairs(o:children())do
 if string.match(v.ClassName, "RemoteEvent") or string.match(v.ClassName, "RemoteFunction") then              
@@ -7470,8 +7470,8 @@ function(args, speaker)
 local players = getPlayer(args[1], speaker)
 for i,v in pairs(players) do
 spawn(function()
-if FindTable(SPC, args[1]) then notify('Kicked ' ..args[1]) else
-notify('Kicked player(s)') end
+if FindTable(SPC, args[1]) then Notify('Kicked ' ..args[1]) else
+Notify('Kicked player(s)') end
 kickF(gPlayers[v])
 end) end end)
 
@@ -7497,14 +7497,14 @@ addcmd('serverlock', 'lock teh server',{'slock'},
 function(args, speaker)
 slock = true
 agelock = false
-notify('Locked Server')
+Notify('Locked Server')
 fadelock("rbxassetid://1495252742")
 end)
 
 addcmd('unserverlock', 'unlock teh server',{'unslock'},
 function(args, speaker)
 slock = false
-notify('Unlocked Server')
+Notify('Unlocked Server')
 if lockic.Image == "rbxassetid://1495252742" then
 fadelock('off')
 end
@@ -7513,7 +7513,7 @@ end)
 addcmd('agelock', 'lock teh server for a certain age',{'alock'},
 function(args, speaker)
 if isNumber(args[1]) then
-notify('Set the age lock to age ' .. args[1])
+Notify('Set the age lock to age ' .. args[1])
 isagelocked = true
 slock = false
 agelock = tonumber(args[1])
@@ -7523,7 +7523,7 @@ end)
 
 addcmd('unagelock', 'lock teh server for a certain age',{'unalock','noagelock','noalock'},
 function(args, speaker)
-notify('Disabled age lock')
+Notify('Disabled age lock')
 isagelocked = false
 if lockic.Image == "rbxassetid://1495252495" then
 fadelock('off')
@@ -7532,7 +7532,7 @@ end)
 
 addcmd('unlockws', 'unlock the whole workspace',{},
 function(args, speaker)
-	notify('Workspace unlocked')
+	Notify('Workspace unlocked')
 	wait(1)
     local function unlock(instance) 
         for i,v in pairs(instance:GetChildren()) do
@@ -7547,7 +7547,7 @@ end)
 
 addcmd('lockws', 'lock the whole workspace',{},
 function(args, speaker)
-	notify('Workspace locked')
+	Notify('Workspace locked')
 	wait(1)
     local function lock(instance) 
         for i,v in pairs(instance:GetChildren()) do
@@ -7633,7 +7633,7 @@ end
 end)
 
 addcmd('explorer', {'dex'}, function(args, speaker)
-	notify('Loading', 'Hold on a sec')
+	Notify('Loading', 'Hold on a sec')
 	loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
 end)
 
@@ -7676,8 +7676,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 	spawn(function()
 	gPlayers[v].Character.Humanoid.Name = "HumanoidIY"
-	if FindTable(SPC, args[1]) then notify('Disabled reset for ' .. args[1]) else
-	notify('Disabled reset for player(s)') end
+	if FindTable(SPC, args[1]) then Notify('Disabled reset for ' .. args[1]) else
+	Notify('Disabled reset for player(s)') end
 	end)
 	end
 end)
@@ -7688,8 +7688,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 	spawn(function()
 	gPlayers[v].Character.HumanoidIY.Name = "Humanoid"
-	if FindTable(SPC, args[1]) then notify('Enabled reset for ' .. args[1]) else
-	notify('Enabled reset for player(s)') end
+	if FindTable(SPC, args[1]) then Notify('Enabled reset for ' .. args[1]) else
+	Notify('Enabled reset for player(s)') end
 	end)
 	end
 end)
@@ -7714,7 +7714,7 @@ addcmd("savelighting","Removes effects from lighting",{'slighting'},
 function(args,speaker)
 origsettings = {abt = LightingService.Ambient, oabt = LightingService.OutdoorAmbient, brt = LightingService.Brightness, time = 
 LightingService.TimeOfDay, fclr = LightingService.FogColor, fe = LightingService.FogEnd, fs = LightingService.FogStart}
-notify('Saved lighting settings')
+Notify('Saved lighting settings')
 end)
 
 addcmd("blackandwhite","Makes the game black and white",{},
@@ -7755,7 +7755,7 @@ pt.Parent = workspace
 pt.Name = (math.random(1,1000000))
 pt.Size = Vector3.new(1000, 1, 1000)
 pt.Locked = true
-notify('Created new base')
+Notify('Created new base')
 end)
 
 addcmd('unblur', 'removes all blur instances',{'noblur'},
@@ -7865,14 +7865,14 @@ function(args, speaker)
 	local players = getPlayer(args[1], speaker)
 	for i,v in pairs(players) do
 		workspace.CurrentCamera.CameraSubject = gPlayers[v].Character
-		notify('Viewing ' .. gPlayers[v].Name)
+		Notify('Viewing ' .. gPlayers[v].Name)
 	end
 end)
 
 addcmd('unview', 'stops viewing player',{'unspectate'},
 function()
 	workspace.CurrentCamera.CameraSubject = gPlayers.LocalPlayer.Character
-	notify('View turned off')
+	Notify('View turned off')
 end)
 
 addcmd('nolimbs', 'removes limbs from player',{'rlimbs'},
@@ -8057,8 +8057,8 @@ function(args, speaker)
 		local Lname = GLS(false, 1)
 		local pchar=gPlayers[v].Character
 		pchar.Name = Lname
-		if FindTable(SPC, args[1]) then notify('Looping name for ' .. args[1] .. ' (only visible to others)') else
-		notify('Looping name for player(s) (only visible to others)') end
+		if FindTable(SPC, args[1]) then Notify('Looping name for ' .. args[1] .. ' (only visible to others)') else
+		Notify('Looping name for player(s) (only visible to others)') end
 		repeat wait(0.01)
 		repeat wait() until _players[v].Character
 		gPlayers[v].Character.Name = Lname
@@ -8075,8 +8075,8 @@ function(args, speaker)
 		local pchar=gPlayers[v].Character
 		for a,b in pairs(loopn) do if b == _players[v].Name then table.remove(loopn, a) end end
 		wait(0.5)
-		if FindTable(SPC, args[1]) then notify('Stopped looping name for ' .. args[1]) else
-		notify('Stopped looping name for player(s)') end
+		if FindTable(SPC, args[1]) then Notify('Stopped looping name for ' .. args[1]) else
+		Notify('Stopped looping name for player(s)') end
 		pchar.Name = gPlayers[v].Name
 		end)
 		end
@@ -8175,7 +8175,7 @@ end)
 
 addcmd('shutdown', 'shuts the server down',{},
 function(args, speaker)
-notify('Broken atm :(')
+Notify('Broken atm :(')
 end)
 
 addcmd('fekill','oof?',{},
@@ -8268,9 +8268,9 @@ addcmd('crash','crashes a player',{},
 function(args, speaker)
 	local players = getPlayer(args[1], speaker)
 	for i,v in pairs(players)do
-	if FindTable(WL, gPlayers[v].Name) then notify('Error: '..gPlayers[v].Name..' is whitelisted') else
-	if FindTable(SPC, args[1]) then notify('Crashed ' .. args[1]) else
-	notify('Crashed player(s)') end
+	if FindTable(WL, gPlayers[v].Name) then Notify('Error: '..gPlayers[v].Name..' is whitelisted') else
+	if FindTable(SPC, args[1]) then Notify('Crashed ' .. args[1]) else
+	Notify('Crashed player(s)') end
 	wait(4)
 if gPlayers[v] ~= nil then
 for i=1,3600 do
@@ -8968,8 +8968,8 @@ function(args, speaker)
 		   pchar.Humanoid.Name = "HUMANOID_" .. gPlayers[v].Name
 		   local humanoid = pchar["HUMANOID_" .. gPlayers[v].Name]
 		   humanoid.Parent = game.ContextActionService
-		if FindTable(SPC, args[1]) then notify('Disabled ' .. args[1]) else
-		notify('Disabled player(s)') end
+		if FindTable(SPC, args[1]) then Notify('Disabled ' .. args[1]) else
+		Notify('Disabled player(s)') end
 	    end end end)
 
 addcmd('enable','gives player humanoid',{},
@@ -8983,8 +8983,8 @@ function(args, speaker)
 		    local humanoid = game.ContextActionService["HUMANOID_" .. gPlayers[v].Name]
 		    humanoid.Parent = pchar
 		    humanoid.Name = "Humanoid"
-			if FindTable(SPC, args[1]) then notify('Enabled ' .. args[1]) else
-			notify('Enabled player(s)') end
+			if FindTable(SPC, args[1]) then Notify('Enabled ' .. args[1]) else
+			Notify('Enabled player(s)') end
 	    end end end)
 
 addcmd('size','changes size of player',{},
@@ -9323,9 +9323,9 @@ end)
 addcmd('fe','checks filtering status',{'filtering'},
 function(args, speaker)
 if workspace.FilteringEnabled == true then
-	notify('Filtering ENABLED') 
+	Notify('Filtering ENABLED') 
 elseif workspace.FilteringEnabled == false then
-	notify('Filtering Disabled') 
+	Notify('Filtering Disabled') 
 end
 end)
 
@@ -9941,14 +9941,14 @@ playerenabled = true
 		for i,v in pairs(idlist) do if tonumber(v) then table.insert(workingIds,tonumber(v)) end end
 		if #workingIds > 0 then
 			playerenabled = true
-			notify.notify:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
+			NOTIFY.NOTIFY:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
 			MusicPlayer:Playlist(workingIds)
 			MusicPlayer:Show() if qopen == true then quickmenu.sheild.cmds:TweenPosition(UDim2.new(0, 50, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.settings:TweenPosition(UDim2.new(0, 146, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.info:TweenPosition(UDim2.new(0, 290, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.mix:TweenPosition(UDim2.new(0, 340, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01) qopen = false end end
-		else MusicPlayer:Show() notify.notify:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil) if qopen == true then quickmenu.sheild.cmds:TweenPosition(UDim2.new(0, 50, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
+		else MusicPlayer:Show() NOTIFY.NOTIFY:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil) if qopen == true then quickmenu.sheild.cmds:TweenPosition(UDim2.new(0, 50, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.settings:TweenPosition(UDim2.new(0, 146, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01) playerenabled = true
 			quickmenu.sheild.info:TweenPosition(UDim2.new(0, 290, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
@@ -9969,7 +9969,7 @@ addcmd('hideplaylist','back a song',{'unplayer','noplayer','hideplayer'},
 function(args, speaker)
 playerenabled = false
 MusicPlayer:Hide()
-notify.notify:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
+NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
 end)
 
 addcmd('playhash', 'plays a hash instead of soundid',{'hash'},
@@ -9985,7 +9985,7 @@ function(args, speaker)
     s.Volume = 1
 	s:Play()
 	playerenabled = false
-	notify('Playing hash')
+	Notify('Playing hash')
  end)
 
 addcmd('disco','disco party',{''},
@@ -10456,7 +10456,7 @@ local function dels(instance) for i,v in pairs(instance:GetChildren())do if v:Is
 for i,v in pairs(LightingService:GetChildren()) do if v:IsA('Sky') then v:Destroy() end end
     for i,v in pairs(game:GetService("Lighting"):GetChildren()) do
     if v:IsA("PostEffect") then v:Destroy() end end
-for i,v in pairs(workspace.Terrain:GetChildren()) do v:Destroy() notify('Reset') end end)
+for i,v in pairs(workspace.Terrain:GetChildren()) do v:Destroy() Notify('Reset') end end)
 
 Floating = false
 
@@ -10504,7 +10504,7 @@ function(args, speaker)
 if speaker.userId ~= LP.userId then
 lponly(speaker)
 else
-notify('Noclip enabled')
+Notify('Noclip enabled')
 Clip = false
 if LP.Character:FindFirstChild('Torso') then
 	wait(0.1)
@@ -10526,7 +10526,7 @@ function(args, speaker)
 if speaker.userId ~= LP.userId then
 lponly(speaker)
 else
-	notify('Noclip disabled')
+	Notify('Noclip disabled')
 	Clip = true
 	r15noclip = false
 	wait(0.1)
@@ -10538,7 +10538,7 @@ end end end)
 addcmd('prefix','changes prefix',{},
 function(args, speaker)
 	cmdprefix = args[1]
-	notify('Set prefix to "' .. args[1] .. '"')
+	Notify('Set prefix to "' .. args[1] .. '"')
 	updatefile()
 end)
 
@@ -10596,13 +10596,13 @@ end
 addcmd('savemap','saves current map',{'smap'},
 function(args, speaker)
 RestorePoint()
-notify('Saved current map')
+Notify('Saved current map')
 end)
 
 addcmd('restoremap','saves current map',{'rmap'},
 function(args, speaker)
 InsertPoint()
-notify('Loaded last saved map')
+Notify('Loaded last saved map')
 end)
 
 addcmd('respawn','respawns',{},
@@ -10618,7 +10618,7 @@ function(args, speaker)
 if speaker.userId ~= LP.userId then
 lponly(speaker)
 else
-	notify("Version is " .. Version)
+	Notify("Version is " .. Version)
 end
 end)
 local CTPenabled = false
@@ -11220,7 +11220,7 @@ CMDss.TopImage = "rbxasset://textures/blackBkg_square.png"
 notifyMAIN = Instance.new('ScreenGui', DATA)
 notifyMAIN.Name = 'Notification'
 notifyNOT = Instance.new('Frame', notifyMAIN)
-notifyNOT.Name = 'notify'
+notifyNOT.Name = 'NOTIFY'
 notifyNOT.BackgroundColor = BrickColor.new(0,0,0)
 notifyNOT.BackgroundTransparency = 1
 notifyNOT.BorderColor = BrickColor.new(0,0,0)
@@ -11237,7 +11237,7 @@ notifyNOTE.Size = UDim2.new(1,0,1,0)
 notifyNOTE.ZIndex = 4
 notifyNOTE.FontSize = 'Size18'
 notifyNOTE.Font = 'SourceSansBold'
-notifyNOTE.Text = 'notify'
+notifyNOTE.Text = 'NOTIFY'
 notifyNOTE.TextColor = BrickColor.new(255,255,255)
 notifyNOTE.TextStrokeColor3 = Color3.new(0,0,0)
 notifyNOTE.TextStrokeTransparency = 0.8
@@ -11321,7 +11321,7 @@ end)
 SettingsGUI.FeedbackMain.setMT.MouseButton1Click:Connect(function()
 wait()
 	Mseconds = SettingsGUI.FeedbackMain.MtimeInput.Input.Text
-	notify('Set message time to ' ..SettingsGUI.FeedbackMain.MtimeInput.Input.Text.. ' second(s)')
+	Notify('Set message time to ' ..SettingsGUI.FeedbackMain.MtimeInput.Input.Text.. ' second(s)')
 	updatefile()
 end)
 --CMDBAR keybind
@@ -11329,14 +11329,14 @@ SettingsGUI.FeedbackMain.setBind.MouseButton1Click:Connect(function()
 wait()
 	cmdbarbind = SettingsGUI.FeedbackMain.bindInput.Input.Text
 	cmdBAR.Text = 'Press ' ..cmdbarbind.. ' to focus the cmd bar'
-	notify('Set the command bar keybind to "' ..SettingsGUI.FeedbackMain.bindInput.Input.Text .. '"' )
+	Notify('Set the command bar keybind to "' ..SettingsGUI.FeedbackMain.bindInput.Input.Text .. '"' )
 	updatefile()
 end)
 --Change prefix
 SettingsGUI.FeedbackMain.setpre.MouseButton1Click:Connect(function()
 wait()
 	cmdprefix = SettingsGUI.FeedbackMain.InputBox.Input.Text
-	notify('Set prefix to "' .. SettingsGUI.FeedbackMain.InputBox.Input.Text .. '"')
+	Notify('Set prefix to "' .. SettingsGUI.FeedbackMain.InputBox.Input.Text .. '"')
 	updatefile()
 end)
 --Check Box for notify
@@ -12116,16 +12116,16 @@ function(args, speaker)
 	s:Play()
 	local Asset = game:GetService("MarketplaceService"):GetProductInfo(c)
 	playerenabled = false
-	notify('Playing: '..Asset.Name..' ('..c..')')
+	Notify('Playing: '..Asset.Name..' ('..c..')')
 	else
 	local name = GLS(false, 0)
 if GLS(false, 0) == "stop" or GLS(false, 0) == "off" then
-notify('Stopped audio')
+Notify('Stopped audio')
 for i,v in pairs(game:GetDescendants()) do
 if v:IsA'Sound'then v:Destroy() end end
 return
 end
-notify('Loading list...')
+Notify('Loading list...')
 local Audios = Instance.new("ScreenGui")
 local drag = Instance.new("Frame")
 local PromptDialog = Instance.new("Frame")
@@ -12228,7 +12228,7 @@ end end)
 local json = game:HttpGet("https://search.roblox.com/catalog/json?Category=Audio&Keyword="..GLS(false, 0).."&ResultsPerPage=50", true)
 local results = HttpService:JSONDecode(json)
 if #results == 0 then
-notify('No audio found :(')
+Notify('No audio found :(')
 Audios:Destroy()
 return
 end
@@ -12259,7 +12259,7 @@ for i,v in pairs(results) do
 		for i,v in pairs(game:GetDescendants()) do
 		if v:IsA'Sound'then v:Destroy() end end
 		wait(0.1)
-		notify('Playing: '..v.Name ..' ('..v.AssetId..')')
+		Notify('Playing: '..v.Name ..' ('..v.AssetId..')')
 		local s = Instance.new("Sound", workspace)
 		s.Name = "IYsound"
 		s.Looped = true
@@ -12267,7 +12267,7 @@ for i,v in pairs(results) do
   		s.Volume = 1
 		s:Play()
 		end)
-notify('Select an audio to play')
+Notify('Select an audio to play')
 drag:TweenPosition(UDim2.new(0.5, -225, 0, 100), "InOut", "Quart", 0.5, true, nil)
 Exit.MouseButton1Click:Connect(function()
 drag:TweenPosition(UDim2.new(0.5, -225, 0, -400), "InOut", "Quart", 0.5, true, nil)
@@ -12319,10 +12319,10 @@ function(args, speaker)
 	local window = false
 	local Asset = game:GetService("MarketplaceService"):GetProductInfo(args[1])
 	dragmodel(game:GetService("InsertService"):LoadLocalAsset("rbxassetid://" .. Asset.AssetId), window, nil, Asset.Name)
-	notify('Inserted ' .. Asset.Name .. '. Click: place | E: Cancel | R: Rotate | T: tilt')
+	Notify('Inserted ' .. Asset.Name .. '. Click: place | E: Cancel | R: Rotate | T: tilt')
 	else
 	local name = GLS(false, 0)
-notify('Loading list...')
+Notify('Loading list...')
 local Models = Instance.new("ScreenGui")
 local drag = Instance.new("Frame")
 local PromptDialog = Instance.new("Frame")
@@ -12425,7 +12425,7 @@ end end)
 local json = game:HttpGet("https://search.roblox.com/catalog/json?Category=Models&Keyword="..GLS(false, 0).."&ResultsPerPage=50", true)
 local results = HttpService:JSONDecode(json)
 if #results == 0 then
-notify('No models found :(')
+Notify('No models found :(')
 Models:Destroy()
 return
 end
@@ -12463,10 +12463,10 @@ for i,v in pairs(results) do
 		ins.MouseButton1Click:Connect(function()
 		local window = true
 		dragmodel(game:GetService("InsertService"):LoadLocalAsset("rbxassetid://" .. v.AssetId), window, ModelContainerFrame, v.Name)
-		notify('Inserted ' .. v.Name .. '. Click: place | E: Cancel | R: Rotate | T: tilt')
+		Notify('Inserted ' .. v.Name .. '. Click: place | E: Cancel | R: Rotate | T: tilt')
 		ModelContainerFrame:TweenPosition(UDim2.new(0, 0, 0, -300), "InOut", "Quart", 0.5, true, nil)
 		end)
-notify('Select a model to insert')
+Notify('Select a model to insert')
 drag:TweenPosition(UDim2.new(0.5, -225, 0, 100), "InOut", "Quart", 0.5, true, nil)
 Exit.MouseButton1Click:Connect(function()
 drag:TweenPosition(UDim2.new(0.5, -225, 0, -400), "InOut", "Quart", 0.5, true, nil)
@@ -12617,9 +12617,6 @@ Mouse.KeyDown:connect(function(Key)
 		cmdBAR.BorderSizePixel = 2
 	end
 end)
-cmdBAR.Changed:connect(function (property)
-if suggestionstoggle == true and cmdBAR:IsFocused() then IndexContents2(cmdBAR.Text,true) end
-end)
 cmdBAR:GetPropertyChangedSignal("Text"):Connect(function()
     local diff = cmdBAR.TextBounds.X-250
     cmdBAR:TweenSizeAndPosition(UDim2.new(0,250+math.floor(math.max(0,diff)),0,25),UDim2.new(0,10-math.floor(math.max(0,diff)),1,-35),Enum.EasingDirection.Out,Enum.EasingStyle.Quart,0.5,true)
@@ -12637,13 +12634,13 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
         cmdBAR.Text = cmdHistory[historyCount] or ""
     end
 end)
-notify = DATA.Notification
-notify.Parent = game.CoreGui
+NOTIFY = DATA.Notification
+NOTIFY.Parent = game.CoreGui
 local usingNOTE = false
-function notify(msg)
+function Notify(msg)
     spawn(function()
-            if notify.notify and notify.notify.NOTE then
-                notify.notify:TweenPosition(UDim2.new(0, 0, 0, -100), "InOut", "Quart", 0.5, true, nil)
+            if NOTIFY.NOTIFY and NOTIFY.NOTIFY.NOTE then
+                NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -100), "InOut", "Quart", 0.5, true, nil)
                 wait(0.5)
                 MusicPlayer:Hide()
                 if qopen == true then
@@ -12658,23 +12655,23 @@ function notify(msg)
                     quickmenu.sheild.mix:TweenPosition(UDim2.new(0, 340, 0, -50), "InOut", "Quart", 0.5, true, nil)
                     wait(0.01)
                     qopen = false
-                    notify.notify.NOTE.Text = msg
-                    notify.notify:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
+                    NOTIFY.NOTIFY.NOTE.Text = msg
+                    NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
                     if playerenabled == true then
                         wait(4)
                         if playerenabled == true then
                             MusicPlayer:Show()
-                            notify.notify:TweenPosition(UDim2.new(0, 0, 0, -100), "InOut", "Quart", 0.5, true, nil)
+                            NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -100), "InOut", "Quart", 0.5, true, nil)
                         end
                     end
                 else
-                    notify.notify.NOTE.Text = msg
-                    notify.notify:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
+                    NOTIFY.NOTIFY.NOTE.Text = msg
+                    NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
                     if playerenabled == true then
                         wait(4)
                         if playerenabled == true then
                             MusicPlayer:Show()
-                            notify.notify:TweenPosition(UDim2.new(0, 0, 0, -100), "InOut", "Quart", 0.5, true, nil)
+                            NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -100), "InOut", "Quart", 0.5, true, nil)
                         end
                     end
                 end
@@ -13073,19 +13070,18 @@ function CreateLabel(Name, Text)
 end logsloaded = true
 if pcall(function() end) then
 	if workspace.FilteringEnabled == true then
-		notify('Filtering ENABLED '..ServerMessage)
+		Notify('Filtering ENABLED '..ServerMessage)
 	elseif workspace.FilteringEnabled == false then
-		notify('Filtering Disabled '..ServerMessage)
+		Notify('Filtering Disabled '..ServerMessage)
 	end
 else
 	if workspace.FilteringEnabled == true then
-		notify('Filtering ENABLED')
+		Notify('Filtering ENABLED')
 	elseif
 		workspace.FilteringEnabled == false then
-		notify('Filtering Disabled')
+		Notify('Filtering Disabled')
 	end
 end
-Loading.ba:TweenSize(UDim2.new(0.45, 0, 1, 0), "InOut", "Quart", 0.4, true, nil)
 local IY = Instance.new("ImageButton") local sheild = Instance.new("Frame") local cmds = Instance.new("ImageButton") local cmds_2 = Instance.new("TextLabel")
 local settings = Instance.new("ImageButton") local settings_2 = Instance.new("TextLabel") local updates = Instance.new("ImageButton") local updates_2 = Instance.new("TextLabel")
 local info = Instance.new("ImageButton") local info_2 = Instance.new("TextLabel") local mix = Instance.new("ImageButton") local mix_2 = Instance.new("TextLabel") local MAIN = Instance.new("TextLabel") IY.Name = "IY" IY.Parent = game.CoreGui.RobloxGui.TopBarContainer
@@ -13117,7 +13113,6 @@ lockic.Size = UDim2.new(0, 40, 0, 40)
 lockic.Image = "rbxassetid://1495252742"
 info_2.TextStrokeTransparency = 0.69999998807907 MAIN.Name = "MAIN" MAIN.Parent = IY MAIN.BackgroundColor3 = Color3.new(1, 1, 1) MAIN.BackgroundTransparency = 1 MAIN.Position = UDim2.new(0, 2, 0, -2)
 MAIN.Size = UDim2.new(0, 40, 0, 40) MAIN.Font = Enum.Font.ArialBold MAIN.FontSize = Enum.FontSize.Size24 MAIN.Text = "IY" MAIN.TextColor3 = Color3.new(1, 1, 1) MAIN.TextStrokeTransparency = 0.69999998807907
-Loading.ba:TweenSize(UDim2.new(0.7, 0, 1, 0), "InOut", "Quart", 0.5, true, nil) quickmenu = game.CoreGui.RobloxGui.TopBarContainer.IY
 local TopBarContainer = Instance.new("Frame") TopBarContainer.Name = "TopBarContainer" TopBarContainer.Parent = game.CoreGui.RobloxGui TopBarContainer.Active = true TopBarContainer.BackgroundColor3 = Color3.new(0.121569, 0.121569, 0.121569)
 TopBarContainer.BackgroundTransparency = 0.5 TopBarContainer.BorderSizePixel = 0 TopBarContainer.Position = UDim2.new(0, 0, 0, -72) TopBarContainer.Size = UDim2.new(1, 0, 0, 36) TopBarContainer.ZIndex = 0
 picker = game:GetService("InsertService"):LoadLocalAsset("rbxassetid://02011075373") picker.Parent = game.CoreGui picker.ColorPicker.Visible = false picker.ColorPicker.Position = UDim2.new(0.5, -219, 0, -500)
@@ -13721,7 +13716,7 @@ quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, -50), "InOut", "Quar
 quickmenu.sheild.info:TweenPosition(UDim2.new(0, 290, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 quickmenu.sheild.mix:TweenPosition(UDim2.new(0, 340, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 qopen = false quickmenu.MouseButton1Click:connect(function()
-if qopen == false then fadelock('off') notify.notify:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
+if qopen == false then fadelock('off') NOTIFY.NOTIFY:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
 quickmenu.sheild.cmds:TweenPosition(UDim2.new(0, 50, 0, 0), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 quickmenu.sheild.settings:TweenPosition(UDim2.new(0, 146, 0, 0), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, 0), "InOut", "Quart", 0.5, true, nil) wait(0.01)
@@ -13734,7 +13729,7 @@ quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, -50), "InOut", "Quar
 quickmenu.sheild.info:TweenPosition(UDim2.new(0, 290, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 quickmenu.sheild.mix:TweenPosition(UDim2.new(0, 340, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 if slock == true then fadelock("rbxassetid://1495252742") elseif isagelocked == true then fadelock("rbxassetid://1495252495") end
-qopen = false if playerenabled == true then MusicPlayer:Show() else notify.notify:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil) end end end)
+qopen = false if playerenabled == true then MusicPlayer:Show() else NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil) end end end)
 quickmenu.sheild.cmds.MouseButton1Click:connect(function() if cmdOpen == true then
 game.CoreGui.cp.Frame.holder.FeedbackMain:TweenPosition(UDim2.new(1.02,0,1.018,-310),"Out","Quad",0.2,true) wait(0.1)
 game.CoreGui.cp.Frame.holder.size:TweenPosition(UDim2.new(1,-301,1,-300),"Out","Quad",0.2,true) wait(0.2)
