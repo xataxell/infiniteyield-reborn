@@ -1,3 +1,4 @@
+local startTime = tick()
 function run()
 --script start
 ---------------------------------------------------------------
@@ -38,9 +39,9 @@ function writefileExploit() if is_protosmasher_caller ~= nil or elysianexecute ~
 loaded = false
 function run()
 local function writeF()
-writefile("IYRFD.txt", defaults)
+writefile("IY.txt", defaults)
 wait(1)
-local newjson = readfile("IYRFD.txt")
+local newjson = readfile("IY.txt")
 local CREATEFILE = HttpService:JSONDecode(newjson)
 colorR = CREATEFILE.colorR
 colorG = CREATEFILE.colorG
@@ -64,17 +65,17 @@ warn("READ/WRITE ERROR: "..err)
 R_W = game:GetObjects("rbxassetid://01587976911")[1] R_W.Parent = game.CoreGui
 function Click(mouse) R_W:Destroy()
 for _, child in pairs(game.CoreGui:GetChildren()) do
-if child.Name == "IYRFDrun" then
+if child.Name == "IYrun" then
 child:Destroy() end end end
 R_W.drag.PromptDialog.shadow.Exit.MouseButton1Down:connect(Click) end end
 if writefileExploit() then
 local function sfile()
-local checktxt = readfile("IYRFD.txt")
+local checktxt = readfile("IY.txt")
 if checktxt == nil then pcWRITE() writeF()
 else return end end
 local success, message2 = pcall(sfile)
 if success then
-local json = readfile("IYRFD.txt")
+local json = readfile("IY.txt")
 local LOADFILE = HttpService:JSONDecode(json)
 colorR = LOADFILE.colorR
 colorG = LOADFILE.colorG
@@ -135,14 +136,14 @@ local update = {
 }
 local updated = HttpService:JSONEncode(update)
 wait(0.1)
-writefile("IYRFD.txt", updated) end end
+writefile("IY.txt", updated) end end
 function isNumber(str)
 return tonumber(str) ~= nil end
 function msghook()
 for _, child in pairs( workspace:GetChildren()) do
-if MSGhook == false and child.ClassName == "Message" and child.Name ~= "IYRFDmessage" then
-child.Name = "IYRFDmessage" child.Text = '' MSGhook = true end end
-if workspace:FindFirstChild("IYRFDmessage") then MSGhook = true
+if MSGhook == false and child.ClassName == "Message" and child.Name ~= "IYmessage" then
+child.Name = "IYmessage" child.Text = '' MSGhook = true end end
+if workspace:FindFirstChild("IYmessage") then MSGhook = true
 else MSGhook = false end end
 game:GetService("RunService").RenderStepped:Connect(function()
 game:GetService("GuiService"):SetGlobalGuiInset(0,72,0,0)
@@ -150,10 +151,10 @@ if r15noclip then
 if LP.Character:FindFirstChild('Humanoid') then LP.Character.Humanoid:ChangeState(11) end end
 if LP.Character and LP.Character:FindFirstChild('Humanoid') then
 	LP.Character.Humanoid.Died:connect(function() FLYING = false end)
-if MSGhook == true and workspace:FindFirstChild("IYRFDmessage") then
-	if workspace.IYRFDmessage.Text == '' then
+if MSGhook == true and workspace:FindFirstChild("IYmessage") then
+	if workspace.IYmessage.Text == '' then
 	for _, child in pairs( LightingService:GetChildren()) do
-    	if child.Name == "IYRFDmblur" then
+    	if child.Name == "IYmblur" then
         child:Destroy() end end end
 	else MSGhook = false end
 	for i,v in pairs(_players:GetPlayers()) do
@@ -205,7 +206,7 @@ elseif JLnotify == true and Nfriends == false then
 end
 end)		
 FLYING = false
-IYRFDflyspeed = 1
+IYflyspeed = 1
 function sFLY() -- from rocky2u cmdscript
 	repeat wait() until LP and LP.Character and LP.Character:FindFirstChild('HumanoidRootPart') and LP.Character:FindFirstChild('Humanoid')
 	repeat wait() until Mouse
@@ -252,13 +253,13 @@ end
 	end
 	Mouse.KeyDown:connect(function(KEY)
 		if KEY:lower() == 'w' then
-			CONTROL.F = IYRFDflyspeed
+			CONTROL.F = IYflyspeed
 		elseif KEY:lower() == 's' then
-			CONTROL.B = -IYRFDflyspeed
+			CONTROL.B = -IYflyspeed
 		elseif KEY:lower() == 'a' then
-			CONTROL.L = -IYRFDflyspeed 
+			CONTROL.L = -IYflyspeed 
 		elseif KEY:lower() == 'd' then 
-			CONTROL.R = IYRFDflyspeed
+			CONTROL.R = IYflyspeed
 		end
 	end)
 	Mouse.KeyUp:connect(function(KEY)
@@ -415,7 +416,7 @@ CMDs = {
 	'invert',
 	'invisible / invis [plr]',
 	'invisibleff / invisff [plr]',
-	'IYRFDspam',
+	'IYspam',
 	'jail [plr]',
 	'jumppower / jpower [plr] [num]',
 	'jump [plr]',
@@ -765,7 +766,7 @@ end
 end
 
 function respawn(plr)
-local M = Instance.new('Model', workspace) M.Name = 'respawn_IYRFD'
+local M = Instance.new('Model', workspace) M.Name = 'respawn_IY'
 local H = Instance.new('Humanoid', M)
 local T = Instance.new('Part', M) T.Name = 'Torso' T.CanCollide = false T.Transparency = 1
 plr.Character = M end
@@ -775,13 +776,13 @@ WL = {'IoIman616','Conceptual_Nullifier','Thomasbudge','N3xuI','MoonlightTears',
 function kickF(plr)
 spawn(function()
 if plr.Parent ~= nil then
-if FindTable(WL, plr.Name) then Notify('Error: '..plr.Name..' is whitelisted') else
+if FindTable(WL, plr.Name) then notify('Error: '..plr.Name..' is whitelisted') else
 local newChar = dummy:Clone() newChar.Parent = workspace
 newChar.HumanoidRootPart.Position = Vector3.new(math.random(999000, 1001000), 10000, 0)
 for i = 1,4 do
 local Plat = Instance.new('SkateboardPlatform', newChar)
 Plat.Position = newChar.HumanoidRootPart.Position
-Plat.Name = 'IYRFDplat'
+Plat.Name = 'IYplat'
 Plat.Size = Vector3.new(10, 1.2, 10)
 Plat.Transparency = 1 end
 plr.Character = newChar
@@ -837,7 +838,7 @@ kickF(player)
 if FindTable(banT, player.userId) then
 	spawn(function()
 repeat wait() until player.Character
-Notify('Banned player, ' .. player.Name .. ' attempted to join')
+notify('Banned player, ' .. player.Name .. ' attempted to join')
 kickF(player)
 end)
 end
@@ -1210,29 +1211,29 @@ function _G.msg(txt)
 	spawn(function()
 	msghook()
 	if MSGhook == true then
-	workspace.IYRFDmessage.Text = ''
+	workspace.IYmessage.Text = ''
 	wait(0.1)
 	local b = Instance.new("BlurEffect", LightingService)
-	b.Name = "IYRFDmblur"
+	b.Name = "IYmblur"
     b.Size = 18
-	workspace.IYRFDmessage.Text = txt
+	workspace.IYmessage.Text = txt
 	wait(Mseconds)
 	b:Destroy()
-	if workspace.IYRFDmessage.Text == txt then
-	workspace.IYRFDmessage.Text = '' end
+	if workspace.IYmessage.Text == txt then
+	workspace.IYmessage.Text = '' end
 	elseif MSGhook == false then
 	execCmd("loadm")
-	repeat wait() until workspace:FindFirstChild("IYRFDmessage")
-	workspace.IYRFDmessage.Text = ''
+	repeat wait() until workspace:FindFirstChild("IYmessage")
+	workspace.IYmessage.Text = ''
 	wait(0.1)
 	local b = Instance.new("BlurEffect", LightingService)
-	b.Name = "IYRFDmblur"
+	b.Name = "IYmblur"
     b.Size = 18
-	workspace.IYRFDmessage.Text = txt
+	workspace.IYmessage.Text = txt
 	wait(Mseconds)
 	b:Destroy()
-	if workspace.IYRFDmessage.Text == txt then
-	workspace.IYRFDmessage.Text = '' end
+	if workspace.IYmessage.Text == txt then
+	workspace.IYmessage.Text = '' end
 	end
 end)
 end
@@ -1360,7 +1361,7 @@ function(args,speaker)
             customAlias[alias] = v
 			if not aliasSave or aliasSave == nil then aliasSave = {} end
 			aliasSave[#aliasSave + 1] = {CMD = cmd, ALIAS = alias}
-            Notify("Added "..alias.." as an alias to "..cmd)
+            notify("Added "..alias.." as an alias to "..cmd)
 			updatefile()
 			updatealiases()
             break
@@ -1393,7 +1394,7 @@ function(args,speaker)
 		if v.ALIAS == tostring(alias) then
 		table.remove(aliasSave, i)
 		end end
-        Notify("Removed the alias "..alias.." from "..cmd)
+        notify("Removed the alias "..alias.." from "..cmd)
 		updatefile()
 		updatealiases()
     end
@@ -1405,7 +1406,7 @@ customAlias = {}
 aliasSave ={}
 updatefile()
 updatealiases()
-Notify('Removed all aliases')
+notify('Removed all aliases')
 end)
 
 addcmd('s','runs a script in the chat or cmdbar',{'script'},
@@ -1529,7 +1530,7 @@ function(args, speaker)
 	spawn(function()
 	local flashlight = game:GetService("InsertService"):LoadLocalAsset("rbxassetid://01679418710")
 	flashlight.Parent = gPlayers[v].Backpack
-	flashlight.Name = "IYRFDflashlight"
+	flashlight.Name = "IYflashlight"
 	end)
 	end
 end)
@@ -1544,7 +1545,7 @@ function(args, speaker)
 	model.Parent = workspace
 	model:MakeJoints()
 	model:MoveTo(pchar.HumanoidRootPart.Position + Vector3.new(5, 5, 0))
-	model.Name = "IYRFDcar" .. gPlayers[v].Name wait(0.2)
+	model.Name = "IYcar" .. gPlayers[v].Name wait(0.2)
 	for _, child in pairs( model:GetChildren()) do
     if child.ClassName == "Part" then
 	child.Anchored = true
@@ -1557,7 +1558,7 @@ function(args, speaker)
     local players = getPlayer(args[1], speaker)
     for i,v in pairs(players)do
 	for _, child in pairs( workspace:GetChildren()) do
-    if child.Name == "IYRFDcar" .. gPlayers[v].Name then
+    if child.Name == "IYcar" .. gPlayers[v].Name then
     child:Destroy()
     end
 end
@@ -1638,7 +1639,7 @@ function(args, speaker)
 			local plr = _players[v]
 			repeat wait() until plr and plr.Character and plr.Character:FindFirstChild("HumanoidRootPart")
 			local torso = plr.Character.HumanoidRootPart
-			local p = Instance.new("Part", torso.Parent) p.Name = "IYRFDcape" p.Anchored = false
+			local p = Instance.new("Part", torso.Parent) p.Name = "IYcape" p.Anchored = false
 			p.CanCollide = false p.TopSurface = 0 p.BottomSurface = 0
 			if not args[2] then
 			p.Color = Color3.new(0,0,0)
@@ -1678,7 +1679,7 @@ function(args, speaker)
     for i,v in pairs(players)do
 	local pchar=_char(v)
 	for _, child in pairs( pchar:GetChildren()) do
-    if child.Name == "IYRFDcape" then
+    if child.Name == "IYcape" then
         child:Destroy() end end
 	end
 end)
@@ -1742,7 +1743,7 @@ function(args, speaker)
     if child.ClassName == "Sound" then
     child:Destroy() end end
 	local s = Instance.new("Sound")
-	s.Name = "IYRFDplrsound"
+	s.Name = "IYplrsound"
 	s.SoundId = "http://www.roblox.com/asset/?id=" .. args[2]
 	s.Volume = 1
 	s.Pitch = 1
@@ -1780,7 +1781,7 @@ if speaker.userId ~= LP.userId then
 lponly(speaker)
 else
 if isNumber(args[1]) then
-IYRFDflyspeed = args[1]
+IYflyspeed = args[1]
 end end end)
 
 addcmd('unfly','takes away fly',{'nofly'},
@@ -2150,7 +2151,7 @@ function(args,speaker)
             execCmd(cmdText,speaker)
         end
     end,false,key)
-    Notify("Binded "..cmdText.." to "..key)
+    notify("Binded "..cmdText.." to "..key)
 end
 end)
 
@@ -2161,7 +2162,7 @@ function(args,speaker)
     if #args < 1 then return end
     local key = string.lower(args[1])
     game:GetService("ContextActionService"):UnbindAction("Keybind"..key)
-    Notify("Unbinded "..key)
+    notify("Unbinded "..key)
 end
 end)
 
@@ -2890,8 +2891,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		if not FindTable(loopkillT, _players[v].Name) then
 			table.insert(loopkillT, _players[v].Name)
-			if FindTable(SPC, args[1]) then Notify('Loopkilling ' .. args[1]) else
-			Notify('Loopkilling player(s)') end end end end)
+			if FindTable(SPC, args[1]) then notify('Loopkilling ' .. args[1]) else
+			notify('Loopkilling player(s)') end end end end)
 
 addcmd('unloopkill', 'un rip person',{'unlkill'},
 function(args, speaker)
@@ -2899,8 +2900,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		if FindTable(loopkillT, _players[v].Name) then
 			table.remove(loopkillT, GetInTable(loopkillT, _players[v].Name))
-			if FindTable(SPC, args[1]) then Notify('No longer loopkilling ' .. args[1]) else
-			Notify('No longer loopkilling player(s)') end end end end)
+			if FindTable(SPC, args[1]) then notify('No longer loopkilling ' .. args[1]) else
+			notify('No longer loopkilling player(s)') end end end end)
 
 addcmd('disabletools', 'removes their tools',{'loopremovetools'},
 function(args, speaker)
@@ -2908,8 +2909,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		if not FindTable(disabletoolsT, _players[v].Name) then
 			table.insert(disabletoolsT, _players[v].Name)
-			if FindTable(SPC, args[1]) then Notify('Disabled tools for ' .. args[1]) else
-			Notify('Disabled tools for player(s)') end end end end)
+			if FindTable(SPC, args[1]) then notify('Disabled tools for ' .. args[1]) else
+			notify('Disabled tools for player(s)') end end end end)
 
 addcmd('enabletools', 'lets them have tools',{},
 function(args, speaker)
@@ -2917,8 +2918,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		if FindTable(disabletoolsT, _players[v].Name) then
 			table.remove(disabletoolsT, GetInTable(disabletoolsT, _players[v].Name)) wait(0.1) refresh(_players[v])
-			if FindTable(SPC, args[1]) then Notify('Enabled tools for ' ..args[1]) else
-			Notify('Enabled tools for player(s)') end end end end)
+			if FindTable(SPC, args[1]) then notify('Enabled tools for ' ..args[1]) else
+			notify('Enabled tools for player(s)') end end end end)
 
 addcmd('refresh', 'refresh their player model',{'re'},
 function(args, speaker)
@@ -3177,8 +3178,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		if not FindTable(rainbowT, _players[v].Name) then
 			table.insert(rainbowT, _players[v].Name)
-			if FindTable(SPC, args[1]) then Notify('Gave ' ..args[1].. ' rainbow name') else
-			Notify('Gave player(s) rainbow name') end end end end)
+			if FindTable(SPC, args[1]) then notify('Gave ' ..args[1].. ' rainbow name') else
+			notify('Gave player(s) rainbow name') end end end end)
 
 addcmd('unrainbowname', 'removes their colorful name',{'unrname'},
 function(args, speaker)
@@ -3187,8 +3188,8 @@ function(args, speaker)
 		if FindTable(rainbowT, _players[v].Name) then
 			table.remove(rainbowT, GetInTable(rainbowT, _players[v].Name))
 			_players[v].Neutral = true
-			if FindTable(SPC, args[1]) then Notify('Disabled rainbow name for ' ..args[1]) else
-			Notify('Disabled rainbow name for player(s)') end end end end)
+			if FindTable(SPC, args[1]) then notify('Disabled rainbow name for ' ..args[1]) else
+			notify('Disabled rainbow name for player(s)') end end end end)
 
 addcmd('terrain', 'gives you terrain tools',{'tt'},
 function(args, speaker)
@@ -3924,10 +3925,10 @@ end
 
 
 function onSelect(mouse)
-    mouse.Button1Down:connect(function()
-        onClick(mouse)
-    end)
+		mouse.Button1Down:connect(function () onClick(mouse) end)
 end
+
+
 
 HopperBin0.Selected:connect(onSelect)
 end
@@ -4003,73 +4004,45 @@ function createDDown(callback,but,...)
 end
 
 local butA = game.CoreGui.CorePart.Frame.ability
-butA.MouseButton1Down:connect(
-    function()
-        createDDown(
-            function(sel)
-                gPlayers.LocalPlayer.TMDATA.Ability.Value = sel -- Rushed scripting, sorry for not being neat!
-            end,
-            butA,
-            "Normal",
-            "Laser Knife",
-            "Boom Blade",
-            "MLG Money",
-            "Midas Touch",
-            "HOT! Knife",
-            "Ghost Knife",
-            "Tesla Knife",
-            "Quickscoper",
-            "Rainbow Laser",
-            "Spider Knife",
-            "Warp Knife",
-            "Brainwasher",
-            "Bolting Knife")
-    end)
+butA.MouseButton1Down:connect(function()
+	createDDown(function(sel)
+		gPlayers.LocalPlayer.TMDATA.Ability.Value = sel -- Rushed scripting, sorry for not being neat!
+	end,butA,"Normal","Laser Knife","Boom Blade","MLG Money","Midas Touch","HOT! Knife","Ghost Knife","Tesla Knife","Quickscoper","Rainbow Laser","Spider Knife","Warp Knife","Brainwasher", "Bolting Knife")
+end)
 
 local butG = game.CoreGui.CorePart.Frame.gamemode
-butG.MouseButton1Down:connect(
-    function()
-        createDDown(
-            function(sel)
-                game.ReplicatedStorage.GameInProgress.Mode.Value = sel
-            end,
-            butG,
-            "Classic",
-            "Cold Killer")
-    end)
+butG.MouseButton1Down:connect(function()
+	createDDown(function(sel)
+		game.ReplicatedStorage.GameInProgress.Mode.Value = sel
+	end,butG,"Classic","Cold Killer")
+end)
 
 local butM = game.CoreGui.CorePart.Frame.mode
-butM.MouseButton1Down:connect(
-    function()
-        createDDown(
-            function(sel)
-                _G.knifemode = sel
-            end,
-            butM,
-            "PlayersOnly",
-            "Players+Npcs")
-    end)
+butM.MouseButton1Down:connect(function()
+	createDDown(function(sel)
+		_G.knifemode = sel
+	end,butM,"PlayersOnly","Players+Npcs")
+end)
 
 _G.Scripters = {}
 
-function _G.loadScripts(obj, runall)
-    for i, v in pairs(obj:GetDescendants()) do
-        if v:IsA("LocalScript") and (not v.Disabled or runall) then
-            table.insert(_G.Scripters, v)
-            local i = #_G.Scripters
-            local loadfunc = loadstring("local script = _G.Scripters[" .. i .. "]\n" .. v.Source)
-            spawn(loadfunc)
-            print("LOADED", v:GetFullName())
-        end
-    end
+function _G.loadScripts(obj,runall)
+	for i,v in pairs(obj:GetDescendants()) do
+		if v:IsA("LocalScript") and (not v.Disabled or runall) then
+			table.insert(_G.Scripters,v)
+			local i = #_G.Scripters
+			local loadfunc = loadstring("local script = _G.Scripters["..i.."]\n"..v.Source)
+			spawn(loadfunc)
+			print("LOADED",v:GetFullName())
+		end
+	end
 end
 
-player.CharacterAdded:Connect(
-    function()
-        newKnife = knife:Clone()
-        newKnife.Parent = player.Backpack
-        _G.loadScripts(newKnife)
-    end)
+player.CharacterAdded:Connect(function()
+	newKnife = knife:Clone()
+	newKnife.Parent = player.Backpack
+	_G.loadScripts(newKnife)
+end)
 
 _G.knifemode = "PlayersOnly"
 	_G.loadScripts(newKnife)
@@ -4087,416 +4060,391 @@ lponly(speaker)
 else
 wait(0.25);
  
-_clear = function()
-    local c = {char, bag, gui}
-    for i = 1, #c do
-        local c = c[i]:children()
-        for i = 1, #c do
-            if (c[i].Name == name) then
-                c[i].Parent = nil
-            end
-        end
-    end
-    local n = name .. user.Name
-    local c = workspace:children()
-    for i = 1, #c do
-        if (c[i].Name == n) then
-            c[i].Parent = nil
-        end
-    end
-end
-
-_valid_key = function(object, key)
-    return object[key], key
-end
-
-_new = function(class)
-    return function(props)
-        if (type(list_base_props) == "table") then
-            for i, v in next, list_base_props do
-                if (props[i] == nil) then
-                    props[i] = v
-                end
-            end
-        end
-
-        local object = class
-
-        if (type(class) == "string") then
-            object = Instance.new(class:sub(1, 1):upper() .. class:sub(2))
-        end
-
-        local parent = props[1]
-        props[1] = nil
-
-        for i, v in next, props do
-            local load, res, key = pcall(_valid_key, object, i:sub(1, 1):upper() .. i:sub(2))
-            if (not load) then
-                load, res, key = pcall(_valid_key, object, i)
-            end
-
-            if (key) then
-                t = type(res)
-                s = tostring(res)
-                if (t == "userdata" and s == "Signal " .. key) then
-                    if (type(v) == "table") then
-                        for i = 1, #v do
-                            res:connect(v[i])
-                        end
-                    else
-                        res:connect(v)
-                    end
-                else
-                    object[key] = v
-                end
-            end
-        end
-
-        if (parent) then
-            object.Parent = parent
-        end
-
-        return object
-    end
-end
-
-_RGB = function(r, g, b)
-    return Color3.new(r / 255, g / 255, b / 255)
-end
-
-_copy = function(o)
-    local def = o.archivable
-    o.archivable = true
-    local c = o:clone()
-    o.archivable = def
-    return c
-end
-
-_hum = function(char)
-    local hum = char:findFirstChild "Humanoid"
-    if (not hum or hum.className ~= "Humanoid") then
-        local c = char:children()
-        for i = 1, #c do
-            if (c[i].className == "Humanoid") then
-                return c[i]
-            end
-        end
-    else
-        return hum
-    end
-end
-
-_hum_tag = function(hum)
-    local c = hum:findFirstChild "creator" or Instance.new("ObjectValue", hum)
-    c.Name = "creator"
-    c.Value = user
-    if (hum.Health == 0 and not hum:findFirstChild "killed") then
-        Instance.new("BoolValue", hum).Name = "killed"
-        bullets.clip = bullets.clip + 10
-    end
-end
-
-_hum_dam = function(hum, dam, percent)
-    hum.Health = hum.Health - (percent and hum.MaxHealth * (dam * 0.01) or dam)
-    if (hum.Health <= hum.MaxHealth * 0.1) then
-        _hum_tag(hum)
-    end
-end
-
-_ray = function(v0, v1, i)
-    local mag = (v0 - v1).magnitude
-    local ray = Ray.new(v0, (v1 - v0).unit * (mag > 999 and 999 or mag))
-
-    return (type(i) == "table" and workspace.FindPartOnRayWithIgnoreList or workspace.FindPartOnRay)(workspace, ray, i)
-end
-
-_must = function(v0, v1, i)
-    local hit, pos = _ray(v0, v1, i)
-    return not hit and mouse.target or hit, pos
-end
-
-_cframe = function(x, y, z, r0, r1, r2)
-    return CFrame.Angles(math.rad(r0 or 0), math.rad(r1 or 0), math.rad(r2 or 0)) * CFrame.new(x, y, z)
-end
-
-_update = function()
-    if (bool_active and not screen.Parent) then
-        screen.Parent = gui
-    elseif (not bool_active and screen.Parent) then
-        screen.Parent = nil
-    end
-end
-
-_light = function(v0, v1)
-    local mag = (v0 - v1).magnitude
-    local len = math.random(2, 7)
-    len = len > mag / 2 and mag / 2 or len
-
-    --local light=_new'part'{
-    --        cFrame=CFrame.new(v0,v1);
-    --        size=Vector3.new(1,1,1);
-    --        color=_RGB(255,255,0);
-    --        anchored=true;
-    --        inv;
-    --};
-    _new "blockMesh" {
-        scale = Vector3.new(0.2, 0.2, len),
-        offset = Vector3.new(0, 0, -len / 2),
-        light
-    }
-
-    local bb =
-        _new "billboardGui" {
-        size = UDim2.new(2, 0, 2, 0),
-        adornee = light,
-        light
-    }
-    _new "imageLabel" {
-        image = url:format(109101526),
-        backgroundTransparency = 1,
-        size = UDim2.new(1, 0, 1, 0),
-        bb
-    }
-
-    -- _rem(light,0.15);
-end
-
-_rem = function(object, del)
-    if (del) then
-        delay(
-            del,
-            function()
-                if (object.Parent) then
-                    object.Parent = nil
-                end
-            end
-        )
-    else
-        pcall(
-            function()
-                if (object.Parent) then
-                    object.Parent = nil
-                end
-            end
-        )
-    end
-end
-
-_blood = function(pos, count)
-    for i = 1, count do
-        local p =
-            _new "part" {
-            rotVelocity = Vector3.new(math.random(), math.random(), math.random()) * 50,
-            position = pos + Vector3.new(math.random(), math.random(), math.random()),
-            velocity = Vector3.new(math.random(), math.random(), math.random()) * 50,
-            size = Vector3.new(math.random(), math.random(), math.random()) / 3,
-            color = _RGB(255, 0, 0),
-            transparency = 0.5,
-            canCollide = true,
-            bottomSurface = 0,
-            topSurface = 0,
-            formFactor = 3,
-            locked = true,
-            inv
-        }
-        delay(
-            5,
-            function()
-                p.Parent = nil
-            end
-        )
-    end
-end
-
-_make_hue = function()
-    h_hue =
-        _new "part" {
-        size = Vector3.new(0.25, 1.8, 0.35),
-        color = _RGB(100, 100, 100),
-        formFactor = 3,
-        name = "hue",
-        handle
-    }
-    hh_weld =
-        _new "weld" {
-        c1 = _cframe(0, 0.5, 0),
-        part0 = handle,
-        part1 = h_hue,
-        handle
-    }
-end
-
-_shot = function(v0, v1)
-    if (not time_left) then
-        time_left = 0
-    end
-    if (time_left > time()) then
-        return nil
-    else
-        time_left = time() + math.random(1, 10) / 100
-    end
-
-    if (bullets.current < 1) then
-        local tick_sound =
-            head:findFirstChild "tick_sound" or
-            _new "sound" {
-                soundId = "rbxasset://sounds/SWITCH3.wav",
-                name = "tick_sound",
-                volume = 0.2,
-                pitch = 2,
-                head
-            }
-        tick_sound:play()
-        if (bullets.clip > 0) then
-            time_left = time() + 2
-            h_hue:breakJoints()
-            h_hue.CanCollide = true
-            h_hue.Velocity = (h_hue.CFrame * CFrame.new(0, 5, 0)).lookVector * 10
-            _rem(h_hue, 10)
-            delay(
-                1.9,
-                function()
-                    _make_hue()
-                    local got = (bullets.clip > bullets.maximum and bullets.maximum or bullets.clip) - bullets.current
-
-                    bullets.clip = bullets.clip - got
-                    bullets.current = bullets.current + got
-                end
-            )
-        end
-        return nil
-    else
-        bullets.current = bullets.current - 1
-
-        h_weld.C1 = _cframe(0, 0.75, 0, -math.random(1000, 1100) / 10, 180, 0)
-        d_weld.C1 = _cframe(0, -0.25, 0.3)
-
-        lightstuff.Visible = true
-        delay(
-            0.1,
-            function()
-                lightstuff.Visible = false
-            end
-        )
-
-        _rem(
-            _new "part" {
-                velocity = CFrame.new(drag.Position, (drag.CFrame * CFrame.new(-4, -5, 0)).p).lookVector * 10,
-                cFrame = drag.CFrame * CFrame.new(-0.5, 0, 0),
-                size = Vector3.new(0.1, 0.1, 0.4),
-                color = _RGB(200, 200, 0),
-                material = "Slate",
-                canCollide = true,
-                formFactor = 3,
-                inv
-            },
-            5
-        )
-
-        delay(
-            0.1,
-            function()
-                d_weld.C1 = _cframe(0, -0.25, 0)
-                if (bool_active) then
-                    h_weld.C1 = h_weld_cf_active
-                end
-            end
-        )
-    end
-
-    local hit, pos = _must(v0, v1, char)
-
-    shot_sound:play()
-
-    _rem(
-        _new "part" {
-            cFrame = CFrame.new(v0, pos) * CFrame.new(0, 0, -(v0 - pos).magnitude * 0.5),
-            size = Vector3.new(0.1, 0.1, (v0 - pos).magnitude),
-            color = _RGB(255, 255, 0),
-            transparency = 0.6,
-            reflectance = 0.5,
-            canCollide = false,
-            bottomSurface = 0,
-            anchored = true,
-            formFactor = 3,
-            topSurface = 0,
-            inv
-        },
-        .15
-    )
-    _light(v0, v1)
-
-    if (not hit) then
-        return nil
-    end
-
-    if (hit.Parent.className == "Hat") then
-        hit:breakJoints()
-        hit.CanCollide = true
-        hit.Velocity = CFrame.new(v0, pos).lookVector * math.random(30, 50)
-        hit.RotVelocity = Vector3.new(math.random(1, 90), math.random(1, 90), math.random(1, 90))
-    else
-        local hum = _hum(hit.Parent)
-        if (not hum) then
-            if (hit.Anchored == false and hit.Size.magnitude < 4) then
-                hit:breakJoints()
-                hit.CanCollide = true
-            end
+_clear=function()
+        local c={char;bag;gui;};
+        for i=1,#c do
+                local c=c[i]:children();
+                for i=1,#c do
+                        if(c[i].Name==name)then
+                                c[i].Parent=nil;
+                        end;
+                end;
+        end;
+        local n=name..user.Name;
+        local c=workspace:children();
+        for i=1,#c do
+                if(c[i].Name==n)then
+                        c[i].Parent=nil;
+                end;
+        end;
+end;
+ 
+_valid_key=function(object,key)
+        return object[key],key;
+end;
+ 
+_new=function(class)
+        return function(props)
+                if(type(list_base_props)=='table')then
+                        for i,v in next,list_base_props do
+                                if(props[i]==nil)then
+                                        props[i]=v;
+                                end;
+                        end;
+                end;
+               
+                local object=class;
+               
+                if(type(class)=='string')then
+                        object=Instance.new(class:sub(1,1):upper()..class:sub(2));
+                end;
+               
+                local parent=props[1];
+                        props[1]=nil;
+               
+                for i,v in next,props do
+                        local load,res,key=pcall(_valid_key,object,i:sub(1,1):upper()..i:sub(2));
+                        if(not load)then
+                                load,res,key=pcall(_valid_key,object,i);
+                        end;
+                       
+                        if(key)then
+                                t=type(res);
+                                s=tostring(res);
+                                if(t=='userdata'and s=='Signal '..key)then
+                                        if(type(v)=='table')then
+                                                for i=1,#v do
+                                                        res:connect(v[i]);
+                                                end;
+                                        else
+                                                res:connect(v);
+                                        end;
+                                else
+                                        object[key]=v;
+                                end;
+                        end;
+                end;
+               
+                if(parent)then
+                        object.Parent=parent;
+                end;
+               
+                return object;
+        end;
+end;
+ 
+_RGB=function(r,g,b)
+        return Color3.new(r/255,g/255,b/255);
+end;
+ 
+_copy=function(o)
+        local def=o.archivable;
+        o.archivable=true;
+        local c=o:clone();
+        o.archivable=def;
+        return c;
+end;
+ 
+_hum=function(char)
+        local hum=char:findFirstChild'Humanoid';
+        if(not hum or hum.className~='Humanoid')then
+                local c=char:children();
+                for i=1,#c do
+                        if(c[i].className=='Humanoid')then
+                                return c[i];
+                        end;
+                end;
         else
-            _hum_dam(hum, math.random(4, 6))
-            _blood(pos, math.random(3, 6))
-            hit.RotVelocity = Vector3.new(math.random(1, 90), math.random(1, 90), math.random(1, 90)) / 6
-            if (hit.Name == "Head") then
-                hum.Health = 0
-                _blood(pos, math.random(3, 6))
-                delay(
-                    0.001,
-                    function()
-                        _new(workspace:FindFirstChild "head_shot" or "sound") {
-                            pitch = math.random(70, 100) * 0.01,
-                            soundId = url:format(1876552),
-                            name = "head_shot",
-                            workspace
-                        }:play()
-                    end)
-                _hum_tag(hum)
-                _rem(_new "part" {
-                        cFrame = CFrame.new(v0, pos) * CFrame.new(0, 0, -(v0 - pos).magnitude * 0.5),
-                        size = Vector3.new(0.1, 0.1, (v0 - pos).magnitude),
-                        color = torso.Color,
-                        transparency = 0.5,
-                        canCollide = false,
-                        bottomSurface = 0,
-                        anchored = true,
-                        formFactor = 3,
-                        topSurface = 0,
-                        inv
-                    }, 30)
-                hit.Parent = nil
-                for b = 0, 1 do
-                    for a = 0, 1 do
-                        for i = 0, 1 do
-                            _rem(
-                                _new "part" {
-                                    velocity = CFrame.new(v0, pos).lookVector * 20,
-                                    cFrame = hit.CFrame * CFrame.new(i, -b, a),
-                                    size = Vector3.new(0.5, 0.5, 0.5),
-                                    color = _RGB(255, 255, 255),
-                                    bottomSurface = 0,
-                                    canCollide = true,
-                                    transparency = 0,
-                                    formFactor = 3,
-                                    topSurface = 0,
-                                    hum
-                                },
-                            30)
-                        end
-                    end
-                end
-            end
-        end
-    end
-end
+                return hum;
+        end;
+end;
+ 
+_hum_tag=function(hum)
+        local c=hum:findFirstChild'creator'or Instance.new('ObjectValue',hum);
+                c.Name='creator';
+                c.Value=user;
+        if(hum.Health==0 and not hum:findFirstChild'killed')then
+                Instance.new('BoolValue',hum).Name='killed';
+                bullets.clip=bullets.clip+10;
+        end;
+end;
+ 
+_hum_dam=function(hum,dam,percent)
+        hum.Health=hum.Health-(percent and hum.MaxHealth*(dam*0.01)or dam);
+        if(hum.Health<=hum.MaxHealth*0.1)then
+                _hum_tag(hum);
+        end;
+end;
+ 
+_ray=function(v0,v1,i)
+        local mag=(v0-v1).magnitude;
+        local ray=Ray.new(v0,(v1-v0).unit*(mag>999 and 999 or mag));
+       
+        return(type(i)=='table'and workspace.FindPartOnRayWithIgnoreList or workspace.FindPartOnRay)(workspace,ray,i);
+end;
+ 
+_must=function(v0,v1,i)
+        local hit,pos=_ray(v0,v1,i);
+        return not hit and mouse.target or hit,pos;
+end;
+ 
+_cframe=function(x,y,z,r0,r1,r2)
+        return CFrame.Angles(
+                math.rad(r0 or 0),
+                math.rad(r1 or 0),
+                math.rad(r2 or 0)
+        )*CFrame.new(x,y,z);
+end;
+ 
+_update=function()
+        if(bool_active and not screen.Parent)then
+                screen.Parent=gui;
+        elseif(not bool_active and screen.Parent)then
+                screen.Parent=nil;
+        end;
+end;
+ 
+_light=function(v0,v1)
+        local mag=(v0-v1).magnitude;
+        local len=math.random(2,7);
+                len=len>mag/2 and mag/2 or len;
+       
+        --local light=_new'part'{
+        --        cFrame=CFrame.new(v0,v1);
+        --        size=Vector3.new(1,1,1);
+        --        color=_RGB(255,255,0);
+        --        anchored=true;
+        --        inv;
+        --};
+                _new'blockMesh'{
+                        scale=Vector3.new(0.2,0.2,len);
+                        offset=Vector3.new(0,0,-len/2);
+                        light;
+                };
+               
+        local bb=_new'billboardGui'{
+                size=UDim2.new(2,0,2,0);
+                adornee=light;
+                light;
+        };
+                _new'imageLabel'{
+                        image=url:format(109101526);
+                        backgroundTransparency=1;
+                        size=UDim2.new(1,0,1,0);
+                        bb;
+                };
+               
+       -- _rem(light,0.15);
+end;
+ 
+_rem=function(object,del)
+        if(del)then
+                delay(del,function()
+                        if(object.Parent)then
+                                object.Parent=nil;
+                        end;
+                end);
+        else
+                pcall(function()
+                        if(object.Parent)then
+                                object.Parent=nil;
+                        end;
+                end);
+        end;
+end;
+ 
+_blood=function(pos,count)
+        for i=1,count do
+                local p=_new'part'{
+                        rotVelocity=Vector3.new(math.random(),math.random(),math.random())*50;
+                        position=pos+Vector3.new(math.random(),math.random(),math.random());
+                        velocity=Vector3.new(math.random(),math.random(),math.random())*50;
+                        size=Vector3.new(math.random(),math.random(),math.random())/3;
+                        color=_RGB(255,0,0);
+                        transparency=0.5;
+                        canCollide=true;
+                        bottomSurface=0;
+                        topSurface=0;
+                        formFactor=3;
+                        locked=true;
+                        inv;
+                };
+                delay(5,function()
+                        p.Parent=nil;
+                end);
+        end;
+end;
+ 
+_make_hue=function()
+        h_hue=_new'part'{
+                size=Vector3.new(0.25,1.8,0.35);
+                color=_RGB(100,100,100);
+                formFactor=3;
+                name='hue';
+                handle;
+        };
+        hh_weld=_new'weld'{
+                c1=_cframe(0,0.5,0);
+                part0=handle;
+                part1=h_hue;
+                handle;
+        };
+end;
+ 
+_shot=function(v0,v1)
+        if(not time_left)then
+                time_left=0;
+        end;
+        if(time_left>time())then
+                return nil;
+        else
+                time_left=time()+math.random(1,10)/100;
+        end;
+       
+        if(bullets.current<1)then
+                local tick_sound=head:findFirstChild'tick_sound'or _new'sound'{
+                        soundId='rbxasset://sounds/SWITCH3.wav';
+                        name='tick_sound';
+                        volume=0.2;
+                        pitch=2;
+                        head;
+                };
+                tick_sound:play();
+                if(bullets.clip>0)then
+                        time_left=time()+2;
+                        h_hue:breakJoints();
+                        h_hue.CanCollide=true;
+                        h_hue.Velocity=(h_hue.CFrame*CFrame.new(0,5,0)).lookVector*10;
+                        _rem(h_hue,10);
+                        delay(1.9,function()
+                                _make_hue();
+                                local got=(bullets.clip>bullets.maximum and
+                                        bullets.maximum or
+                                        bullets.clip)-bullets.current;
+ 
+                                bullets.clip=bullets.clip-got;
+                                bullets.current=bullets.current+got;
+                        end);
+                end;
+                return nil;
+        else
+                bullets.current=bullets.current-1;
+               
+                h_weld.C1=_cframe(0,0.75,0,
+                                        -math.random(1000,1100)/10,180,0);
+                d_weld.C1=_cframe(0,-0.25,0.3);
+               
+                lightstuff.Visible=true;
+                delay(0.1,function()
+                        lightstuff.Visible=false;
+                end);
+               
+                _rem(_new'part'{
+                        velocity=CFrame.new(drag.Position,(drag.CFrame*CFrame.new(-4,-5,0)).p).lookVector*10;
+                        cFrame=drag.CFrame*CFrame.new(-0.5,0,0);
+                        size=Vector3.new(0.1,0.1,0.4);
+                        color=_RGB(200,200,0);
+                        material='Slate';
+                        canCollide=true;
+                        formFactor=3;
+                        inv;
+                },5);
+ 
+                delay(0.1,function()
+                        d_weld.C1=_cframe(0,-0.25,0);
+                        if(bool_active)then
+                                h_weld.C1=h_weld_cf_active;
+                        end;
+                end)
+        end;
+       
+        local hit,pos=_must(v0,v1,char);
+       
+        shot_sound:play();
+       
+ 
+                                _rem(_new'part'{
+                                        cFrame=CFrame.new(v0,pos)*CFrame.new(0,0,-(v0-pos).magnitude*0.5);
+                                        size=Vector3.new(0.1,0.1,(v0-pos).magnitude);
+                                        color=_RGB(255,255,0);
+                                        transparency=0.6;
+                                                                                reflectance=0.5;
+                                        canCollide=false;
+                                        bottomSurface=0;
+                                        anchored=true;
+                                        formFactor=3;
+                                        topSurface=0;
+                                        inv;
+                                },.15);
+        _light(v0,v1);
+       
+        if(not hit)then return nil;end;
+       
+        if(hit.Parent.className=='Hat')then
+                hit:breakJoints();
+                hit.CanCollide=true;
+                hit.Velocity=CFrame.new(v0,pos).lookVector*math.random(30,50);
+                hit.RotVelocity=Vector3.new(math.random(1,90),math.random(1,90),math.random(1,90));
+        else
+                local hum=_hum(hit.Parent);
+                if(not hum)then
+                        if(hit.Anchored==false and hit.Size.magnitude<4)then
+                                hit:breakJoints();
+                                hit.CanCollide=true;
+                        end;
+                else
+                        _hum_dam(hum,math.random(4,6));
+                        _blood(pos,math.random(3,6));
+                        hit.RotVelocity=Vector3.new(math.random(1,90),math.random(1,90),math.random(1,90))/6;
+                        if(hit.Name=='Head')then
+                                hum.Health=0;
+                                _blood(pos,math.random(3,6));
+                                delay(0.001,function()
+                                        _new(workspace:FindFirstChild'head_shot'or'sound'){
+                                                pitch=math.random(70,100)*0.01;
+                                                soundId=url:format(1876552);
+                                                name='head_shot';
+                                                workspace;
+                                        }:play();
+                                end);
+                                _hum_tag(hum);
+                                _rem(_new'part'{
+                                        cFrame=CFrame.new(v0,pos)*CFrame.new(0,0,-(v0-pos).magnitude*0.5);
+                                        size=Vector3.new(0.1,0.1,(v0-pos).magnitude);
+                                        color=torso.Color;
+                                        transparency=0.5;
+                                        canCollide=false;
+                                        bottomSurface=0;
+                                        anchored=true;
+                                        formFactor=3;
+                                        topSurface=0;
+                                        inv;
+                                },30);
+                                hit.Parent=nil;
+                                for b=0,1 do
+                                        for a=0,1 do
+                                                for i=0,1 do
+                                                        _rem(_new'part'{
+                                                                velocity=CFrame.new(v0,pos).lookVector*20;
+                                                                cFrame=hit.CFrame*CFrame.new(i,-b,a);
+                                                                size=Vector3.new(0.5,0.5,0.5);
+                                                                color=_RGB(255,255,255);
+                                                                bottomSurface=0;
+                                                                canCollide=true;
+                                                                transparency=0;
+                                                                formFactor=3;
+                                                                topSurface=0;
+                                                                hum;
+                                                        },30);
+                                                end;
+                                        end;
+                                end;
+                        end;
+                end;
+        end;
+end;
+ 
+ 
  
 _cf_select=function(mouse)
         mouse.Icon=url:format(109111387);--108999296
@@ -4848,8 +4796,8 @@ function(args, speaker)
     for i,v in pairs(players)do
 		pcall(function() gPlayers[v].Character:Remove() end)
 		gPlayers[v].Character = nil
-		if FindTable(SPC, args[1]) then Notify('Made ' ..args[1].. ' nil') else
-			Notify('Made player(s) nil') end end end)
+		if FindTable(SPC, args[1]) then notify('Made ' ..args[1].. ' nil') else
+			notify('Made player(s) nil') end end end)
 
 
 addcmd('addban', 'Adds a ban to the banlist if the player is offline.', {},
@@ -4857,11 +4805,11 @@ function(args, speaker)
 	local player = args[1]
 	local playerid = game:GetService("Players"):GetUserIdFromNameAsync(args[1])
 	if player ~= nil then
-	if FindTable(WL, player) then Notify('Error: '..player..' is whitelisted') elseif not FindTable(banname, player) then
+	if FindTable(WL, player) then notify('Error: '..player..' is whitelisted') elseif not FindTable(banname, player) then
 		table.insert(banT, playerid)
 		banname[#banname + 1] = {NAME = tostring(player), ID = tonumber(playerid), AGE = "-"}
 		updatebans()
-		Notify("Added ban for: "..player)
+		notify("Added ban for: "..player)
 	end
 	end	
 end)
@@ -4870,10 +4818,10 @@ addcmd('ban', 'goodbye ;)',{},
 function(args, speaker)
 local players = getPlayer(args[1], speaker)
 for i,v in pairs(players)do
-if FindTable(SPC, args[1]) then Notify('Banned ' ..args[1]) else
-Notify('Banned player(s)') end
+if FindTable(SPC, args[1]) then notify('Banned ' ..args[1]) else
+notify('Banned player(s)') end
 	spawn(function()
-if FindTable(WL, gPlayers[v].Name) then Notify('Error: '..gPlayers[v].Name..' is whitelisted') else
+if FindTable(WL, gPlayers[v].Name) then notify('Error: '..gPlayers[v].Name..' is whitelisted') else
 if not FindTable(banname, gPlayers[v].Name) then
 table.insert(banT, _players[v].userId)
 banname[#banname + 1] = {NAME = tostring(gPlayers[v].Name), ID = tonumber(gPlayers[v].userId), AGE = tonumber(gPlayers[v].AccountAge)}
@@ -4889,7 +4837,7 @@ addcmd('clearbans', 'welcome back!',{'clrbans'},
 function(args, speaker)
 	banT = {}
 	banname = {}
-	Notify('Removed all bans')
+	notify('Removed all bans')
 	updatebans()
 end)
 
@@ -4902,7 +4850,7 @@ function(args, speaker)
 		table.remove(banname, i)
 		updatebans()
 		end end
-		Notify('Unbanned ' .. args[1])
+		notify('Unbanned ' .. args[1])
 	end
 end)
 
@@ -4925,8 +4873,8 @@ lponly(speaker) else
 			table.insert(adminT, _players[v].userId)
 			adminname[#adminname + 1] = {NAME = tostring(gPlayers[v].Name)}
 			updateadmins()
-			if FindTable(SPC, args[1]) then Notify('Gave ' ..args[1].. ' admin') else
-Notify('Gave player(s) admin') end
+			if FindTable(SPC, args[1]) then notify('Gave ' ..args[1].. ' admin') else
+notify('Gave player(s) admin') end
 game:GetService('Chat'):Chat(gPlayers[v].Character, 'You are now an admin! The prefix is ' .. cmdprefix, 1)
 end end) end end end)
 
@@ -4945,8 +4893,8 @@ lponly(speaker) else
 		updateadmins()
 		end end
 		game:GetService('Chat'):Chat(gPlayers[v].Character, 'You are no longer an admin', 2)
-		if FindTable(SPC, args[1]) then Notify('Removed admin from ' .. args[1]) else
-		Notify('Removed admin from player(s)') end
+		if FindTable(SPC, args[1]) then notify('Removed admin from ' .. args[1]) else
+		notify('Removed admin from player(s)') end
 	end
 	end
 	end
@@ -5241,7 +5189,7 @@ for i,v in pairs(players)do
     end
     copy(gPlayers[v].Character)
 end
-Notify('Copied tools to StarterGear')
+notify('Copied tools to StarterGear')
 end)
 
 addcmd('nokeeptools', 'deletes tools in starterpack',{'unkeeptools','nokeeptools','nostartertools','unstartertools','nostools','unstools','noktools','unktools'},
@@ -5251,7 +5199,7 @@ function(args, speaker)
 	for i,c in pairs(gPlayers[v].StarterGear:GetChildren())do
 	if c:IsA('Tool') or c:IsA('HopperBin') then c:destroy()
 end end end
-Notify('Cleared tools from StarterGear')
+notify('Cleared tools from StarterGear')
 end)
 
 addcmd('tools', 'steals tools from serverstorage and lighting',{'gears'},
@@ -5308,7 +5256,7 @@ end)
 addcmd('gravity', 'workspace gravity',{''},
 function(args, speaker)
 workspace.Gravity = args[1]
-Notify('Gravity set to ' .. args[1])
+notify('Gravity set to ' .. args[1])
 end)
 
 local SINFOGUIopen = false
@@ -5816,8 +5764,8 @@ function(args, speaker)
 	  		Instance.new("HopperBin", gPlayers[v].Backpack).BinType = 2 -- Part Grab Tool
 			Instance.new("HopperBin", gPlayers[v].Backpack).BinType = 3 -- Clone Tool
 			Instance.new("HopperBin", gPlayers[v].Backpack).BinType = 4 -- Hammer Tool
-			if FindTable(SPC, args[1]) then Notify('Gave building tools to ' ..args[1]) else
-			Notify('Gave btools to player(s)') end end end end)
+			if FindTable(SPC, args[1]) then notify('Gave building tools to ' ..args[1]) else
+			notify('Gave btools to player(s)') end end end end)
 
 addcmd('sword', 'gives a player a sword',{},
 function(args, speaker)
@@ -5915,210 +5863,256 @@ function(args, speaker)
 	end
 end)
 
-addcmd('draw', 'drawing tool', {}, function(args, speaker)
-    if speaker.userId ~= LP.userId then
-        lponly(speaker)
-    else
-        for _, v in pairs(game:children()) do
-            pcall(function()
-                local className = v.className
-                rawset(getfenv(0), className:sub(1, 1):lower() .. className:sub(2), game:service(className))
-            end)
-        end
+addcmd('draw', 'drawing tool',{},
+function(args, speaker)
+if speaker.userId ~= LP.userId then
+lponly(speaker)
+else
+for i,v in next,game:children()do
+	pcall(function()
+		local c=v.className;
+		rawset(getfenv(0),c:sub(1,1):lower()..c:sub(2),game:service(c));
+	end);
+end;
 
-        local user = players.LocalPlayer
-        local uname = user.Name
-        local guis = user.PlayerGui
-        local pack = user.Backpack
-        local keyDowns, freeKeys, shortcuts = {}, {}, {}
 
-        _G.mine = _G.mine or {}
-        _G.drawLimit = _G.drawLimit or 1000
-        _G.drawColor = _G.drawColor or Color3.new()
+user=players.LocalPlayer;
+uname=user.Name;
+guis=user.PlayerGui;
+pack=user.Backpack;
 
-        local name = 'Draw3D'
-        local url = 'http://www.roblox.com/asset/?id=%d'
-        local iconNormal, iconOnDown = url:format(96578285), url:format(96584484)
+keyDowns={};
+freeKeys={};
+shortcuts={};
 
-        local ver, drawPixel, drawing = 0, 0.10, false
+_G.mine=_G.mine or{};
 
-        local destroy, find, new = game.remove, game.findFirstChild, Instance.new
-        local function with(class)
-            return function(properties)
-                local obj = type(class) == 'string' and new(class) or class
-                local parent = properties.Parent
-                properties.Parent = nil
-                for i, v in pairs(properties) do obj[i] = v end
-                if parent then obj.Parent = parent end
-                return obj
-            end
-        end
+name='Draw3D';
+url='http://www.roblox.com/asset/?id=%d';
 
-        local function getPlace()
-            if not find(workspace, 'draw') then new('Model', workspace).Name = 'draw' end
-            if not find(workspace.draw, uname) then new('Model', workspace.draw).Name = uname end
-            return workspace.draw[uname]
-        end
+iconNormal=url:format(96578285);
+iconOnDown=url:format(96584484);
 
-        local function drawLine(start, target)
-            local gui = with('BlockMesh'){
-                Parent = with('Part'){
-                    CFrame = CFrame.new(start, target) * CFrame.new(0, 0, -(start - target).magnitude / 2),
-                    Size = Vector3.new(drawPixel, drawPixel, (start - target).magnitude + 0.325 * drawPixel),
-                    Parent = getPlace(),
-                    Color = _G.drawColor,
-                    BottomSurface = 0,
-                    Anchored = true,
-                    TopSurface = 0,
-                    formFactor = 3,
-                    Name = name,
-                }
-            }.Parent
-            table.insert(_G.mine, gui)
-            return gui
-        end
+ver=0;
+drawPixel=0.10;
+_G.drawLimit=_G.drawLimit or 1000;
 
-        local function onDown()
-            if drawing then return end
-            if selectGui.Adornee then destroy(selectGui.Adornee) end
+_G.drawColor=_G.drawColor or Color3.new();
 
-            drawing = true
-            mouse.Icon = iconOnDown
-            ver = ver + 1
 
-            local cVer, start, target = ver, mouse.hit.p, nil
-            local group = {}
 
-            repeat
-                wait(0.02)
-                if mouse.target and mouse.target.Name ~= name and mouse.hit.p ~= start then
-                    target = mouse.hit.p
-                    table.insert(group, drawLine(start, target))
-                    start = target
-                end
-            until ver ~= cVer
 
-            drawing = false
-            local groupM = new('Model', getPlace())
-            for _, v in pairs(group) do
-                if v:IsDescendantOf(Workspace) then v.Parent = groupM end
-            end
-            if #groupM:children() == 0 then destroy(groupM) end
-        end
 
-        local function onUp() mouse.Icon = iconNormal ver = ver + 1 end
-        local function onKeyDown(k)
-            if not freeKeys[k] then return false end
-            freeKeys[k] = false wait(0.01)
-            if keyDowns[k] then keyDowns[k]()
-            elseif shortcuts[k] then shortcuts[k]() end
-        end
-        local function onKeyUp(k) freeKeys[k] = true end
-        local function onMove() end
+destroy=game.remove;
+find=game.findFirstChild;
+new=Instance.new;
+with=function(c)
+	return function(p)
+		local o=type(c)=='string'and new(c)or c;
+		local x=p.Parent;p.Parent=nil;
+		for i,v in next,p do
+			o[i]=v;
+		end;
+		if(x)then
+			o.Parent=x;
+		end;
+		return o;
+	end;
+end;
+getPlace=function()
+	if(find(workspace,'draw')==nil)then
+		new('Model',workspace).Name='draw';
+	end;
+	if(find(workspace.draw,uname)==nil)then
+		new('Model',workspace.draw).Name=uname;
+	end;
+	return workspace.draw[uname];
+end;
+drawLine=function(start,target)
+	local gui=with'BlockMesh'{
+		Parent=with'Part'{
+			CFrame=CFrame.new(start,target)*CFrame.new(0,0,-(start-target).magnitude/2);
+			Size=Vector3.new(drawPixel,drawPixel,(start-target).magnitude+.325*drawPixel);
+			Parent=getPlace();
+			Color=_G.drawColor;
+			BottomSurface=0;
+			Anchored=true;
+			TopSurface=0;
+			formFactor=3;
+			Name=name;
+	}}.Parent;
+	table.insert(_G.mine,gui);
+	return gui;
+end;
+onDown=function()
+	if(drawing)then
+		return nil;
+	end;
+	if(selectGui.Adornee)then
+		destroy(selectGui.Adornee);
+	end;
+	
+	drawing=true;
+	
+	mouse.Icon=iconOnDown;
+	ver=ver+1;
+	
+	
+	local cVer,start,target=ver,mouse.hit.p;
+	
+	local group={};
+	repeat
+		Wait(0.02);
+		
+		if(mouse.target and mouse.target.Name~=name and mouse.hit.p~=start)then
+			
+			target=mouse.hit.p;
+			
+			table.insert(group,drawLine(start,target));
+			
+			start=target;
+		end;
+	until ver~=cVer;
+	drawing=false;
+	
+	local groupM=new('Model',getPlace());
+	for i,v in next,group do
+		if(v:IsDescendantOf(Workspace))then
+			v.Parent=groupM;
+		end;
+	end;
+	if(next(groupM:children())==nil)then
+		destroy(groupM);
+	end;
+end;
+onUp=function()
+	mouse.Icon=iconNormal;
+	ver=ver+1;
+end;
+onKeyDown=function(k)
+	if(freeKeys[k]==false)then
+		return false;
+	end;
+	freeKeys[k]=false;
+	Wait(0.01);
+	if(keyDowns[k])then
+		keyDowns[k]();
+	elseif(shortcuts[k])then
+		shortcuts[k]();
+	end;
+end;
+onKeyUp=function(k)
+	freeKeys[k]=true;
+end;
+onMove=function()
 
-        local function onSelect(lmouse)
-            frame.Visible, mouse = true, lmouse
-            mouse.Icon = iconNormal
+end;
+onSelect=function(lmouse)
+	frame.Visible=true;
 
-            mouse.Button1Down:connect(onDown)
-            mouse.KeyDown:connect(onKeyDown)
-            mouse.Button1Up:connect(onUp)
-            mouse.KeyUp:connect(onKeyUp)
-            mouse.Move:connect(onMove)
-        end
+	mouse=lmouse;
+	
+	mouse.Icon=iconNormal;
+	
+	mouse.Button1Down:connect(onDown);
+	mouse.KeyDown:connect(onKeyDown);
+	mouse.Button1Up:connect(onUp);
+	mouse.KeyUp:connect(onKeyUp);
+	mouse.Move:connect(onMove);
+end;
+onDeselect=function()
+	ver=ver+1;
+	frame.Visible=false;
+	selectGui.Adornee=nil;
+	mouse.Icon=iconNormal;
+	for i,v in next,freeKeys do
+		freeKeys[i]=true;
+	end;
+end;
+addButton=function(title,shortcut,fun)
+	with'TextButton'{
+		Text=string.format(' %s (%s)',title,shortcut);
+		TextXAlignment=0;
+		Parent=frame;
+	}.MouseButton1Up:connect(fun);
+	
+	shortcuts[shortcut]=fun;
+	
+	local c=#frame:children();
+	for i,v in next,frame:children()do
+		v.Position=UDim2.new(0,0,0,20*(i-1));
+		v.Size=UDim2.new(1,0,0,20);
+	end;
+	
+	frame.Position=UDim2.new(1,-152,.5,-c*10);
+	frame.Size=UDim2.new(0,150,0,c*20);
+end;
 
-        local function onDeselect()
-            ver = ver + 1
-            frame.Visible = false
-            selectGui.Adornee = nil
-            mouse.Icon = iconNormal
-            for k, _ in pairs(freeKeys) do freeKeys[k] = true end
-        end
 
-        local function addButton(title, shortcut, func)
-            with('TextButton'){
-                Text = string.format(' %s (%s)', title, shortcut),
-                TextXAlignment = 0,
-                Parent = frame,
-            }.MouseButton1Up:connect(func)
 
-            shortcuts[shortcut] = func
-            local c = #frame:children()
-            for i, v in pairs(frame:children()) do
-                v.Position = UDim2.new(0, 0, 0, 20 * (i - 1))
-                v.Size = UDim2.new(1, 0, 0, 20)
-            end
-            frame.Position, frame.Size = UDim2.new(1, -152, .5, -c * 10), UDim2.new(0, 150, 0, c * 20)
-        end
 
-        for _, gui in pairs({guis, pack}) do pcall(function() repeat until destroy(gui[name]) end) end
 
-        tool = with('HopperBin'){ Parent = pack, Name = name }
-        tool.Deselected:connect(onDeselect)
-        tool.Selected:connect(onSelect)
 
-        screen = with('ScreenGui'){ Parent = guis, Name = name }
-        frame = with('Frame'){ Parent = screen, Visible = false }
-        clframe = with('Frame'){
-            Position = UDim2.new(.5, -50, .5, -50),
-            Size = UDim2.new(0, 100, 0, 100),
-            Visible = false,
-            Parent = screen,
-        }
-        selectGui = with('SelectionBox'){ Parent = screen }
 
-        local colorIdx = 0
-        for y = 0, 7 do
-            for x = 0, 7 do
-                local color = BrickColor.palette(colorIdx).Color
-                with('ImageButton'){
-                    Position = UDim2.new(.125 * x, 0, .125 * y),
-                    Size = UDim2.new(.125, 0, .125),
-                    BackgroundColor3 = color,
-                    Parent = clframe,
-                }.MouseButton1Up:connect(function()
-                    clframe.Visible, _G.drawColor = false, color
-                end)
-                colorIdx = colorIdx + 1
-            end
-        end
 
-        addButton('Color', 'c', function() clframe.Visible = true end)
-        addButton('Remove your draws', 'r', function() while _G.mine[1] do destroy(_G.mine[1]) table.remove(_G.mine, 1) wait(0.01) end end)
-        addButton('Remove global draws', 'k', function()
-            destroy(workspace.draw)
-            while _G.mine[1] do destroy(_G.mine[1]) table.remove(_G.mine, 1) end
-        end)
-        addButton('Remove selected', 'x', function()
-            repeat
-                if find(workspace, 'draw') then
-                    local dt = mouse.target
-                    selectGui.Adornee = (dt and dt:IsDescendantOf(workspace.draw)) and dt.Parent or nil
-                else
-                    selectGui.Adornee = nil
-                end
-                wait(0.01)
-            until freeKeys.x
-            selectGui.Adornee = nil
-        end)
+for i,v in next,{guis;pack;}do
+	pcall(function()
+		repeat until destroy(v[name]);
+	end);
+end;
 
-        repeat
-            wait(0.01)
-            if _G.mine[1] and _G.mine[_G.drawLimit] then
-                destroy(_G.mine[1])
-                table.remove(_G.mine, 1)
-            end
-        until script.Parent == nil or tool.Parent == nil
 
-        script.Disabled = true
-        destroy(screen)
-    end
-end)
+
+tool=with'HopperBin'{
+	Parent=pack;
+	Name=name;
+};
+tool.Deselected:connect(onDeselect);
+tool.Selected:connect(onSelect);
+
+
+
+
+screen=with'ScreenGui'{
+	Parent=guis;
+	Name=name;
+};
+frame=with'Frame'{
+	Parent=screen;
+	Visible=false;
+};
+clframe=with'Frame'{
+	Position=UDim2.new(.5,-50,.5,-50);
+	Size=UDim2.new(0,100,0,100);
+	Visible=false;
+	Parent=screen;
+};
+selectGui=with'SelectionBox'{
+	Parent=screen;
+};
+
+local c=0;
+for y=0,7 do
+	for x=0,7 do
+		local color=BrickColor.palette(c).Color;
+		
+		with'ImageButton'{
+			Position=UDim2.new(.125*x,0,.125*y);
+			Size=UDim2.new(.125,0,.125);
+			BackgroundColor3=color;
+			Parent=clframe;
+		}.MouseButton1Up:connect(function()
+			clframe.Visible=false;
+			_G.drawColor=color;
+		end);
+		
+		c=c+1;
+	end;
+end;
 
 addButton('Color','c',function()
 	clframe.Visible=true;
 end);
-
 addButton('Remove your draws','r',function()
 	repeat
 		destroy(_G.mine[1]);
@@ -6150,6 +6144,9 @@ addButton('Remove selected','x',function()
 	selectGui.Adornee=nil;
 end);
 
+
+
+
 repeat
 	Wait(0.01);
 	if(next(_G.mine)and _G.mine[_G.drawLimit])then
@@ -6180,8 +6177,8 @@ function(args, speaker)
             pchar.Humanoid.MaxHealth = 10000000
 			wait()
 			pchar.Humanoid.Health = 10000000
-			if FindTable(SPC, args[1]) then Notify('Silent godded ' ..args[1]) else
-			Notify('Silent godded player(s)') end
+			if FindTable(SPC, args[1]) then notify('Silent godded ' ..args[1]) else
+			notify('Silent godded player(s)') end
         end)
     end
 end)
@@ -6198,42 +6195,40 @@ function(args, speaker)
     end
 end)
 
-addcmd("heal", "resets a players health", {}, function(args, speaker)
-        local players = getPlayer(args[1], speaker)
-        for i, v in pairs(players) do spawn(function()
-                local pchar = _char(v)
-                if pchar then
-                pchar.Humanoid.Health = pchar.Humanoid.MaxHealth
-            end
-        end)
-    end
-end)
+addcmd('heal', 'resets a players health',{},
+function(args, speaker)
+    local players = getPlayer(args[1], speaker)
+    for i,v in pairs(players)do spawn(function()
+local pchar=_char(v)
+if pchar then pchar.Humanoid.Health=pchar.Humanoid.MaxHealth;end end) end end)
 
-addcmd("fart", "makes u fart", {}, function(args, speaker)
-        local players = getPlayer(args[1], speaker)
-        for i, v in pairs(players) do spawn(function()
-            local pchar = _char(v)
-            fart = Instance.new("Smoke")
-            fart.Parent = pchar.HumanoidRootPart
-            fart.Color = Color3.new(255 / 255, 255 / 255, 0)
-            fart.Opacity = 0.4
-            fart.Size = 1.0
-            fart.RiseVelocity = 8
-            fartsound = Instance.new("Sound", workspace)
-            fsound = "http://www.roblox.com/asset?id=251309043"
-            fartsound.SoundId = fsound
-            fartsound.Volume = 1.0
-            fartsound:Play()
-            wait(9.0)
-            fartsound:Destroy()
-            pchar.HumanoidRootPart.Smoke:Destroy()
-        end)
-    end
+addcmd('fart', 'makes u fart',{},
+function(args, speaker)
+    local players = getPlayer(args[1], speaker)
+    for i,v in pairs(players)do
+	spawn(function()
+        local pchar=_char(v)
+fart = Instance.new("Smoke")
+fart.Parent = pchar.HumanoidRootPart
+fart.Color = Color3.new(255/255, 255/255, 0)
+fart.Opacity = 0.4
+fart.Size = 1.0
+fart.RiseVelocity = 8
+fartsound = Instance.new("Sound", workspace)
+fsound = "http://www.roblox.com/asset?id=251309043"
+fartsound.SoundId = fsound
+fartsound.Volume = 1.0
+fartsound:Play()
+wait(9.0)
+fartsound:Destroy()
+pchar.HumanoidRootPart.Smoke:Destroy()
+	    end)
+end
 end)
 
 addcmd('decalspam', 'you can already guess...',{},
 function(args, speaker)
-Notify('Decal Spammed ID: ' ..args[1])
+notify('Decal Spammed ID: ' ..args[1])
 wait(4)
 decalID = args[1]
 function exPro(root)
@@ -6257,12 +6252,12 @@ Three.Face = "Right"
 Four.Face = "Left"
 Five.Face = "Top"
 Six.Face = "Bottom"
-One.Name = "IYRFDdecal"
-Two.Name = "IYRFDdecal"
-Three.Name = "IYRFDdecal"
-Four.Name = "IYRFDdecal"
-Five.Name = "IYRFDdecal"
-Six.Name = "IYRFDdecal"
+One.Name = "IYdecal"
+Two.Name = "IYdecal"
+Three.Name = "IYdecal"
+Four.Name = "IYdecal"
+Five.Name = "IYdecal"
+Six.Name = "IYdecal"
 end
 exPro(v)
 end
@@ -6278,7 +6273,7 @@ end)
 
 addcmd('undecalspam', 'removes the mess',{},
 function(args, speaker)
-Notify('Removing Decal Spam...')
+notify('Removing Decal Spam...')
 wait(4)
 function exPro(root)
 for _, v in pairs(root:GetChildren()) do
@@ -6314,141 +6309,160 @@ s.SkyboxUp = "http://www.roblox.com/asset/?id="..skyboxID
 LightingService.TimeOfDay = 12
 end)
 
-addcmd('skygif', 'makes the sky play the IDs you feed it', {}, function(args, speaker)
-    if args[2] then skyinterval = tonumber(args[2]) else skyinterval = 0.05 end
-    playinggif = false
-    wait(0.5)
-    
-    local GIF = splitString(args[1])
-    for _, child in pairs(gLighting:GetChildren()) do
-        if child.ClassName == "Sky" then
-            child:Destroy()
-        end
+addcmd('skygif', 'makes the sky play the IDs you feed it',{},
+function(args, speaker)
+if args[2] then skyinterval = tonumber(args[2]) else skyinterval = 0.05 end
+playinggif = false
+wait(0.5)
+local GIF = splitString(args[1])
+for _, child in pairs( gLighting:GetChildren()) do
+    if child.ClassName == "Sky" then
+        child:Destroy()
     end
-    
-    Sky = Instance.new("Sky", game.Lighting)
-    Notify('Loading...')
-    playinggif = true
-    
-    for N, F in ipairs(GIF) do
-        game:GetService("ContentProvider"):Preload("http://www.roblox.com/asset/?id=" .. F)
-    end
-    
-    gLighting.TimeOfDay = 12
-    Notify('Playing skybox')
-    playinggif = true
-    wait(0.5)
-    
-    repeat
-        for N, F in ipairs(GIF) do
-            Sky.SkyboxBk = "http://www.roblox.com/asset/?id=" .. F - 1
-            Sky.SkyboxDn = "http://www.roblox.com/asset/?id=" .. F - 1
-            Sky.SkyboxFt = "http://www.roblox.com/asset/?id=" .. F - 1
-            Sky.SkyboxLf = "http://www.roblox.com/asset/?id=" .. F - 1
-            Sky.SkyboxRt = "http://www.roblox.com/asset/?id=" .. F - 1
-            Sky.SkyboxUp = "http://www.roblox.com/asset/?id=" .. F - 1
-            wait(skyinterval)
-        end
-    until playinggif == false
+end
+Sky = Instance.new("Sky",game.Lighting)
+notify('Loading...')
+playinggif = true
+for N,F in ipairs(GIF) do
+	game:GetService("ContentProvider"):Preload("http://www.roblox.com/asset/?id="..F)
+end
+gLighting.TimeOfDay = 12
+notify('Playing skybox')
+playinggif = true
+wait(0.5)
+repeat
+	for N,F in ipairs(GIF) do
+		Sky.SkyboxBk = "http://www.roblox.com/asset/?id="..F- 1
+		Sky.SkyboxDn = "http://www.roblox.com/asset/?id="..F- 1
+		Sky.SkyboxFt = "http://www.roblox.com/asset/?id="..F- 1
+		Sky.SkyboxLf = "http://www.roblox.com/asset/?id="..F- 1
+		Sky.SkyboxRt = "http://www.roblox.com/asset/?id="..F- 1
+		Sky.SkyboxUp = "http://www.roblox.com/asset/?id="..F- 1
+		wait(skyinterval)
+	end
+until playinggif == false
 end)
 
-addcmd('unskygif', 'removes the sky animation', {'noskygif'}, function(args, speaker)
-    playinggif = false
-    wait(0.5)
-    Notify('Stopped sky gif')
-    for _, child in pairs(gLighting:GetChildren()) do
-        if child.ClassName == "Sky" then
-            child:Destroy()
-        end
+addcmd('unskygif', 'removes the sky animation',{'noskygif'},
+function(args, speaker)
+playinggif = false
+wait(0.5)
+notify('Stopped sky gif')
+for _, child in pairs( gLighting:GetChildren()) do
+    if child.ClassName == "Sky" then
+        child:Destroy()
     end
+end
 end)
 
-addcmd('freeze', 'freezes a player', {'fr'}, function(args, speaker)
-    local players = getPlayer(args[1], speaker)
-    if players then
-        for i, v in pairs(players) do
-            spawn(function()
-                for _, x in ipairs(_char(v):GetDescendants()) do
-                    if x:IsA("Part") and not x.Anchored then x.Anchored = true end
-                end
-            end)
-        end
-    end
+addcmd('freeze', 'freezes a player',{'fr'},
+function(args, speaker)
+	local players = getPlayer(args[1], speaker)
+	if players ~= nil then
+	for i, v in pairs(players) do
+	spawn(function()
+	for i, x in next, _char(v):GetDescendants() do if x:IsA("Part") and not x.Anchored then x.Anchored = true end
+	end
+	end)
+	end
+end
 end)
 
-addcmd('thaw', 'unfreezes a player', {'unfreeze', 'unfr'}, function(args, speaker)
-    local players = getPlayer(args[1], speaker)
-    if players then
-        for i, v in pairs(players) do
-            spawn(function()
-                for _, x in ipairs(_char(v):GetDescendants()) do
-                    if x:IsA("Part") and x.Anchored then x.Anchored = false end
-                end
-            end)
-        end
-    end
+addcmd('thaw', 'unfreezes a player',{'unfreeze','unfr'},
+function(args, speaker)
+	local players = getPlayer(args[1], speaker)
+	if players ~= nil then
+	for i, v in pairs(players) do
+	spawn(function()
+	for i, x in next, _char(v):GetDescendants() do if x:IsA("Part") and x.Anchored then x.Anchored = false end
+	end
+	end)
+	end
+end
 end)
 
-addcmd('spawn', 'places a spawn', {'spawnpoint'}, function(args, speaker)
-    local players = getPlayer(args[1], speaker)
-    if players then
-        for _, v in pairs(players) do
-            local M = Instance.new('SpawnLocation', workspace)
-            M.Name = 'IYRFDspawn'
-            M.CFrame = _char(v).HumanoidRootPart.CFrame
-            M.Color = maincolor
-            M.Material = 'Neon'
-            M.Size = Vector3.new(6, 1, 6)
-            M.Position = _char(v).HumanoidRootPart.Position + Vector3.new(0, -3.5, 0)
-            M.Anchored = true
-        end
-    end
+addcmd('spawn', 'places a spawn',{'spawnpoint'},
+function(args, speaker)
+	local players = getPlayer(args[1], speaker)
+	if players ~= nil then
+		for i, v in pairs(players) do
+local M = Instance.new('SpawnLocation', workspace) M.Name = 'IYspawn'
+M.CFrame = _char(v).HumanoidRootPart.CFrame
+M.Color = maincolor M.Material = 'Neon' M.Size = Vector3.new(6, 1, 6)
+M.Position = _char(v).HumanoidRootPart.Position + Vector3.new(0, -3.5, 0)
+M.Anchored = true
+end
+end
 end)
 
-addcmd('deletespawns', 'removes all spawns', {'removespawns'}, function(args, speaker)
-    for _, v in pairs(workspace:GetDescendants()) do
-        if v:IsA("SpawnLocation") then
-            v:Destroy()
-        end
-    end
+addcmd('deletespawns', 'places a spawn',{'removespawns'},
+function(args, speaker)
+for i,v in pairs(workspace:GetDescendants()) do
+if v:IsA("SpawnLocation") then
+v:Destroy()
+end
+end
 end)
 
-addcmd('neon', 'makes a player neon', {}, function(args, speaker)
-    local players = getPlayer(args[1], speaker)
-    if players then
-        for _, v in pairs(players) do
-            for _, child in ipairs(_char(v):GetChildren()) do
-                if child.ClassName == "CharacterMesh" or child.ClassName == "Shirt" or child.ClassName == "Pants" then
-                    child:Destroy()
-                end
-            end
-            for _, child in ipairs(_char(v):GetDescendants()) do
-                if child.ClassName == "Part" then
-                    child.Material = "Neon"
-                end
-            end
-        end
+addcmd('neon', 'makes a player neon',{},
+function(args, speaker)
+	local players = getPlayer(args[1], speaker)
+	if players ~= nil then
+		for i, v in pairs(players) do
+					for _, child in pairs( _char(v):GetChildren()) do
+    	if child.ClassName == "CharacterMesh" then
+        child:Destroy()
+   		end
+		end
+		for _, child in pairs( _char(v):GetChildren()) do
+    	if child.ClassName == "Shirt" then
+        child:Destroy()
+   		end
+		end
+		for _, child in pairs( _char(v):GetChildren()) do
+    	if child.ClassName == "Pants" then
+        child:Destroy()
+   		end
+		end
+			for _, child in pairs( _char(v):GetDescendants()) do
+    		if child.ClassName == "Part" then
+        child.Material = "Neon"
     end
+end
+end
+end
 end)
 
-addcmd('glass', 'makes a player glass', {}, function(args, speaker)
-    local players = getPlayer(args[1], speaker)
-    if players then
-        for _, v in pairs(players) do
-            for _, child in ipairs(_char(v):GetChildren()) do
-                if child.ClassName == "CharacterMesh" or child.ClassName == "Shirt" or child.ClassName == "Pants" then
-                    child:Destroy()
-                end
-            end
-            for _, child in ipairs(_char(v):GetDescendants()) do
-                if child.ClassName == "Part" then
-                    child.Material = "Glass"
-                    child.Transparency = 0.3
-                end
-            end
-        end
+addcmd('glass', 'makes a player glass',{},
+function(args, speaker)
+	local players = getPlayer(args[1], speaker)
+	if players ~= nil then
+		for i, v in pairs(players) do
+					for _, child in pairs( _char(v):GetChildren()) do
+    	if child.ClassName == "CharacterMesh" then
+        child:Destroy()
+   		end
+		end
+		for _, child in pairs( _char(v):GetChildren()) do
+    	if child.ClassName == "Shirt" then
+        child:Destroy()
+   		end
+		end
+		for _, child in pairs( _char(v):GetChildren()) do
+    	if child.ClassName == "Pants" then
+        child:Destroy()
+   		end
+		end
+			for _, child in pairs( _char(v):GetDescendants()) do
+    		if child.ClassName == "Part" then
+        child.Material = "Glass"
+		child.Transparency = 0.3
     end
+end
+end
+end
 end)
+
 
 addcmd('os', 'Shows the targets platform.', {'platform', 'device'},
 function(args, speaker)
@@ -6458,7 +6472,7 @@ function(args, speaker)
         local p = game:GetService("Players")[v]
         table.insert(platforms, p.Name.."'s platform is: "..p.OsPlatform)
     end
-    Notify(table.concat(platforms, ', '))
+    notify(table.concat(platforms, ', '))
 end)
 
 addcmd('whiteify', 'Turns the target white.', {'white'},
@@ -6586,7 +6600,7 @@ function(args, speaker)
         end
     end
     dels(workspace)
-Notify('Deleted ' ..GLS(false, 0))
+notify('Deleted ' ..GLS(false, 0))
 end)
 
 addcmd('deleteclass', 'removes any part with a certain classname from the workspace',{'removeclass','deleteclassname','removeclassname','dc'},
@@ -6599,7 +6613,7 @@ function(args, speaker)
         end
     end
     dels(workspace)
-Notify('Deleted items with ClassName ' ..GLS(false, 0))
+notify('Deleted items with ClassName ' ..GLS(false, 0))
 end)
 
 addcmd('blur', 'adjusts blur',{},
@@ -6613,19 +6627,19 @@ function(args, speaker)
     dels(LightingService)
 
 	local b = Instance.new("BlurEffect", LightingService)
-	b.Name = "IYRFDblur"
+	b.Name = "IYblur"
     b.Size = args[1]
 end)
 
 addcmd('distortsound','changes volume of sound',{'distort'},
 function(args, speaker)
 	for i,v in pairs(workspace:GetChildren())do
-		if v:IsA("Sound") and v.Name == "IYRFDsound" then
+		if v:IsA("Sound") and v.Name == "IYsound" then
 			v:ClearAllChildren ()
 			local d = Instance.new('DistortionSoundEffect')
 			d.Parent = v
 			d.Level = args[1]
-			Notify('Changed distortion to ' .. args[1])
+			notify('Changed distortion to ' .. args[1])
 		end
 	end
 end)
@@ -6633,9 +6647,9 @@ end)
 addcmd('volume','changes volume of sound',{'vol'},
 function(args, speaker)
 	for i,v in pairs(workspace:GetChildren())do
-		if v:IsA("Sound") and v.Name == "IYRFDsound" then
+		if v:IsA("Sound") and v.Name == "IYsound" then
 			v.Volume = args[1]
-			Notify('Changed volume to ' .. args[1])
+			notify('Changed volume to ' .. args[1])
 		end
 	end
 end)
@@ -6643,9 +6657,9 @@ end)
 addcmd('pitch','changes pitch of sound',{},
 function(args, speaker)
 	for i,v in pairs(workspace:GetChildren())do
-		if v:IsA("Sound") and v.Name == "IYRFDsound" then
+		if v:IsA("Sound") and v.Name == "IYsound" then
 			v.Pitch = args[1]
-			Notify('Changed pitch to ' .. args[1])
+			notify('Changed pitch to ' .. args[1])
 		end
 	end
 end)
@@ -6690,7 +6704,7 @@ part:Destroy()
 local message = localp:FindFirstChild'ChessMsg'
 message.Text = ''
 message.Parent = workspace
-message.Name = "IYRFDmessage"
+message.Name = "IYmessage"
 if part ~= nil then part:Destroy() end
 localp.Character.HumanoidRootPart.Anchored = false
 for _, child in pairs( workspace:GetChildren()) do
@@ -6700,13 +6714,13 @@ for _, child in pairs( workspace:GetChildren()) do
 end
 if localp.Character:FindFirstChild'ForceField' then localp.Character.ForceField:Destroy() end
 if _G.msg ~= nil then
-Notify('Loaded global message bypass')
+notify('Loaded global message bypass')
 else
 execCmd("loadm")
 end
 end
 elseif MSGhook == true then
-Notify('Messages already loaded!')
+notify('Messages already loaded!')
 end
 end)
 
@@ -6717,7 +6731,7 @@ if args[1] ~= string then
 local time = args[1]
 msghook()
 if MSGhook == true then
-local h = workspace.IYRFDmessage
+local h = workspace.IYmessage
 for i = time, 1, -1 do
 wait(1)
 h.Text = "Countdown: "..i..""
@@ -6728,8 +6742,8 @@ wait(2)
 h.Text = ''
 elseif MSGhook == false then
 	execCmd("loadm")
-	repeat wait() until workspace:FindFirstChild("IYRFDmessage")
-local h = workspace.IYRFDmessage
+	repeat wait() until workspace:FindFirstChild("IYmessage")
+local h = workspace.IYmessage
 for i = time, 1, -1 do
 wait(1)
 h.Text = "Countdown: "..i..""
@@ -7017,7 +7031,7 @@ addcmd("savepos","sets a waypoint at the speaker's position",{'spos'},
 function(args, speaker)
 	local WPName = tostring(GLS(false, 0))
 	if speaker.Character:findFirstChild("HumanoidRootPart") then
-		Notify("Created waypoint: "..GLS(false, 0))
+		notify("Created waypoint: "..GLS(false, 0))
 		local torso = speaker.Character:findFirstChild("HumanoidRootPart")
 		WayPoints[#WayPoints + 1] = {NAME = WPName, COORD = {math.floor(torso.Position.X), math.floor(torso.Position.Y), math.floor(torso.Position.Z)}}
 		updatepositions()
@@ -7028,7 +7042,7 @@ addcmd("deletepos","sets a waypoint at the speaker's position",{'dpos'},
 function(args, speaker)
 		for i,v in pairs(WayPoints) do
 		if v.NAME == tostring(GLS(false, 0)) then
-		Notify("Deleted waypoint: " .. v.NAME)
+		notify("Deleted waypoint: " .. v.NAME)
 		table.remove(WayPoints, i)
 		updatepositions()
 		end end
@@ -7363,7 +7377,7 @@ end)
 addcmd('time', 'change the time of day',{},
 function(args, speaker)
     if not args[1]then return end
-	Notify('Time set to ' .. args[1])
+	notify('Time set to ' .. args[1])
     LightingService.ClockTime = args[1]
 end)
 
@@ -7379,31 +7393,31 @@ end)
 
 addcmd('globalshadows', 'changes the lighting property',{'gshadows'},
 function(args, speaker)
-	Notify('Turned on global shadows')
+	notify('Turned on global shadows')
     LightingService.GlobalShadows = true
 end)
 
 addcmd('unglobalshadows', 'changes the lighting property',{'nogshadows','ungshadows','noglobalshadows'},
 function(args, speaker)
-	Notify('Turned off global shadows')
+	notify('Turned off global shadows')
     LightingService.GlobalShadows = false
 end)
 
 addcmd('outlines', 'changes the lighting property',{},
 function(args, speaker)
-	Notify('Turned on outlines')
+	notify('Turned on outlines')
     LightingService.Outlines = true
 end)
 
 addcmd('unoutlines', 'changes the lighting property',{'nooutlines'},
 function(args, speaker)
-	Notify('Turned off outlines')
+	notify('Turned off outlines')
     LightingService.Outlines = false
 end)
 
 addcmd('brightness', 'changes the lighting property',{},
 function(args, speaker)
-	Notify('Set brightness to ' .. args[1])
+	notify('Set brightness to ' .. args[1])
     LightingService.Brightness = args[1]
 end)
 
@@ -7429,7 +7443,7 @@ function(args, speaker)
 if speaker.userId ~= LP.userId then
 lponly(speaker)
 else
-Notify('Printing remotes')
+notify('Printing remotes')
 function getem(o)
 for i,v in pairs(o:children())do
 if string.match(v.ClassName, "RemoteEvent") or string.match(v.ClassName, "RemoteFunction") then              
@@ -7456,8 +7470,8 @@ function(args, speaker)
 local players = getPlayer(args[1], speaker)
 for i,v in pairs(players) do
 spawn(function()
-if FindTable(SPC, args[1]) then Notify('Kicked ' ..args[1]) else
-Notify('Kicked player(s)') end
+if FindTable(SPC, args[1]) then notify('Kicked ' ..args[1]) else
+notify('Kicked player(s)') end
 kickF(gPlayers[v])
 end) end end)
 
@@ -7483,14 +7497,14 @@ addcmd('serverlock', 'lock teh server',{'slock'},
 function(args, speaker)
 slock = true
 agelock = false
-Notify('Locked Server')
+notify('Locked Server')
 fadelock("rbxassetid://1495252742")
 end)
 
 addcmd('unserverlock', 'unlock teh server',{'unslock'},
 function(args, speaker)
 slock = false
-Notify('Unlocked Server')
+notify('Unlocked Server')
 if lockic.Image == "rbxassetid://1495252742" then
 fadelock('off')
 end
@@ -7499,7 +7513,7 @@ end)
 addcmd('agelock', 'lock teh server for a certain age',{'alock'},
 function(args, speaker)
 if isNumber(args[1]) then
-Notify('Set the age lock to age ' .. args[1])
+notify('Set the age lock to age ' .. args[1])
 isagelocked = true
 slock = false
 agelock = tonumber(args[1])
@@ -7509,7 +7523,7 @@ end)
 
 addcmd('unagelock', 'lock teh server for a certain age',{'unalock','noagelock','noalock'},
 function(args, speaker)
-Notify('Disabled age lock')
+notify('Disabled age lock')
 isagelocked = false
 if lockic.Image == "rbxassetid://1495252495" then
 fadelock('off')
@@ -7518,7 +7532,7 @@ end)
 
 addcmd('unlockws', 'unlock the whole workspace',{},
 function(args, speaker)
-	Notify('Workspace unlocked')
+	notify('Workspace unlocked')
 	wait(1)
     local function unlock(instance) 
         for i,v in pairs(instance:GetChildren()) do
@@ -7533,7 +7547,7 @@ end)
 
 addcmd('lockws', 'lock the whole workspace',{},
 function(args, speaker)
-	Notify('Workspace locked')
+	notify('Workspace locked')
 	wait(1)
     local function lock(instance) 
         for i,v in pairs(instance:GetChildren()) do
@@ -7618,16 +7632,12 @@ end)
 end
 end)
 
-addcmd('explorer', 'opens DEX',{'dex'},
-function(args, speaker)
-if speaker.userId ~= LP.userId then
-lponly(speaker)
-else
-loadstring(game:GetObjects("rbxassetid://418957341")[1].Source)()
-end
+addcmd('explorer', {'dex'}, function(args, speaker)
+	notify('Loading', 'Hold on a sec')
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
 end)
 
-addcmd('IYRFDspam', '/shrug',{},
+addcmd('IYspam', '/shrug',{},
 function(args, speaker)
 loadstring(game:HttpGet(('https://pastebin.com/raw/aJ15LAbN'),true))()
 end)
@@ -7665,9 +7675,9 @@ function(args, speaker)
     local players = getPlayer(args[1], speaker)
     for i,v in pairs(players)do
 	spawn(function()
-	gPlayers[v].Character.Humanoid.Name = "HumanoidIYRFD"
-	if FindTable(SPC, args[1]) then Notify('Disabled reset for ' .. args[1]) else
-	Notify('Disabled reset for player(s)') end
+	gPlayers[v].Character.Humanoid.Name = "HumanoidIY"
+	if FindTable(SPC, args[1]) then notify('Disabled reset for ' .. args[1]) else
+	notify('Disabled reset for player(s)') end
 	end)
 	end
 end)
@@ -7677,9 +7687,9 @@ function(args, speaker)
     local players = getPlayer(args[1], speaker)
     for i,v in pairs(players)do
 	spawn(function()
-	gPlayers[v].Character.HumanoidIYRFD.Name = "Humanoid"
-	if FindTable(SPC, args[1]) then Notify('Enabled reset for ' .. args[1]) else
-	Notify('Enabled reset for player(s)') end
+	gPlayers[v].Character.HumanoidIY.Name = "Humanoid"
+	if FindTable(SPC, args[1]) then notify('Enabled reset for ' .. args[1]) else
+	notify('Enabled reset for player(s)') end
 	end)
 	end
 end)
@@ -7704,7 +7714,7 @@ addcmd("savelighting","Removes effects from lighting",{'slighting'},
 function(args,speaker)
 origsettings = {abt = LightingService.Ambient, oabt = LightingService.OutdoorAmbient, brt = LightingService.Brightness, time = 
 LightingService.TimeOfDay, fclr = LightingService.FogColor, fe = LightingService.FogEnd, fs = LightingService.FogStart}
-Notify('Saved lighting settings')
+notify('Saved lighting settings')
 end)
 
 addcmd("blackandwhite","Makes the game black and white",{},
@@ -7729,7 +7739,7 @@ function(args,speaker)
     local spread = args[2] or 1
     local lighting = game:GetService("Lighting")
     local effect = Instance.new("SunRaysEffect",lighting)
-	effect.Name = "IYRFDsun"
+	effect.Name = "IYsun"
     effect.Intensity = tonumber(intense)
     effect.Spread = tonumber(spread)
 end)
@@ -7745,7 +7755,7 @@ pt.Parent = workspace
 pt.Name = (math.random(1,1000000))
 pt.Size = Vector3.new(1000, 1, 1000)
 pt.Locked = true
-Notify('Created new base')
+notify('Created new base')
 end)
 
 addcmd('unblur', 'removes all blur instances',{'noblur'},
@@ -7855,14 +7865,14 @@ function(args, speaker)
 	local players = getPlayer(args[1], speaker)
 	for i,v in pairs(players) do
 		workspace.CurrentCamera.CameraSubject = gPlayers[v].Character
-		Notify('Viewing ' .. gPlayers[v].Name)
+		notify('Viewing ' .. gPlayers[v].Name)
 	end
 end)
 
 addcmd('unview', 'stops viewing player',{'unspectate'},
 function()
 	workspace.CurrentCamera.CameraSubject = gPlayers.LocalPlayer.Character
-	Notify('View turned off')
+	notify('View turned off')
 end)
 
 addcmd('nolimbs', 'removes limbs from player',{'rlimbs'},
@@ -8047,8 +8057,8 @@ function(args, speaker)
 		local Lname = GLS(false, 1)
 		local pchar=gPlayers[v].Character
 		pchar.Name = Lname
-		if FindTable(SPC, args[1]) then Notify('Looping name for ' .. args[1] .. ' (only visible to others)') else
-		Notify('Looping name for player(s) (only visible to others)') end
+		if FindTable(SPC, args[1]) then notify('Looping name for ' .. args[1] .. ' (only visible to others)') else
+		notify('Looping name for player(s) (only visible to others)') end
 		repeat wait(0.01)
 		repeat wait() until _players[v].Character
 		gPlayers[v].Character.Name = Lname
@@ -8065,8 +8075,8 @@ function(args, speaker)
 		local pchar=gPlayers[v].Character
 		for a,b in pairs(loopn) do if b == _players[v].Name then table.remove(loopn, a) end end
 		wait(0.5)
-		if FindTable(SPC, args[1]) then Notify('Stopped looping name for ' .. args[1]) else
-		Notify('Stopped looping name for player(s)') end
+		if FindTable(SPC, args[1]) then notify('Stopped looping name for ' .. args[1]) else
+		notify('Stopped looping name for player(s)') end
 		pchar.Name = gPlayers[v].Name
 		end)
 		end
@@ -8165,7 +8175,7 @@ end)
 
 addcmd('shutdown', 'shuts the server down',{},
 function(args, speaker)
-Notify('Broken atm :(')
+notify('Broken atm :(')
 end)
 
 addcmd('fekill','oof?',{},
@@ -8258,9 +8268,9 @@ addcmd('crash','crashes a player',{},
 function(args, speaker)
 	local players = getPlayer(args[1], speaker)
 	for i,v in pairs(players)do
-	if FindTable(WL, gPlayers[v].Name) then Notify('Error: '..gPlayers[v].Name..' is whitelisted') else
-	if FindTable(SPC, args[1]) then Notify('Crashed ' .. args[1]) else
-	Notify('Crashed player(s)') end
+	if FindTable(WL, gPlayers[v].Name) then notify('Error: '..gPlayers[v].Name..' is whitelisted') else
+	if FindTable(SPC, args[1]) then notify('Crashed ' .. args[1]) else
+	notify('Crashed player(s)') end
 	wait(4)
 if gPlayers[v] ~= nil then
 for i=1,3600 do
@@ -8958,8 +8968,8 @@ function(args, speaker)
 		   pchar.Humanoid.Name = "HUMANOID_" .. gPlayers[v].Name
 		   local humanoid = pchar["HUMANOID_" .. gPlayers[v].Name]
 		   humanoid.Parent = game.ContextActionService
-		if FindTable(SPC, args[1]) then Notify('Disabled ' .. args[1]) else
-		Notify('Disabled player(s)') end
+		if FindTable(SPC, args[1]) then notify('Disabled ' .. args[1]) else
+		notify('Disabled player(s)') end
 	    end end end)
 
 addcmd('enable','gives player humanoid',{},
@@ -8973,8 +8983,8 @@ function(args, speaker)
 		    local humanoid = game.ContextActionService["HUMANOID_" .. gPlayers[v].Name]
 		    humanoid.Parent = pchar
 		    humanoid.Name = "Humanoid"
-			if FindTable(SPC, args[1]) then Notify('Enabled ' .. args[1]) else
-			Notify('Enabled player(s)') end
+			if FindTable(SPC, args[1]) then notify('Enabled ' .. args[1]) else
+			notify('Enabled player(s)') end
 	    end end end)
 
 addcmd('size','changes size of player',{},
@@ -9313,9 +9323,9 @@ end)
 addcmd('fe','checks filtering status',{'filtering'},
 function(args, speaker)
 if workspace.FilteringEnabled == true then
-	Notify('Filtering ENABLED') 
+	notify('Filtering ENABLED') 
 elseif workspace.FilteringEnabled == false then
-	Notify('Filtering Disabled') 
+	notify('Filtering Disabled') 
 end
 end)
 
@@ -9387,7 +9397,7 @@ local victim = gPlayers:FindFirstChild(blind)
 if victim ~= nil then
 victim.CameraMaxZoomDistance = 0.5
 blnd = Instance.new("Part",workspace)
-blnd.Name = "IYRFDblind" .. gPlayers[v].Name
+blnd.Name = "IYblind" .. gPlayers[v].Name
 blnd.Size = Vector3.new(1,1,1)
 blnd.CanCollide = false
 blnd.BrickColor = BrickColor.new("Really black")
@@ -9400,13 +9410,13 @@ w.Part0 = blnd
 w.Part1 = victim.Character.Head
 if FindTable(blindT, _players[v].Name) then return end
 		table.insert(blindT, _players[v].Name)
-		repeat if not workspace:FindFirstChild('IYRFDblind' .. gPlayers[v].Name) then
+		repeat if not workspace:FindFirstChild('IYblind' .. gPlayers[v].Name) then
 local blind = gPlayers[v].Name
 local victim = gPlayers:FindFirstChild(blind)
 if victim ~= nil then
 victim.CameraMaxZoomDistance = 0.5
 blnd = Instance.new("Part",workspace)
-blnd.Name = "IYRFDblind" .. gPlayers[v].Name
+blnd.Name = "IYblind" .. gPlayers[v].Name
 blnd.Size = Vector3.new(1,1,1)
 blnd.CanCollide = false
 blnd.BrickColor = BrickColor.new("Really black")
@@ -9432,7 +9442,7 @@ local victim = gPlayers:FindFirstChild(blind)
 if victim ~= nil then
 victim.CameraMaxZoomDistance = 400 wait(0.5)
 	for _, child in pairs( workspace:GetChildren()) do
-    if child.Name == "IYRFDblind" .. gPlayers[v].Name then
+    if child.Name == "IYblind" .. gPlayers[v].Name then
     child:Destroy()
 end end end end) end end)
 
@@ -9667,7 +9677,7 @@ end)
 addcmd('bait',';)',{'troll'},
 function(args, speaker)
 spawn(function()
-local M = Instance.new('Model', workspace) M.Name = 'IYRFDbait'
+local M = Instance.new('Model', workspace) M.Name = 'IYbait'
 local P = Instance.new('Part', M) P.Name = 'Main' P.Position = speaker.Character.Head.Position P.Color = maincolor P.Material = 'Neon' P.Size = Vector3.new(4, 1, 4)
 y = Instance.new("BillboardGui")
 y.Size = UDim2.new(0,100,0,150)
@@ -9694,7 +9704,7 @@ addcmd('removebait','clears bait parts',{'nobait'},
 function(args, speaker)
     local function dels(instance)
         for i,v in pairs(instance:GetChildren())do
-            if v.name == "IYRFDbait"then v:Destroy()end
+            if v.name == "IYbait"then v:Destroy()end
             dels(v)
         end
     end
@@ -9810,7 +9820,7 @@ local MusicPlayer do
 		adminSound:Stop()
 		if adminSound.Parent == nil then
 			adminSound = Instance.new("Sound",workspace)
-			adminSound.Name = "IYRFDsound"
+			adminSound.Name = "IYsound"
 			adminSound.Looped = true
 			if plist then setPlaylistHook() end
 		end
@@ -9828,7 +9838,7 @@ local MusicPlayer do
 		currentSong = 1
 		if adminSound.Parent == nil then
 			adminSound = Instance.new("Sound",workspace)
-			adminSound.Name = "IYRFDsound"
+			adminSound.Name = "IYsound"
 			adminSound.Looped = true
 		end
 		soundFrame.PlaylistCount.Text = "1/"..tostring(#playlist)
@@ -9923,7 +9933,7 @@ playerenabled = true
 	if v:IsA'Sound'then v:Destroy() end end wait(0.1)
 		if adminSound.Parent == nil then
 			adminSound = Instance.new("Sound",workspace)
-			adminSound.Name = "IYRFDsound"
+			adminSound.Name = "IYsound"
 			adminSound.Looped = true
 		end
 		local idlist = splitString(args[1])
@@ -9931,14 +9941,14 @@ playerenabled = true
 		for i,v in pairs(idlist) do if tonumber(v) then table.insert(workingIds,tonumber(v)) end end
 		if #workingIds > 0 then
 			playerenabled = true
-			NOTIFY.NOTIFY:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
+			notify.notify:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
 			MusicPlayer:Playlist(workingIds)
 			MusicPlayer:Show() if qopen == true then quickmenu.sheild.cmds:TweenPosition(UDim2.new(0, 50, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.settings:TweenPosition(UDim2.new(0, 146, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.info:TweenPosition(UDim2.new(0, 290, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.mix:TweenPosition(UDim2.new(0, 340, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01) qopen = false end end
-		else MusicPlayer:Show() NOTIFY.NOTIFY:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil) if qopen == true then quickmenu.sheild.cmds:TweenPosition(UDim2.new(0, 50, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
+		else MusicPlayer:Show() notify.notify:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil) if qopen == true then quickmenu.sheild.cmds:TweenPosition(UDim2.new(0, 50, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.settings:TweenPosition(UDim2.new(0, 146, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 			quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01) playerenabled = true
 			quickmenu.sheild.info:TweenPosition(UDim2.new(0, 290, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
@@ -9959,7 +9969,7 @@ addcmd('hideplaylist','back a song',{'unplayer','noplayer','hideplayer'},
 function(args, speaker)
 playerenabled = false
 MusicPlayer:Hide()
-NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
+notify.notify:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
 end)
 
 addcmd('playhash', 'plays a hash instead of soundid',{'hash'},
@@ -9969,13 +9979,13 @@ function(args, speaker)
     local c = args[1] or 'stop'
     if std.inTable({'stop'}, c:lower()) then return end
 	local s = Instance.new("Sound", workspace)
-	s.Name = "IYRFDsound"
+	s.Name = "IYsound"
 	s.Looped = true
 	s.SoundId = c
     s.Volume = 1
 	s:Play()
 	playerenabled = false
-	Notify('Playing hash')
+	notify('Playing hash')
  end)
 
 addcmd('disco','disco party',{''},
@@ -10446,7 +10456,7 @@ local function dels(instance) for i,v in pairs(instance:GetChildren())do if v:Is
 for i,v in pairs(LightingService:GetChildren()) do if v:IsA('Sky') then v:Destroy() end end
     for i,v in pairs(game:GetService("Lighting"):GetChildren()) do
     if v:IsA("PostEffect") then v:Destroy() end end
-for i,v in pairs(workspace.Terrain:GetChildren()) do v:Destroy() Notify('Reset') end end)
+for i,v in pairs(workspace.Terrain:GetChildren()) do v:Destroy() notify('Reset') end end)
 
 Floating = false
 
@@ -10494,7 +10504,7 @@ function(args, speaker)
 if speaker.userId ~= LP.userId then
 lponly(speaker)
 else
-Notify('Noclip enabled')
+notify('Noclip enabled')
 Clip = false
 if LP.Character:FindFirstChild('Torso') then
 	wait(0.1)
@@ -10516,7 +10526,7 @@ function(args, speaker)
 if speaker.userId ~= LP.userId then
 lponly(speaker)
 else
-	Notify('Noclip disabled')
+	notify('Noclip disabled')
 	Clip = true
 	r15noclip = false
 	wait(0.1)
@@ -10528,7 +10538,7 @@ end end end)
 addcmd('prefix','changes prefix',{},
 function(args, speaker)
 	cmdprefix = args[1]
-	Notify('Set prefix to "' .. args[1] .. '"')
+	notify('Set prefix to "' .. args[1] .. '"')
 	updatefile()
 end)
 
@@ -10586,13 +10596,13 @@ end
 addcmd('savemap','saves current map',{'smap'},
 function(args, speaker)
 RestorePoint()
-Notify('Saved current map')
+notify('Saved current map')
 end)
 
 addcmd('restoremap','saves current map',{'rmap'},
 function(args, speaker)
 InsertPoint()
-Notify('Loaded last saved map')
+notify('Loaded last saved map')
 end)
 
 addcmd('respawn','respawns',{},
@@ -10608,7 +10618,7 @@ function(args, speaker)
 if speaker.userId ~= LP.userId then
 lponly(speaker)
 else
-	Notify("Version is " .. Version)
+	notify("Version is " .. Version)
 end
 end)
 local CTPenabled = false
@@ -10694,7 +10704,7 @@ Float.Size = Vector3.new(6,1,6)
 Float.Anchored = true
 function C3(R, G, B) return Color3.new(R/255, G/255, B/255) end
 missile = Instance.new('Part', DATA)
-missile.Name = 'IYRFD_missile'
+missile.Name = 'IY_missile'
 missile.CanCollide = false
 missile.Size = Vector3.new(2, 5, 2) 
 Instance.new('CylinderMesh', missile)
@@ -11210,7 +11220,7 @@ CMDss.TopImage = "rbxasset://textures/blackBkg_square.png"
 notifyMAIN = Instance.new('ScreenGui', DATA)
 notifyMAIN.Name = 'Notification'
 notifyNOT = Instance.new('Frame', notifyMAIN)
-notifyNOT.Name = 'NOTIFY'
+notifyNOT.Name = 'notify'
 notifyNOT.BackgroundColor = BrickColor.new(0,0,0)
 notifyNOT.BackgroundTransparency = 1
 notifyNOT.BorderColor = BrickColor.new(0,0,0)
@@ -11227,7 +11237,7 @@ notifyNOTE.Size = UDim2.new(1,0,1,0)
 notifyNOTE.ZIndex = 4
 notifyNOTE.FontSize = 'Size18'
 notifyNOTE.Font = 'SourceSansBold'
-notifyNOTE.Text = 'NOTIFY'
+notifyNOTE.Text = 'notify'
 notifyNOTE.TextColor = BrickColor.new(255,255,255)
 notifyNOTE.TextStrokeColor3 = Color3.new(0,0,0)
 notifyNOTE.TextStrokeTransparency = 0.8
@@ -11311,7 +11321,7 @@ end)
 SettingsGUI.FeedbackMain.setMT.MouseButton1Click:Connect(function()
 wait()
 	Mseconds = SettingsGUI.FeedbackMain.MtimeInput.Input.Text
-	Notify('Set message time to ' ..SettingsGUI.FeedbackMain.MtimeInput.Input.Text.. ' second(s)')
+	notify('Set message time to ' ..SettingsGUI.FeedbackMain.MtimeInput.Input.Text.. ' second(s)')
 	updatefile()
 end)
 --CMDBAR keybind
@@ -11319,14 +11329,14 @@ SettingsGUI.FeedbackMain.setBind.MouseButton1Click:Connect(function()
 wait()
 	cmdbarbind = SettingsGUI.FeedbackMain.bindInput.Input.Text
 	cmdBAR.Text = 'Press ' ..cmdbarbind.. ' to focus the cmd bar'
-	Notify('Set the command bar keybind to "' ..SettingsGUI.FeedbackMain.bindInput.Input.Text .. '"' )
+	notify('Set the command bar keybind to "' ..SettingsGUI.FeedbackMain.bindInput.Input.Text .. '"' )
 	updatefile()
 end)
 --Change prefix
 SettingsGUI.FeedbackMain.setpre.MouseButton1Click:Connect(function()
 wait()
 	cmdprefix = SettingsGUI.FeedbackMain.InputBox.Input.Text
-	Notify('Set prefix to "' .. SettingsGUI.FeedbackMain.InputBox.Input.Text .. '"')
+	notify('Set prefix to "' .. SettingsGUI.FeedbackMain.InputBox.Input.Text .. '"')
 	updatefile()
 end)
 --Check Box for notify
@@ -11413,218 +11423,192 @@ game.CoreGui.cp.Frame.holder.bar.Hide.Visible = true
 game.CoreGui.cp.Frame.holder.bar.Hide:TweenSize(UDim2.new(0,20,0,20),"Out","Quad",0.2,true) end end
 
 function searchbar()
-    local CSP = game.CoreGui.cp.Frame.holder.size.MAIN
-    local main = CSP
-    local frame = CSP:WaitForChild("CMDs")
-    local gui = CSP:WaitForChild("Search")
-    local focused = false
-    Match = function(name, str)
-        return name:lower():find(str:lower()) and true
-    end
-    gui.FocusLost:connect(
-        function(enterpressed)
-            gui.Text = "Search"
-        end)
-    IndexContents = function(str, bool)
-        local Index, SizeY = 0, 0
-        for i, v in next, frame:GetChildren() do
-            if bool then
-                if Match(v.Text, str) then
-                    Index = Index + 1
-                    v.Position = UDim2.new(0, 0, 0, Index * v.AbsoluteSize.Y - v.AbsoluteSize.Y)
-                    v.Visible = true
-                    SizeY = SizeY + v.AbsoluteSize.Y
-                    frame.CanvasSize = UDim2.new(0, 0, 0, SizeY)
-                else
-                    v.Visible = false
-                end
-            else
-                v.Visible = true
-                SizeY = SizeY + v.AbsoluteSize.Y
-                frame.CanvasSize = UDim2.new(0, 0, 0, SizeY)
-            end
-        end
-    end
-    game:GetService("RunService").Stepped:connect(function()
-            if gui:IsFocused() and gui.Text == "Search" then
-                gui.Text = ""
-            end
-        end)
-    gui.Changed:connect(function()
-            if gui:IsFocused() then
-                IndexContents(gui.Text, true)
-            end
-        end)
-    IndexContents("", true)
+local CSP = game.CoreGui.cp.Frame.holder.size.MAIN
+local main = CSP
+local frame = CSP:WaitForChild('CMDs')
+local gui = CSP:WaitForChild('Search')
+local focused = false
+Match = function(name,str)
+	return name:lower():find(str:lower()) and true
+end
+gui.FocusLost:connect(function(enterpressed)
+gui.Text = "Search"
+end)
+IndexContents = function(str,bool)
+	local Index,SizeY = 0,0
+	for i,v in next, frame:GetChildren() do
+		if bool then
+			if Match(v.Text,str) then
+				Index = Index + 1
+				v.Position = UDim2.new(0,0,0,Index*v.AbsoluteSize.Y-v.AbsoluteSize.Y)
+				v.Visible = true
+				SizeY = SizeY + v.AbsoluteSize.Y
+				frame.CanvasSize = UDim2.new(0,0,0,SizeY)
+			else
+				v.Visible = false
+			end
+		else
+			v.Visible = true
+			SizeY = SizeY + v.AbsoluteSize.Y
+			frame.CanvasSize = UDim2.new(0,0,0,SizeY)
+		end
+	end
+end
+game:GetService('RunService').Stepped:connect(function()
+	if gui:IsFocused() and gui.Text == "Search" then
+	gui.Text = ''
+	end
+end)
+gui.Changed:connect(function()
+	if gui:IsFocused() then IndexContents(gui.Text,true) end
+end)
+
+IndexContents('',true)
 end
 
 function runwindow()
-    commands()
-    searchbar()
+commands()
+searchbar()
 end
 
-addcmd("settings", "opens settings window", {"toggles"}, function(args, speaker)
-    if speaker.userId ~= LP.userId then
-        lponly(speaker)
-    else
-        runwindow()
-        game.CoreGui.cp.Frame.holder.size:TweenPosition(UDim2.new(1, -600, 1, -300), "Out", "Quad", 0.2, true)
-        wait(0.1)
-        game.CoreGui.cp.Frame.holder.FeedbackMain:TweenPosition(UDim2.new(1.02, -301, 1.018, -310), "Out", "Quad", 0.2, true)
-        wait(0.1)
-        game.CoreGui.cp.Frame.holder.bar.Hide.Visible = true
-        game.CoreGui.cp.Frame.holder.bar.Hide:TweenSize(UDim2.new(0, 20, 0, 20), "Out", "Quad", 0.2, true)
-    end
+addcmd('settings','opens settings window',{'toggles'},
+function(args, speaker)
+if speaker.userId ~= LP.userId then
+lponly(speaker)
+else
+runwindow()
+game.CoreGui.cp.Frame.holder.size:TweenPosition(UDim2.new(1,-600,1,-300),"Out","Quad",0.2,true)
+wait(0.1)
+game.CoreGui.cp.Frame.holder.FeedbackMain:TweenPosition(UDim2.new(1.02,-301,1.018,-310),"Out","Quad",0.2,true)
+wait(0.1)
+game.CoreGui.cp.Frame.holder.bar.Hide.Visible = true
+game.CoreGui.cp.Frame.holder.bar.Hide:TweenSize(UDim2.new(0,20,0,20),"Out","Quad",0.2,true)
+end
 end)
 
-function movetab(speaker, PART)
-    game:GetService("RunService").Stepped:connect(function()
-        if PART ~= nil and speaker ~= nil and speaker.Character:FindFirstChild("HumanoidRootPart") then
-            PART.Locked = true
-            local cf = speaker.Character.HumanoidRootPart.CFrame
-            local newcf = cf + cf.lookVector * 6 + Vector3.new(0, 1, 0)
-            PART.CFrame = newcf
-        end
-    end)
-end
+function movetab(speaker,PART)
+game:GetService('RunService').Stepped:connect(function()
+if PART ~= nil and speaker ~= nil and speaker.Character:FindFirstChild('HumanoidRootPart') then
+PART.Locked = true
+local cf = speaker.Character.HumanoidRootPart.CFrame
+local newcf = cf + cf.lookVector * 6 + Vector3.new(0, 1, 0)
+PART.CFrame = newcf end end) end
 
 hastab = {}
-addcmd(
-    "tablet",
-    "opens tablet gui",
-    {},
-    function(args, speaker)
-        for _, child in pairs(workspace:GetChildren()) do
-            if child.Name == speaker.Name .. "TAB" then
-                child:Destroy()
-            end
-        end
-        game:GetService("Chat"):Chat(speaker.Character, 'The command to close is "' .. cmdprefix .. 'dismiss"', 1)
-        local GUI = Instance.new("SurfaceGui")
-        local holder = Instance.new("Frame")
-        local bar = Instance.new("Frame")
-        local Title = Instance.new("TextLabel")
-        local MAIN = Instance.new("Frame")
-        local Example = Instance.new("TextLabel")
-        local CMDs = Instance.new("ScrollingFrame")
-        local PART = Instance.new("Part")
-        PART.Name = speaker.Name .. "TAB"
-        PART.Color = maincolor
-        PART.Size = Vector3.new(7, 7.8, 0.2)
-        PART.Transparency = 0
-        PART.Locked = true
-        PART.CanCollide = false
-        PART.Parent = workspace
-        PART.Anchored = true
-        PART.Material = "Neon"
-        local GUI = Instance.new("SurfaceGui")
-        local holder = Instance.new("Frame")
-        local bar = Instance.new("Frame")
-        local Title = Instance.new("TextLabel")
-        local MAIN = Instance.new("Frame")
-        local Example = Instance.new("TextLabel")
-        local CMDs = Instance.new("ScrollingFrame")
-        GUI.Name = "GUI"
-        GUI.Parent = PART
-        GUI.CanvasSize = Vector2.new(500, 600)
-        GUI.Face = Enum.NormalId.Back
-        holder.Name = "holder"
-        holder.Parent = GUI
-        holder.BackgroundColor3 = Color3.new(1, 1, 1)
-        holder.BackgroundTransparency = 1
-        holder.BorderSizePixel = 2
-        holder.Position = UDim2.new(0, 0, 0, 10)
-        holder.Size = UDim2.new(0, 300, 0, 330)
-        holder.ZIndex = 2
-        bar.Name = "bar"
-        bar.Parent = holder
-        bar.BackgroundColor3 = Color3.new(0, 0, 0)
-        bar.BackgroundTransparency = 0.89999997615814
-        bar.BorderSizePixel = 0
-        bar.Position = UDim2.new(0, 10, 1, -330)
-        bar.Size = UDim2.new(0, 480, 0, 33)
-        Title.Name = "Title"
-        Title.Parent = bar
-        Title.BackgroundColor3 = Color3.new(0.639216, 0.635294, 0.647059)
-        Title.BackgroundTransparency = 1
-        Title.Size = UDim2.new(1, 0, 0, 30)
-        Title.Font = Enum.Font.SourceSansBold
-        Title.FontSize = Enum.FontSize.Size24
-        Title.Text = "[Infinite Yield Reborn FD] Command List"
-        Title.TextColor3 = Color3.new(0.980392, 0.980392, 0.980392)
-        MAIN.Name = "MAIN"
-        MAIN.Parent = holder
-        MAIN.BackgroundColor3 = Color3.new(0, 0, 0)
-        MAIN.BackgroundTransparency = 0.89999997615814
-        MAIN.BorderSizePixel = 0
-        MAIN.Position = UDim2.new(0, 10, 1, -300)
-        MAIN.Size = UDim2.new(0, 480, 0, 550)
-        Example.Name = "Example"
-        Example.Parent = MAIN
-        Example.BackgroundColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
-        Example.BackgroundTransparency = 1
-        Example.BorderColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
-        Example.BorderSizePixel = 0
-        Example.Size = UDim2.new(0, 190, 0, 40)
-        Example.Visible = false
-        Example.Font = Enum.Font.SourceSansBold
-        Example.FontSize = Enum.FontSize.Size36
-        Example.Text = "txt"
-        Example.TextColor3 = Color3.new(0.972549, 0.972549, 0.972549)
-        Example.TextStrokeTransparency = 0
-        Example.TextXAlignment = Enum.TextXAlignment.Left
-        Example.ZIndex = 6
-        CMDs.Name = "CMDs"
-        CMDs.Parent = MAIN
-        CMDs.BackgroundColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
-        CMDs.BackgroundTransparency = 1
-        CMDs.BorderColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
-        CMDs.BorderSizePixel = 0
-        CMDs.Size = UDim2.new(0, 480, 0, 550)
-        CMDs.BottomImage = "rbxasset://textures/blackBkg_square.png"
-        CMDs.CanvasSize = UDim2.new(0, 0, 0, 4880)
-        CMDs.MidImage = "rbxasset://textures/blackBkg_square.png"
-        CMDs.ScrollBarThickness = 15
-        CMDs.TopImage = "rbxasset://textures/blackBkg_square.png"
-        local CMDsV = CMDsFolder:GetChildren()
-        for i = 1, #CMDsV do
-            local YSize = 35
-            local Position = ((i * YSize) - YSize)
-            local newcmd = Example:Clone()
-            newcmd.Parent = CMDs
-            newcmd.Visible = true
-            newcmd.Position = UDim2.new(0, 10, 0, Position + 1)
-            newcmd.Text = "" .. CMDsV[i].Value
-            CMDs.CanvasSize = UDim2.new(0, 0, 0, Position + 40)
-        end
-        local cf = speaker.Character.HumanoidRootPart.CFrame
-        local newcf = cf + cf.lookVector * 6 + Vector3.new(0, 1, 0)
-        PART.CFrame = newcf
-        speaker.Character.Humanoid.Died:connect(
-            function()
-                PART:Destroy()
-            end
-        )
-        wait(1)
-        PART.Transparency = 0.1
-        wait(0.05)
-        PART.Transparency = 0.2
-        wait(0.05)
-        PART.Transparency = 0.3
-        wait(0.05)
-        PART.Transparency = 0.4
-        wait(0.05)
-        PART.Transparency = 0.5
-        wait(0.05)
-        PART.Transparency = 0.6
-        wait(0.05)
-        if FindTable(hastab, speaker.Name) then
-            movetab(speaker, PART)
-            return
-        end
-        table.insert(hastab, speaker.Name)
-        movetab(speaker, PART)
-    end)
+addcmd('tablet','opens tablet gui',{},
+function(args, speaker)
+for _, child in pairs( workspace:GetChildren()) do
+    if child.Name == speaker.Name .. "TAB" then
+        child:Destroy() end end
+game:GetService('Chat'):Chat(speaker.Character, 'The command to close is "'.. cmdprefix .. 'dismiss"', 1)
+local GUI = Instance.new("SurfaceGui")
+local holder = Instance.new("Frame")
+local bar = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local MAIN = Instance.new("Frame")
+local Example = Instance.new("TextLabel")
+local CMDs = Instance.new("ScrollingFrame")
+local PART = Instance.new("Part")
+PART.Name = speaker.Name .. 'TAB'
+PART.Color = maincolor
+PART.Size = Vector3.new(7, 7.8, 0.2)
+PART.Transparency = 0
+PART.Locked = true
+PART.CanCollide = false
+PART.Parent = workspace
+PART.Anchored = true
+PART.Material = "Neon"
+local GUI = Instance.new("SurfaceGui")
+local holder = Instance.new("Frame")
+local bar = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local MAIN = Instance.new("Frame")
+local Example = Instance.new("TextLabel")
+local CMDs = Instance.new("ScrollingFrame")
+GUI.Name = "GUI"
+GUI.Parent = PART
+GUI.CanvasSize = Vector2.new(500, 600)
+GUI.Face = Enum.NormalId.Back
+holder.Name = "holder"
+holder.Parent = GUI
+holder.BackgroundColor3 = Color3.new(1, 1, 1)
+holder.BackgroundTransparency = 1
+holder.BorderSizePixel = 2
+holder.Position = UDim2.new(0, 0, 0, 10)
+holder.Size = UDim2.new(0, 300, 0, 330)
+holder.ZIndex = 2
+bar.Name = "bar"
+bar.Parent = holder
+bar.BackgroundColor3 = Color3.new(0, 0, 0)
+bar.BackgroundTransparency = 0.89999997615814
+bar.BorderSizePixel = 0
+bar.Position = UDim2.new(0, 10, 1, -330)
+bar.Size = UDim2.new(0, 480, 0, 33)
+Title.Name = "Title"
+Title.Parent = bar
+Title.BackgroundColor3 = Color3.new(0.639216, 0.635294, 0.647059)
+Title.BackgroundTransparency = 1
+Title.Size = UDim2.new(1, 0, 0, 30)
+Title.Font = Enum.Font.SourceSansBold
+Title.FontSize = Enum.FontSize.Size24
+Title.Text = "[Infinite Yield] Command List"
+Title.TextColor3 = Color3.new(0.980392, 0.980392, 0.980392)
+MAIN.Name = "MAIN"
+MAIN.Parent = holder
+MAIN.BackgroundColor3 = Color3.new(0, 0, 0)
+MAIN.BackgroundTransparency = 0.89999997615814
+MAIN.BorderSizePixel = 0
+MAIN.Position = UDim2.new(0, 10, 1, -300)
+MAIN.Size = UDim2.new(0, 480, 0, 550)
+Example.Name = "Example"
+Example.Parent = MAIN
+Example.BackgroundColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Example.BackgroundTransparency = 1
+Example.BorderColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
+Example.BorderSizePixel = 0
+Example.Size = UDim2.new(0, 190, 0, 40)
+Example.Visible = false
+Example.Font = Enum.Font.SourceSansBold
+Example.FontSize = Enum.FontSize.Size36
+Example.Text = "txt"
+Example.TextColor3 = Color3.new(0.972549, 0.972549, 0.972549)
+Example.TextStrokeTransparency = 0
+Example.TextXAlignment = Enum.TextXAlignment.Left
+Example.ZIndex = 6
+CMDs.Name = "CMDs"
+CMDs.Parent = MAIN
+CMDs.BackgroundColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
+CMDs.BackgroundTransparency = 1
+CMDs.BorderColor3 = Color3.new(0.0666667, 0.0666667, 0.0666667)
+CMDs.BorderSizePixel = 0
+CMDs.Size = UDim2.new(0, 480, 0, 550)
+CMDs.BottomImage = "rbxasset://textures/blackBkg_square.png"
+CMDs.CanvasSize = UDim2.new(0, 0, 0, 4880)
+CMDs.MidImage = "rbxasset://textures/blackBkg_square.png"
+CMDs.ScrollBarThickness = 15
+CMDs.TopImage = "rbxasset://textures/blackBkg_square.png"
+	local CMDsV = CMDsFolder:GetChildren()
+	for i = 1, #CMDsV do
+		local YSize = 35
+		local Position = ((i * YSize) - YSize)
+		local newcmd = Example:Clone()
+		newcmd.Parent = CMDs
+		newcmd.Visible = true
+		newcmd.Position = UDim2.new(0,10,0, Position + 1)
+		newcmd.Text = "" .. CMDsV[i].Value
+	CMDs.CanvasSize = UDim2.new(0,0,0, Position + 40) end
+local cf = speaker.Character.HumanoidRootPart.CFrame
+local newcf = cf + cf.lookVector * 6 + Vector3.new(0, 1, 0)
+PART.CFrame = newcf
+speaker.Character.Humanoid.Died:connect(function()
+PART:Destroy() end)
+wait(1)
+PART.Transparency = 0.1 wait(0.05) PART.Transparency = 0.2 wait(0.05)
+PART.Transparency = 0.3 wait(0.05) PART.Transparency = 0.4 wait(0.05)
+PART.Transparency = 0.5 wait(0.05) PART.Transparency = 0.6 wait(0.05)
+if FindTable(hastab, speaker.Name) then movetab(speaker,PART) return end
+table.insert(hastab, speaker.Name) movetab(speaker,PART)
+end)
 
 function updatepositions()
 	if PList then
@@ -12125,23 +12109,23 @@ function(args, speaker)
     local c = args[1] or 'stop'
     if std.inTable({'stop'}, c:lower()) then return end
 	local s = Instance.new("Sound", workspace)
-	s.Name = "IYRFDsound"
+	s.Name = "IYsound"
 	s.Looped = true
 	s.SoundId = "rbxassetid://" .. c
     s.Volume = 1
 	s:Play()
 	local Asset = game:GetService("MarketplaceService"):GetProductInfo(c)
 	playerenabled = false
-	Notify('Playing: '..Asset.Name..' ('..c..')')
+	notify('Playing: '..Asset.Name..' ('..c..')')
 	else
 	local name = GLS(false, 0)
 if GLS(false, 0) == "stop" or GLS(false, 0) == "off" then
-Notify('Stopped audio')
+notify('Stopped audio')
 for i,v in pairs(game:GetDescendants()) do
 if v:IsA'Sound'then v:Destroy() end end
 return
 end
-Notify('Loading list...')
+notify('Loading list...')
 local Audios = Instance.new("ScreenGui")
 local drag = Instance.new("Frame")
 local PromptDialog = Instance.new("Frame")
@@ -12244,7 +12228,7 @@ end end)
 local json = game:HttpGet("https://search.roblox.com/catalog/json?Category=Audio&Keyword="..GLS(false, 0).."&ResultsPerPage=50", true)
 local results = HttpService:JSONDecode(json)
 if #results == 0 then
-Notify('No audio found :(')
+notify('No audio found :(')
 Audios:Destroy()
 return
 end
@@ -12275,15 +12259,15 @@ for i,v in pairs(results) do
 		for i,v in pairs(game:GetDescendants()) do
 		if v:IsA'Sound'then v:Destroy() end end
 		wait(0.1)
-		Notify('Playing: '..v.Name ..' ('..v.AssetId..')')
+		notify('Playing: '..v.Name ..' ('..v.AssetId..')')
 		local s = Instance.new("Sound", workspace)
-		s.Name = "IYRFDsound"
+		s.Name = "IYsound"
 		s.Looped = true
 		s.SoundId = "rbxassetid://" .. v.AssetId
   		s.Volume = 1
 		s:Play()
 		end)
-Notify('Select an audio to play')
+notify('Select an audio to play')
 drag:TweenPosition(UDim2.new(0.5, -225, 0, 100), "InOut", "Quart", 0.5, true, nil)
 Exit.MouseButton1Click:Connect(function()
 drag:TweenPosition(UDim2.new(0.5, -225, 0, -400), "InOut", "Quart", 0.5, true, nil)
@@ -12335,10 +12319,10 @@ function(args, speaker)
 	local window = false
 	local Asset = game:GetService("MarketplaceService"):GetProductInfo(args[1])
 	dragmodel(game:GetService("InsertService"):LoadLocalAsset("rbxassetid://" .. Asset.AssetId), window, nil, Asset.Name)
-	Notify('Inserted ' .. Asset.Name .. '. Click: place | E: Cancel | R: Rotate | T: tilt')
+	notify('Inserted ' .. Asset.Name .. '. Click: place | E: Cancel | R: Rotate | T: tilt')
 	else
 	local name = GLS(false, 0)
-Notify('Loading list...')
+notify('Loading list...')
 local Models = Instance.new("ScreenGui")
 local drag = Instance.new("Frame")
 local PromptDialog = Instance.new("Frame")
@@ -12441,10 +12425,11 @@ end end)
 local json = game:HttpGet("https://search.roblox.com/catalog/json?Category=Models&Keyword="..GLS(false, 0).."&ResultsPerPage=50", true)
 local results = HttpService:JSONDecode(json)
 if #results == 0 then
-Notify('No models found :(')
+notify('No models found :(')
 Models:Destroy()
 return
 end
+
 for i,v in pairs(results) do
 		local YSize = 100
 		local Position = ((i * YSize) - YSize)
@@ -12478,10 +12463,10 @@ for i,v in pairs(results) do
 		ins.MouseButton1Click:Connect(function()
 		local window = true
 		dragmodel(game:GetService("InsertService"):LoadLocalAsset("rbxassetid://" .. v.AssetId), window, ModelContainerFrame, v.Name)
-		Notify('Inserted ' .. v.Name .. '. Click: place | E: Cancel | R: Rotate | T: tilt')
+		notify('Inserted ' .. v.Name .. '. Click: place | E: Cancel | R: Rotate | T: tilt')
 		ModelContainerFrame:TweenPosition(UDim2.new(0, 0, 0, -300), "InOut", "Quart", 0.5, true, nil)
 		end)
-Notify('Select a model to insert')
+notify('Select a model to insert')
 drag:TweenPosition(UDim2.new(0.5, -225, 0, 100), "InOut", "Quart", 0.5, true, nil)
 Exit.MouseButton1Click:Connect(function()
 drag:TweenPosition(UDim2.new(0.5, -225, 0, -400), "InOut", "Quart", 0.5, true, nil)
@@ -12545,7 +12530,7 @@ Title.BackgroundTransparency = 1
 Title.Size = UDim2.new(1, 0, 0, 30)
 Title.Font = Enum.Font.SourceSansBold
 Title.FontSize = Enum.FontSize.Size24
-Title.Text = "[Infinite Yield Reborn FD] Command List"
+Title.Text = "[Infinite Yield] Command List"
 Title.TextColor3 = Color3.new(0.980392, 0.980392, 0.980392)
 MAIN.Name = "MAIN"
 MAIN.Parent = holder
@@ -12652,57 +12637,66 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
         cmdBAR.Text = cmdHistory[historyCount] or ""
     end
 end)
-NOTIFY = DATA.Notification
-NOTIFY.Parent = game.CoreGui
+notify = DATA.Notification
+notify.Parent = game.CoreGui
 local usingNOTE = false
-function Notify(msg)
-	spawn(function()
-		if NOTIFY.NOTIFY and NOTIFY.NOTIFY.NOTE then
-				NOTIFY.NOTIFY:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
-				wait(0.5)
-				MusicPlayer:Hide()
-				if qopen == true then
-				quickmenu.sheild.cmds:TweenPosition(UDim2.new(0, 50, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
-				quickmenu.sheild.settings:TweenPosition(UDim2.new(0, 146, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
-				quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
-				quickmenu.sheild.info:TweenPosition(UDim2.new(0, 290, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
-				quickmenu.sheild.mix:TweenPosition(UDim2.new(0, 340, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01) qopen = false
-				NOTIFY.NOTIFY.NOTE.Text = msg
-				NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
-				if playerenabled == true then
-				wait(4)
-				if playerenabled == true then
-				MusicPlayer:Show()
-				NOTIFY.NOTIFY:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
-				end
-				end
-				else
-				NOTIFY.NOTIFY.NOTE.Text = msg
-				NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
-				if playerenabled == true then
-				wait(4)
-				if playerenabled == true then
-				MusicPlayer:Show()
-				NOTIFY.NOTIFY:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
-				end
-				end
-end end end) end
-local loadbar = Instance.new("ScreenGui") local Loading = Instance.new("TextLabel") local fr = Instance.new("Frame") local ba = Instance.new("Frame") loadbar.Name = "loadbar" loadbar.Parent = game.CoreGui
-Loading.Name = "Loading" Loading.Parent = loadbar Loading.BackgroundColor3 = Color3.new(1, 1, 1) Loading.BackgroundTransparency = 1 Loading.Position = UDim2.new(0.25, 0, 0.875, 0) Loading.Size = UDim2.new(0.5, 0, 0, 50)
-Loading.ZIndex = 101 Loading.Font = Enum.Font.ArialBold Loading.FontSize = Enum.FontSize.Size24 Loading.Text = "Loading..." Loading.TextColor3 = Color3.new(0, 0, 0) Loading.TextStrokeColor3 = Color3.new(1, 1, 1) Loading.TextStrokeTransparency = 0.5
-Loading.TextTransparency = 0.10000000149012 Loading.TextWrapped = true fr.Name = "fr" fr.Parent = Loading fr.BackgroundColor3 = Color3.new(0.196078, 0.196078, 0.196078) fr.BackgroundTransparency = 0.30000001192093
-fr.BorderColor3 = Color3.new(0.196078, 0.196078, 0.196078) fr.BorderSizePixel = 2 fr.Size = UDim2.new(1, 0, 1, 0) ba.ZIndex = 100 fr.ZIndex = 99 ba.Name = "ba" ba.Parent = Loading ba.BackgroundColor3 = Color3.new(0.0980392, 0.0980392, 0.0980392) ba.BorderColor3 = Color3.new(0.0980392, 0.0980392, 0.0980392)
-ba.BorderSizePixel = 0 ba.Size = UDim2.new(0, 0, 1, 0)
+function notify(msg)
+    spawn(function()
+            if notify.notify and notify.notify.NOTE then
+                notify.notify:TweenPosition(UDim2.new(0, 0, 0, -100), "InOut", "Quart", 0.5, true, nil)
+                wait(0.5)
+                MusicPlayer:Hide()
+                if qopen == true then
+                    quickmenu.sheild.cmds:TweenPosition(UDim2.new(0, 50, 0, -50), "InOut", "Quart", 0.5, true, nil)
+                    wait(0.01)
+                    quickmenu.sheild.settings:TweenPosition(UDim2.new(0, 146, 0, -50), "InOut", "Quart", 0.5, true, nil)
+                    wait(0.01)
+                    quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, -50), "InOut", "Quart", 0.5, true, nil)
+                    wait(0.01)
+                    quickmenu.sheild.info:TweenPosition(UDim2.new(0, 290, 0, -50), "InOut", "Quart", 0.5, true, nil)
+                    wait(0.01)
+                    quickmenu.sheild.mix:TweenPosition(UDim2.new(0, 340, 0, -50), "InOut", "Quart", 0.5, true, nil)
+                    wait(0.01)
+                    qopen = false
+                    notify.notify.NOTE.Text = msg
+                    notify.notify:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
+                    if playerenabled == true then
+                        wait(4)
+                        if playerenabled == true then
+                            MusicPlayer:Show()
+                            notify.notify:TweenPosition(UDim2.new(0, 0, 0, -100), "InOut", "Quart", 0.5, true, nil)
+                        end
+                    end
+                else
+                    notify.notify.NOTE.Text = msg
+                    notify.notify:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil)
+                    if playerenabled == true then
+                        wait(4)
+                        if playerenabled == true then
+                            MusicPlayer:Show()
+                            notify.notify:TweenPosition(UDim2.new(0, 0, 0, -100), "InOut", "Quart", 0.5, true, nil)
+                        end
+                    end
+                end
+            end
+        end)
+end
 if aliasSave then
-for i = 1, #aliasSave do
-execCmd("877241loadalias "..aliasSave[i].CMD.." "..aliasSave[i].ALIAS)
-end else
-aliasSave = {} wait(0.1) updatefile()
-for i = 1, #aliasSave do
-execCmd("877241loadalias "..aliasSave[i].CMD.." "..aliasSave[i].ALIAS)
-end end
-Loading.ba:TweenSize(UDim2.new(0.3, 0, 1, 0), "InOut", "Quart", 1, true, nil)
-commands() wait(0.01) game.CoreGui.cp:Destroy() cmdOpen = false
+    for i = 1, #aliasSave do
+        execCmd("877241loadalias " .. aliasSave[i].CMD .. " " .. aliasSave[i].ALIAS)
+    end
+else
+    aliasSave = {}
+    wait(0.1)
+    updatefile()
+    for i = 1, #aliasSave do
+        execCmd("877241loadalias " .. aliasSave[i].CMD .. " " .. aliasSave[i].ALIAS)
+    end
+end
+commands()
+wait(0.01)
+game.CoreGui.cp:Destroy()
+cmdOpen = false
 local Logs = Instance.new("ScreenGui")
 logdrag = Instance.new("Frame")
 local PromptDialog = Instance.new("Frame")
@@ -12948,45 +12942,81 @@ Hide.Text = ""
 checked = "http://www.roblox.com/asset/?id=65492641"
 unchecked = "http://www.roblox.com/asset/?id=65492651"
 if chatsV == true then
-CheckBox_2.Image = checked else
-CheckBox_2.Image = unchecked end
-box_2.MouseButton1Down:connect(function()
-if chatsV == true then chatsV = false
-CheckBox_2.Image = unchecked updatefile() else
-chatsV = true
-CheckBox_2.Image = checked updatefile() end end)
+    CheckBox_2.Image = checked
+else
+    CheckBox_2.Image = unchecked
+end
+box_2.MouseButton1Down:connect(
+    function()
+        if chatsV == true then
+            chatsV = false
+            CheckBox_2.Image = unchecked
+            updatefile()
+        else
+            chatsV = true
+            CheckBox_2.Image = checked
+            updatefile()
+        end
+    end)
 if whispersV == true then
-CheckBox.Image = checked else
-CheckBox.Image = unchecked end
-box.MouseButton1Down:connect(function()
-if whispersV == true then whispersV = false
-CheckBox.Image = unchecked updatefile() else
-whispersV = true
-CheckBox.Image = checked updatefile() end end)
+    CheckBox.Image = checked
+else
+    CheckBox.Image = unchecked
+end
+box.MouseButton1Down:connect(
+    function()
+        if whispersV == true then
+            whispersV = false
+            CheckBox.Image = unchecked
+            updatefile()
+        else
+            whispersV = true
+            CheckBox.Image = checked
+            updatefile()
+        end
+    end)
 if commandsV == true then
-CheckBox_3.Image = checked else
-CheckBox_3.Image = unchecked end
-box_3.MouseButton1Down:connect(function()
-if commandsV == true then commandsV = false
-CheckBox_3.Image = unchecked updatefile() else
-commandsV = true
-CheckBox_3.Image = checked updatefile() end end)
-clear.MouseButton1Down:connect(function()
-for _, child in pairs( scroll:GetChildren()) do
-child:Destroy() end
-scroll.CanvasSize = UDim2.new(0, 0, 0, 10)
-end)
-Exit.MouseButton1Down:connect(function()
-logdrag:TweenPosition(UDim2.new(0.5, -225, 0, -400), "InOut", "Quart", 0.5, true, nil)
-logsopen = false
-end)
+    CheckBox_3.Image = checked
+else
+    CheckBox_3.Image = unchecked
+end
+box_3.MouseButton1Down:connect(
+    function()
+        if commandsV == true then
+            commandsV = false
+            CheckBox_3.Image = unchecked
+            updatefile()
+        else
+            commandsV = true
+            CheckBox_3.Image = checked
+            updatefile()
+        end
+    end)
+clear.MouseButton1Down:connect(
+    function()
+        for _, child in pairs(scroll:GetChildren()) do
+            child:Destroy()
+        end
+        scroll.CanvasSize = UDim2.new(0, 0, 0, 10)
+    end)
+Exit.MouseButton1Down:connect(
+    function()
+        logdrag:TweenPosition(UDim2.new(0.5, -225, 0, -400), "InOut", "Quart", 0.5, true, nil)
+        logsopen = false
+    end)
 local hidden = false
-Hide.MouseButton1Down:connect(function()
-if hidden == false then hidden = true
-ContainerFrame:TweenPosition(UDim2.new(0, 0, 0, -300), "InOut", "Quart", 0.5, true, nil)
-else ContainerFrame:TweenPosition(UDim2.new(0, 0, 0, 29), "InOut", "Quart", 0.5, true, nil) hidden = false
-end end)
-function logtime() -- time function from aperture 
+Hide.MouseButton1Down:connect(
+    function()
+        if hidden == false then
+            hidden = true
+            ContainerFrame:TweenPosition(UDim2.new(0, 0, 0, -300), "InOut", "Quart", 0.5, true, nil)
+        else
+            ContainerFrame:TweenPosition(UDim2.new(0, 0, 0, 29), "InOut", "Quart", 0.5, true, nil)
+            hidden = false
+        end
+    end)
+
+function logtime()
 	local HOUR = math.floor((tick() % 86400) / 3600)
 	local MINUTE = math.floor((tick() % 3600) / 60)
 	local SECOND = math.floor(tick() % 60)
@@ -13041,173 +13071,43 @@ function CreateLabel(Name, Text)
 	end
 	tl.TextTransparency = 0
 end logsloaded = true
-local intro = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local Circle = Instance.new("ImageLabel")
-local ImageLabel = Instance.new("ImageLabel")
-intro.Name = "intro"
-intro.Parent = game.CoreGui
-Frame.Parent = intro
-Frame.BackgroundColor3 = Color3.new(0.121569, 0.121569, 0.121569)
-Frame.BackgroundTransparency = 1
-Frame.BorderSizePixel = 0
-Frame.ClipsDescendants = true
-Frame.Position = UDim2.new(0.5, -125, 0.5, -125)
-Frame.Size = UDim2.new(0, 250, 0, 250)
-Circle.Name = "Circle"
-Circle.Parent = Frame
-Circle.BackgroundColor3 = Color3.new(0.243137, 0.243137, 0.243137)
-Circle.BackgroundTransparency = 1
-Circle.BorderSizePixel = 0
-Circle.Position = UDim2.new(0.5, 0, 0.5, 0)
-Circle.Image = "rbxassetid://631172870"
-Circle.ImageColor3 = Color3.new(0.121569, 0.121569, 0.121569)
-ImageLabel.Parent = Frame
-ImageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
-ImageLabel.BackgroundTransparency = 1
-ImageLabel.BorderSizePixel = 0
-ImageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
-ImageLabel.Image = "rbxassetid://1352543873"
-Loading.ba:TweenSize(UDim2.new(0.35, 0, 1, 0), "InOut", "Quart", 0.5, true, nil)
-local g = intro
-local f = Frame
-local imagef = Circle
-local logof = ImageLabel
-loadedintro = false
-local function tween2()
-f:TweenSizeAndPosition(UDim2.new(0,250,0,250),UDim2.new(0.5,-125,0.5,-125), "Out", "Quart", 0.4)
-wait(0.6) loadedintro = true end
-local function tween1()
-f:TweenSizeAndPosition(UDim2.new(0,300,0,300),UDim2.new(0.5,-150,0.5,-150), "In", "Quart", 0.4, false, tween2) end
-imagef:TweenSizeAndPosition(UDim2.new(3,0,3,0),UDim2.new(-1,0,-1,0), "Out", "Linear", 0.4)
-logof:TweenSizeAndPosition(UDim2.new(1,0,1,0),UDim2.new(0,0,0,0), "Out", "Linear", 0.4, false, tween1)
-if pcall(function() loadstring(game:HttpGet(('https://pastebin.com/raw/wcEw3rW9'),true))() end) then
+if pcall(function() end) then
 	if workspace.FilteringEnabled == true then
-		Notify('Filtering ENABLED '..ServerMessage)
+		notify('Filtering ENABLED '..ServerMessage)
 	elseif workspace.FilteringEnabled == false then
-		Notify('Filtering Disabled '..ServerMessage)
+		notify('Filtering Disabled '..ServerMessage)
 	end
 else
 	if workspace.FilteringEnabled == true then
-		Notify('Filtering ENABLED')
+		notify('Filtering ENABLED')
 	elseif
 		workspace.FilteringEnabled == false then
-		Notify('Filtering Disabled')
+		notify('Filtering Disabled')
 	end
 end
-
 Loading.ba:TweenSize(UDim2.new(0.45, 0, 1, 0), "InOut", "Quart", 0.4, true, nil)
-local IYRFD = Instance.new("ImageButton")
-local sheild = Instance.new("Frame")
-local cmds = Instance.new("ImageButton")
-local cmds_2 = Instance.new("TextLabel")
-local settings = Instance.new("ImageButton")
-local settings_2 = Instance.new("TextLabel")
-local updates = Instance.new("ImageButton")
-local updates_2 = Instance.new("TextLabel")
-local info = Instance.new("ImageButton")
-local info_2 = Instance.new("TextLabel")
-local mix = Instance.new("ImageButton")
-local mix_2 = Instance.new("TextLabel")
-local MAIN = Instance.new("TextLabel")
-IYRFD.Name = "IYRFD"
-IYRFD.Parent = game.CoreGui.RobloxGui.TopBarContainer
-IYRFD.BackgroundTransparency = 1
-IYRFD.Position = UDim2.new(0, 2, 0, -38)
-IYRFD.Size = UDim2.new(0, 50, 0, 36)
-IYRFD.AutoButtonColor = false
-sheild.Name = "sheild"
-sheild.Parent = IYRFD
-sheild.BackgroundColor3 = Color3.new(1, 1, 1)
-sheild.BackgroundTransparency = 1
-sheild.Size = UDim2.new(0, 320, 0, 35)
-cmds.Name = "cmds"
-cmds.Parent = sheild
-cmds.BackgroundTransparency = 1
-cmds.Position = UDim2.new(0, 50, 0, 0)
-cmds.Size = UDim2.new(0, 80, 0, 36)
-cmds.AutoButtonColor = false
-cmds_2.Name = "cmds"
-cmds_2.Parent = cmds
-cmds_2.BackgroundColor3 = Color3.new(1, 1, 1)
-cmds_2.BackgroundTransparency = 1
-cmds_2.Position = UDim2.new(0, 0, 0, -2)
-cmds_2.Size = UDim2.new(0, 80, 0, 40)
-cmds_2.Font = Enum.Font.Arial
-cmds_2.FontSize = Enum.FontSize.Size14
-cmds_2.Text = "Commands"
-cmds_2.TextColor3 = Color3.new(1, 1, 1)
-cmds_2.TextStrokeTransparency = 0.69999998807907
-settings.Name = "settings"
-settings.Parent = sheild
-settings.BackgroundTransparency = 1
-settings.Position = UDim2.new(0, 146, 0, 0)
-settings.Size = UDim2.new(0, 60, 0, 36)
-settings.AutoButtonColor = false
-settings_2.Name = "settings"
-settings_2.Parent = settings
-settings_2.BackgroundColor3 = Color3.new(1, 1, 1)
-settings_2.BackgroundTransparency = 1
-settings_2.Position = UDim2.new(0, 0, 0, -2)
-settings_2.Size = UDim2.new(0, 60, 0, 40)
-settings_2.Font = Enum.Font.Arial
-settings_2.FontSize = Enum.FontSize.Size14
-settings_2.Text = "Script Hub"
-settings_2.TextColor3 = Color3.new(1, 1, 1)
-settings_2.TextStrokeTransparency = 0.69999998807907
-updates.Name = "updates"
-updates.Parent = sheild
-updates.BackgroundTransparency = 1
-updates.Position = UDim2.new(0, 220, 0, 0)
-updates.Size = UDim2.new(0, 60, 0, 36)
-updates.AutoButtonColor = false
-updates_2.Name = "updates"
-updates_2.Parent = updates
-updates_2.BackgroundColor3 = Color3.new(1, 1, 1)
-updates_2.BackgroundTransparency = 1
-updates_2.Position = UDim2.new(0, 0, 0, -2)
-updates_2.Size = UDim2.new(0, 60, 0, 40)
-updates_2.Font = Enum.Font.Arial
-updates_2.FontSize = Enum.FontSize.Size14
-updates_2.Text = "Server"
-updates_2.TextColor3 = Color3.new(1, 1, 1)
-updates_2.TextStrokeTransparency = 0.69999998807907
-info.Name = "info"
-info.Parent = sheild
-info.BackgroundTransparency = 1
-info.Position = UDim2.new(0, 290, 0, 0)
-info.Size = UDim2.new(0, 35, 0, 36)
-info.AutoButtonColor = false
-info_2.Name = "info"
-info_2.Parent = info
-info_2.BackgroundColor3 = Color3.new(1, 1, 1)
-info_2.BackgroundTransparency = 1
-info_2.Position = UDim2.new(0, 0, 0, -2)
-info_2.Size = UDim2.new(0, 30, 0, 40)
-info_2.Font = Enum.Font.Arial
-info_2.FontSize = Enum.FontSize.Size14
-info_2.Text = "Info"
-info_2.TextColor3 = Color3.new(1, 1, 1)
-mix.Name = "mix"
-mix.Parent = sheild
-mix.BackgroundTransparency = 1
-mix.Position = UDim2.new(0, 340, 0, 0)
-mix.Size = UDim2.new(0, 35, 0, 36)
-mix.AutoButtonColor = false
-mix_2.Name = "mix"
-mix_2.Parent = mix
-mix_2.BackgroundColor3 = Color3.new(1, 1, 1)
-mix_2.BackgroundTransparency = 1
-mix_2.Position = UDim2.new(0, 0, 0, -2)
-mix_2.Size = UDim2.new(0, 30, 0, 40)
-mix_2.Font = Enum.Font.Arial
-mix_2.FontSize = Enum.FontSize.Size14
-mix_2.Text = "Color"
-mix_2.TextColor3 = Color3.new(1, 1, 1)
-mix_2.TextStrokeTransparency = 0.7
+local IY = Instance.new("ImageButton") local sheild = Instance.new("Frame") local cmds = Instance.new("ImageButton") local cmds_2 = Instance.new("TextLabel")
+local settings = Instance.new("ImageButton") local settings_2 = Instance.new("TextLabel") local updates = Instance.new("ImageButton") local updates_2 = Instance.new("TextLabel")
+local info = Instance.new("ImageButton") local info_2 = Instance.new("TextLabel") local mix = Instance.new("ImageButton") local mix_2 = Instance.new("TextLabel") local MAIN = Instance.new("TextLabel") IY.Name = "IY" IY.Parent = game.CoreGui.RobloxGui.TopBarContainer
+IY.BackgroundTransparency = 1 IY.Position = UDim2.new(0, 2, 0, -38) IY.Size = UDim2.new(0, 50, 0, 36) IY.AutoButtonColor = false sheild.Name = "sheild" sheild.Parent = IY sheild.BackgroundColor3 = Color3.new(1, 1, 1)
+sheild.BackgroundTransparency = 1 sheild.Size = UDim2.new(0, 320, 0, 35) cmds.Name = "cmds" cmds.Parent = sheild cmds.BackgroundTransparency = 1 cmds.Position = UDim2.new(0, 50, 0, 0) cmds.Size = UDim2.new(0, 80, 0, 36)
+cmds.AutoButtonColor = false cmds_2.Name = "cmds" cmds_2.Parent = cmds cmds_2.BackgroundColor3 = Color3.new(1, 1, 1) cmds_2.BackgroundTransparency = 1 cmds_2.Position = UDim2.new(0, 0, 0, -2)
+cmds_2.Size = UDim2.new(0, 80, 0, 40) cmds_2.Font = Enum.Font.Arial cmds_2.FontSize = Enum.FontSize.Size14 cmds_2.Text = "Commands" cmds_2.TextColor3 = Color3.new(1, 1, 1) cmds_2.TextStrokeTransparency = 0.69999998807907
+settings.Name = "settings" settings.Parent = sheild settings.BackgroundTransparency = 1 settings.Position = UDim2.new(0, 146, 0, 0) settings.Size = UDim2.new(0, 60, 0, 36) settings.AutoButtonColor = false
+settings_2.Name = "settings" settings_2.Parent = settings settings_2.BackgroundColor3 = Color3.new(1, 1, 1) settings_2.BackgroundTransparency = 1 settings_2.Position = UDim2.new(0, 0, 0, -2)
+settings_2.Size = UDim2.new(0, 60, 0, 40) settings_2.Font = Enum.Font.Arial settings_2.FontSize = Enum.FontSize.Size14 settings_2.Text = "Script Hub" settings_2.TextColor3 = Color3.new(1, 1, 1)
+settings_2.TextStrokeTransparency = 0.69999998807907 updates.Name = "updates" updates.Parent = sheild updates.BackgroundTransparency = 1 updates.Position = UDim2.new(0, 220, 0, 0)
+updates.Size = UDim2.new(0, 60, 0, 36) updates.AutoButtonColor = false updates_2.Name = "updates" updates_2.Parent = updates updates_2.BackgroundColor3 = Color3.new(1, 1, 1) updates_2.BackgroundTransparency = 1
+updates_2.Position = UDim2.new(0, 0, 0, -2) updates_2.Size = UDim2.new(0, 60, 0, 40) updates_2.Font = Enum.Font.Arial updates_2.FontSize = Enum.FontSize.Size14
+updates_2.Text = "Server" updates_2.TextColor3 = Color3.new(1, 1, 1) updates_2.TextStrokeTransparency = 0.69999998807907 info.Name = "info" info.Parent = sheild info.BackgroundTransparency = 1 info.Position = UDim2.new(0, 290, 0, 0)
+info.Size = UDim2.new(0, 35, 0, 36) info.AutoButtonColor = false info_2.Name = "info" info_2.Parent = info info_2.BackgroundColor3 = Color3.new(1, 1, 1) info_2.BackgroundTransparency = 1 info_2.Position = UDim2.new(0, 0, 0, -2)
+info_2.Size = UDim2.new(0, 30, 0, 40) info_2.Font = Enum.Font.Arial info_2.FontSize = Enum.FontSize.Size14 info_2.Text = "Info" info_2.TextColor3 = Color3.new(1, 1, 1)
+mix.Name = "mix" mix.Parent = sheild mix.BackgroundTransparency = 1 mix.Position = UDim2.new(0, 340, 0, 0)
+mix.Size = UDim2.new(0, 35, 0, 36) mix.AutoButtonColor = false mix_2.Name = "mix" mix_2.Parent = mix mix_2.BackgroundColor3 = Color3.new(1, 1, 1) mix_2.BackgroundTransparency = 1 mix_2.Position = UDim2.new(0, 0, 0, -2)
+mix_2.Size = UDim2.new(0, 30, 0, 40) mix_2.Font = Enum.Font.Arial mix_2.FontSize = Enum.FontSize.Size14 mix_2.Text = "Color" mix_2.TextColor3 = Color3.new(1, 1, 1) mix_2.TextStrokeTransparency = 0.7
 lockic = Instance.new("ImageLabel")
 lockic.Name = "lock"
-lockic.Parent = IYRFD
+lockic.Parent = IY
 lockic.BackgroundColor3 = Color3.new(1, 1, 1)
 lockic.BackgroundTransparency = 1
 lockic.ImageTransparency = 1
@@ -13215,42 +13115,14 @@ lockic.BorderSizePixel = 0
 lockic.Position = UDim2.new(0, 53, 0, -3)
 lockic.Size = UDim2.new(0, 40, 0, 40)
 lockic.Image = "rbxassetid://1495252742"
-info_2.TextStrokeTransparency = 0.69999998807907
-MAIN.Name = "MAIN"
-MAIN.Parent = IYRFD
-MAIN.BackgroundColor3 = Color3.new(1, 1, 1)
-MAIN.BackgroundTransparency = 1
-MAIN.Position = UDim2.new(0, 2, 0, -2)
-MAIN.Size = UDim2.new(0, 40, 0, 40)
-MAIN.Font = Enum.Font.ArialBold
-MAIN.FontSize = Enum.FontSize.Size24
-MAIN.Text = "IYRFD"
-MAIN.TextColor3 = Color3.new(1, 1, 1)
-MAIN.TextStrokeTransparency = 0.69999998807907
-Loading.ba:TweenSize(UDim2.new(0.7, 0, 1, 0), "InOut", "Quart", 0.5, true, nil)
-quickmenu = game.CoreGui.RobloxGui.TopBarContainer.IYRFD
-local TopBarContainer = Instance.new("Frame")
-TopBarContainer.Name = "TopBarContainer"
-TopBarContainer.Parent = game.CoreGui.RobloxGui
-TopBarContainer.Active = true
-TopBarContainer.BackgroundColor3 = Color3.new(0.121569, 0.121569, 0.121569)
-TopBarContainer.BackgroundTransparency = 0.5
-TopBarContainer.BorderSizePixel = 0
-TopBarContainer.Position = UDim2.new(0, 0, 0, -72)
-TopBarContainer.Size = UDim2.new(1, 0, 0, 36)
-TopBarContainer.ZIndex = 0
-picker = game:GetService("InsertService"):LoadLocalAsset("rbxassetid://02011075373")
-picker.Parent = game.CoreGui
-picker.ColorPicker.Visible = false
-picker.ColorPicker.Position = UDim2.new(0.5, -219, 0, -500)
-quickmenu.sheild.mix.MouseButton1Click:connect(
-    function()
-        picker.ColorPicker.Visible = true
-        picker.ColorPicker:TweenPosition(UDim2.new(0.5, -219, 0, 100), "InOut", "Quart", 0.5, true, nil)
-    end
-)
+info_2.TextStrokeTransparency = 0.69999998807907 MAIN.Name = "MAIN" MAIN.Parent = IY MAIN.BackgroundColor3 = Color3.new(1, 1, 1) MAIN.BackgroundTransparency = 1 MAIN.Position = UDim2.new(0, 2, 0, -2)
+MAIN.Size = UDim2.new(0, 40, 0, 40) MAIN.Font = Enum.Font.ArialBold MAIN.FontSize = Enum.FontSize.Size24 MAIN.Text = "IY" MAIN.TextColor3 = Color3.new(1, 1, 1) MAIN.TextStrokeTransparency = 0.69999998807907
+Loading.ba:TweenSize(UDim2.new(0.7, 0, 1, 0), "InOut", "Quart", 0.5, true, nil) quickmenu = game.CoreGui.RobloxGui.TopBarContainer.IY
+local TopBarContainer = Instance.new("Frame") TopBarContainer.Name = "TopBarContainer" TopBarContainer.Parent = game.CoreGui.RobloxGui TopBarContainer.Active = true TopBarContainer.BackgroundColor3 = Color3.new(0.121569, 0.121569, 0.121569)
+TopBarContainer.BackgroundTransparency = 0.5 TopBarContainer.BorderSizePixel = 0 TopBarContainer.Position = UDim2.new(0, 0, 0, -72) TopBarContainer.Size = UDim2.new(1, 0, 0, 36) TopBarContainer.ZIndex = 0
+picker = game:GetService("InsertService"):LoadLocalAsset("rbxassetid://02011075373") picker.Parent = game.CoreGui picker.ColorPicker.Visible = false picker.ColorPicker.Position = UDim2.new(0.5, -219, 0, -500)
+quickmenu.sheild.mix.MouseButton1Click:connect(function() picker.ColorPicker.Visible = true picker.ColorPicker:TweenPosition(UDim2.new(0.5, -219, 0, 100), "InOut", "Quart", 0.5, true, nil) end)
 PKR = picker.ColorPicker
-
 local ColorPicker do
 	ColorPicker = {}
 	
@@ -13779,21 +13651,6 @@ IndexContents2 = function(str, bool)
 end
 
 IndexContents2("", true)
-game.CoreGui.sugg.suggestions:TweenSize(UDim2.new(0, 300, 0, 0), "Out", "Quad", 0.2, true)
-Loading.ba:TweenSize(UDim2.new(1, 0, 1, 0), "InOut", "Quart", 0.4, true, nil)
-wait(1)
-repeat
-    wait()
-until loadedintro == true
-logof:TweenSizeAndPosition(UDim2.new(0, 0, 0, 0), UDim2.new(0.5, 0, 0.5, 0), "Out", "Linear", 0.1)
-wait(0.2)
-f:TweenSizeAndPosition(UDim2.new(0, 0, 0, 0), UDim2.new(0.5, 0, 0.5, 0), "Out", "Linear", 0.2)
-wait(0.3)
-g:Destroy()
-updatecolors(Color3.new(colorR, colorG, colorB))
-Loading:TweenPosition(UDim2.new(0.25, 0, 1.5, 0), "InOut", "Quart", 0.5, true, nil)
-wait(0.5)
-Loading.Parent:Destroy()
 
 if
     gPlayers.LocalPlayer.PlayerGui:FindFirstChild("Chat") and
@@ -13816,14 +13673,12 @@ if
                             gPlayers.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar.Text:lower(
 
                             ):sub(2),
-                            true
-                        )
+                            true)
                     else
                         game.CoreGui.sugg.suggestions:TweenSize(UDim2.new(0, 300, 0, 0), "Out", "Quad", 0.2, true)
                     end
                 end
-            end
-        )
+            end)
     end
     chatboxx()
     gPlayers.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.ChildAdded:Connect(
@@ -13831,11 +13686,9 @@ if
             if newbar:FindFirstChild("BoxFrame") then
                 chatboxx()
             end
-        end
-    )
-    LP.PlayerGui.Chat.Frame.ChatChannelParentFrame.Frame_MessageLogDisplay.Scroller.CanvasPosition =
-        Vector2.new(0, 9999999999999999999999999999999999999999999, 0, 0)
-    coroutine.resume(
+        end)
+    LP.PlayerGui.Chat.Frame.ChatChannelParentFrame.Frame_MessageLogDisplay.Scroller.CanvasPosition = Vector2.new(0, 9999999999999999999999999999999999999999999, 0, 0)
+        coroutine.resume(
         coroutine.create(
             function()
                 if script.ClassName == "LocalScript" then
@@ -13846,22 +13699,18 @@ if
                             Color = Color3.new(255, 255, 255),
                             Font = Enum.Font.SourceSans,
                             FontSize = Enum.FontSize.Size24
-                        }
-                    )
+                        })
                     wait(0.5)
                     game.StarterGui:SetCore(
                         "ChatMakeSystemMessage",
                         {
-                            Text = "Click IYRFD on the top left to see more options",
+                            Text = "Click IY on the top left to see more options",
                             Color = Color3.new(255, 255, 255),
                             Font = Enum.Font.SourceSans,
                             FontSize = Enum.FontSize.Size24
-                        }
-                    )
+                        })
                 end
-            end
-        )
-    )
+            end))
 else
     print("Custom chat detected. Will not provide suggestions for the chat.")
 end
@@ -13872,7 +13721,7 @@ quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, -50), "InOut", "Quar
 quickmenu.sheild.info:TweenPosition(UDim2.new(0, 290, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 quickmenu.sheild.mix:TweenPosition(UDim2.new(0, 340, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 qopen = false quickmenu.MouseButton1Click:connect(function()
-if qopen == false then fadelock('off') NOTIFY.NOTIFY:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
+if qopen == false then fadelock('off') notify.notify:TweenPosition(UDim2.new(0,0,0,-100), "InOut", "Quart", 0.5, true, nil)
 quickmenu.sheild.cmds:TweenPosition(UDim2.new(0, 50, 0, 0), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 quickmenu.sheild.settings:TweenPosition(UDim2.new(0, 146, 0, 0), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, 0), "InOut", "Quart", 0.5, true, nil) wait(0.01)
@@ -13885,7 +13734,7 @@ quickmenu.sheild.updates:TweenPosition(UDim2.new(0, 220, 0, -50), "InOut", "Quar
 quickmenu.sheild.info:TweenPosition(UDim2.new(0, 290, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 quickmenu.sheild.mix:TweenPosition(UDim2.new(0, 340, 0, -50), "InOut", "Quart", 0.5, true, nil) wait(0.01)
 if slock == true then fadelock("rbxassetid://1495252742") elseif isagelocked == true then fadelock("rbxassetid://1495252495") end
-qopen = false if playerenabled == true then MusicPlayer:Show() else NOTIFY.NOTIFY:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil) end end end)
+qopen = false if playerenabled == true then MusicPlayer:Show() else notify.notify:TweenPosition(UDim2.new(0, 0, 0, -38), "InOut", "Quart", 0.5, true, nil) end end end)
 quickmenu.sheild.cmds.MouseButton1Click:connect(function() if cmdOpen == true then
 game.CoreGui.cp.Frame.holder.FeedbackMain:TweenPosition(UDim2.new(1.02,0,1.018,-310),"Out","Quad",0.2,true) wait(0.1)
 game.CoreGui.cp.Frame.holder.size:TweenPosition(UDim2.new(1,-301,1,-300),"Out","Quad",0.2,true) wait(0.2)
@@ -13942,7 +13791,7 @@ LOG.Size = UDim2.new(1, -16, 1, 0)
 LOG.ZIndex = 10
 LOG.Font = Enum.Font.SourceSansBold
 LOG.TextSize = 20
-LOG.Text = "+ Added os [plr]\n+ Added whiteify/blackify [plr]\n+ Added addban [full username]\n+ Added a rainbow mode to the UI (inside color picker)\n\n* Fixed a bug in kidnap"
+LOG.Text = "Added nothing"
 LOG.TextColor3 = Color3.new(0.97, 0.97, 0.97)
 LOG.TextStrokeTransparency = 0
 LOG.TextWrapped = true
@@ -13969,7 +13818,7 @@ PopupText4.Size = UDim2.new(1, -16, 0.100000001, 0)
 PopupText4.ZIndex = 10
 PopupText4.Font = Enum.Font.SourceSansBold
 PopupText4.FontSize = Enum.FontSize.Size18
-PopupText4.Text = "infyield.weebly.com - discord.me/infiniteyield"
+PopupText4.Text = "github.com/ryxeleron/infiniteyield-reborn"
 PopupText4.TextColor3 = Color3.new(0.97, 0.97, 0.97)
 PopupText4.TextStrokeTransparency = 0
 PopupText4.TextWrapped = true
@@ -14050,13 +13899,12 @@ dragg:TweenPosition(UDim2.new(0.5, -225, 0, 100), "InOut", "Quart", 0.5, true, n
 dragg:TweenPosition(UDim2.new(0.5, -225, 0, -600), "InOut", "Quart", 0.5, true, nil) wait(0.5) infopen = false Updates:Destroy() end) end)
 quickmenu.sheild.updates.MouseButton1Click:connect(function() serverinfogui() end) end
 
-local Asset = game:GetService("MarketplaceService"):GetProductInfo(01203480675)
 wait(0.3)
-if not game.CoreGui:FindFirstChild("IYRFDrun") then
+if not game.CoreGui:FindFirstChild("IYrun") then
     running = Instance.new("BoolValue")
     running.Parent = game.CoreGui
-    running.Name = "IYRFDrun"
-    if Asset.Name == "Infinite Yield Reborn FD" .. Version then
+    running.Name = "IYrun"
+    if true then
         UTD = true
         wait(0.5)
         run()
@@ -14129,7 +13977,7 @@ if not game.CoreGui:FindFirstChild("IYRFDrun") then
         a.ZIndex = 10
         a.Font = Enum.Font.SourceSansBold
         a.FontSize = Enum.FontSize.Size18
-        a.Text = "infyield.weebly.com - discord.me/infiniteyield"
+        a.Text = "github.com/ryxeleron/infiniteyield-reborn"
         a.TextColor3 = Color3.new(0.97, 0.97, 0.97)
         a.TextStrokeTransparency = 0
         a.TextWrapped = true
@@ -14155,7 +14003,7 @@ if not game.CoreGui:FindFirstChild("IYRFDrun") then
         a3.ZIndex = 10
         a3.Font = Enum.Font.SourceSansBold
         a3.TextSize = 20
-        a3.Text = "You can get a new version at one of these 2 sources."
+        a3.Text = "You can get a new version at this source."
         a3.TextColor3 = Color3.new(0.97, 0.97, 0.97)
         a3.TextStrokeTransparency = 0
         a3.TextWrapped = true
@@ -14207,18 +14055,13 @@ if not game.CoreGui:FindFirstChild("IYRFDrun") then
             wait(0.4)
             PromptDialog:TweenPosition(UDim2.new(0.5, -219, 0, -400), "InOut", "Quart", 0.5, true, nil)
             for _, child in pairs(game.CoreGui:GetChildren()) do
-                if child.Name == "IYRFDrun" then
+                if child.Name == "IYrun" then
                     child:Destroy()
                 end
             end
             wait(0.5)
             Updates:Destroy()
-            loadstring(
-                game:HttpGet(
-                    ("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/Infinite%20Yield%20FD"),
-                    true
-                )
-            )()
+            loadstring(game:HttpGet(("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/master/Infinite%20Yield%20FD"), true))()
             end
             UPDATE.MouseButton1Down:connect(Click)
         end
@@ -14226,3 +14069,121 @@ if not game.CoreGui:FindFirstChild("IYRFDrun") then
 end
 
 run()
+
+local endTime = tick()
+local elapsedTime = endTime - startTime
+
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local screenGuiLogo = Instance.new("ScreenGui")
+screenGuiLogo.Parent = player:WaitForChild("PlayerGui")
+screenGuiLogo.Name = "ImageFadeGui"
+screenGuiLogo.DisplayOrder = 10^6
+screenGuiLogo.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local sound = Instance.new("Sound")
+sound.Parent = screenGuiLogo
+sound.SoundId = "rbxassetid://8795831946"
+sound.Volume = 1
+sound.Looped = false
+sound:Play()
+
+local imageIDs = { "rbxassetid://17645082538" }
+local credits = { "Edge // Zwolf // Moon // Toon // _Real // Ry" }
+local loadTimeMessage = "IYR LOADED IN " .. string.format("%.20f", elapsedTime) .. " SECONDS"
+
+local imageLabels = {}
+local positions = {
+    UDim2.new(0.5, -563 / 2, 0.1, -563 / 2), -- top
+    UDim2.new(0.5, -563 / 2, 0.9, -563 / 2), -- bottom
+    UDim2.new(0.1, -563 / 2, 0.5, -563 / 2), -- left
+    UDim2.new(0.9, -563 / 2, 0.5, -563 / 2)  -- right
+}
+local moveGoals = {
+    UDim2.new(0.5, -563 / 2, 0.5, -563 / 2), -- to center from top
+    UDim2.new(0.5, -563 / 2, 0.5, -563 / 2), -- to center from bottom
+    UDim2.new(0.5, -563 / 2, 0.5, -563 / 2), -- to center from left
+    UDim2.new(0.5, -563 / 2, 0.5, -563 / 2)  -- to center from right
+}
+
+local moveDuration = 1.5
+local fadeDuration = 1.5
+local moveTweenInfo = TweenInfo.new(moveDuration, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+local fadeTweenInfo = TweenInfo.new(fadeDuration, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
+
+for i = 1, 4 do
+    local imageLabel = Instance.new("ImageLabel")
+    imageLabel.Parent = screenGuiLogo
+    imageLabel.Name = "IYRLOGO" .. i
+    imageLabel.Size = UDim2.new(0, 563, 0, 563)
+    imageLabel.Position = positions[i]
+    imageLabel.Image = imageIDs[1]
+    imageLabel.BackgroundTransparency = 1
+    imageLabel.ImageTransparency = 1
+    imageLabel.ScaleType = Enum.ScaleType.Stretch
+    imageLabel.ZIndex = 10^6
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Name = "Credits"
+    textLabel.Parent = screenGuiLogo
+    textLabel.BackgroundTransparency = 1
+    textLabel.BorderSizePixel = 0
+    textLabel.Size = UDim2.new(0, 560, 0, -40)
+    textLabel.Font = Enum.Font.Code
+    textLabel.FontSize = Enum.FontSize.Size18
+    textLabel.Text = credits[1]
+    textLabel.TextColor3 = Color3.new(1, 1, 1)
+    textLabel.TextTransparency = 1
+    textLabel.ZIndex = 10^6 + 1
+
+    textLabel.Position = UDim2.new(imageLabel.Position.X.Scale, imageLabel.Position.X.Offset, imageLabel.Position.Y.Scale + 563 / screenGuiLogo.AbsoluteSize.Y, imageLabel.Position.Y.Offset + imageLabel.Size.Y.Offset + 10)
+
+    local moveGoal = { Position = moveGoals[i] }
+    local moveTween = TweenService:Create(imageLabel, moveTweenInfo, moveGoal)
+
+    local moveTextGoal = {
+        Position = UDim2.new(
+            moveGoals[i].X.Scale,
+            moveGoals[i].X.Offset,
+            moveGoals[i].Y.Scale + 563 / screenGuiLogo.AbsoluteSize.Y,
+            moveGoals[i].Y.Offset + 10
+        )
+    }
+    local moveTextTween = TweenService:Create(textLabel, moveTweenInfo, moveTextGoal)
+
+    local fadeInGoal = { ImageTransparency = 0 }
+    local fadeOutGoal = { ImageTransparency = 1 }
+
+    local fadeInTween = TweenService:Create(imageLabel, fadeTweenInfo, fadeInGoal)
+    local fadeInTextTween = TweenService:Create(textLabel, fadeTweenInfo, { TextTransparency = 0 })
+    local fadeOutTween = TweenService:Create(imageLabel, fadeTweenInfo, fadeOutGoal)
+    local fadeOutTextTween = TweenService:Create(textLabel, fadeTweenInfo, { TextTransparency = 1 })
+
+    table.insert(imageLabels, {imageLabel, textLabel, moveTween, moveTextTween, fadeInTween, fadeInTextTween, fadeOutTween, fadeOutTextTween})
+end
+
+local function fadeInAndMove()
+    for _, labelData in ipairs(imageLabels) do
+        local imageLabel, textLabel, moveTween, moveTextTween, fadeInTween, fadeInTextTween, fadeOutTween, fadeOutTextTween = unpack(labelData)
+        fadeInTween:Play()
+        fadeInTextTween:Play()
+        moveTween:Play()
+        moveTextTween:Play()
+        moveTween.Completed:Connect(
+            function()
+                wait(1)
+                textLabel.Text = loadTimeMessage
+                fadeOutTween:Play()
+                fadeOutTextTween:Play()
+                fadeOutTween.Completed:Connect(
+                    function()
+                        screenGuiLogo:Destroy()
+                    end
+                )
+            end
+        )
+    end
+end
+
+fadeInAndMove()
