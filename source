@@ -6444,7 +6444,7 @@ addcmd('clienttoken', {'ctoken'}, function(args, speaker)
         return
     end
     if not everyWebSocket then
-        notify("Missing ", "No WebSocket functions found.")
+        notify("Missing WebSockets", "No WebSocket functions found.")
         return
     end
 
