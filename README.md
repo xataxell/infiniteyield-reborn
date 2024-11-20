@@ -47,6 +47,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyie
 - Now includes counters for Plugins, Aliases, Keybinds, and Waypoints
 - Actually has an OnLeave detection.
 
+![image](https://github.com/user-attachments/assets/fee6dd58-e438-47ab-b4a3-1f14f2a2d80b)
+
 ## Credits
 
 ### IY Devs
