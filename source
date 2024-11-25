@@ -4819,7 +4819,7 @@ CMDs[#CMDs + 1] = {NAME = 'hovername', DESC = 'Shows a players username when you
 CMDs[#CMDs + 1] = {NAME = 'unhovername / nohovername', DESC = 'Turns off hovername'}
 CMDs[#CMDs + 1] = {NAME = 'mousesensitivity / ms [0-10]', DESC = 'Sets your mouse sensitivity (affects first person and right click drag) (default is 1)'}
 CMDs[#CMDs + 1] = {NAME = 'clickdelete / clickdel [CLIENT]', DESC = 'Go to settings > Keybinds > Add for clickdelete'}
-CMDs[#CMDs + 1] = {NAME = 'clickteleport / clicktp', DESC = 'Go to settings > Keybinds > Add for click tp'}
+CMDs[#CMDs + 1] = {NAME = 'clickteleport / clicktp', DESC = 'Go to settings > Keybinds > Add for clicktp'}
 CMDs[#CMDs + 1] = {NAME = 'mouseteleport / mousetp', DESC = 'Teleports your character to your mouse. This is recommended as a keybind'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'simulationradius / simradius / setsimradius', DESC = 'Set the simulation radius.'}
@@ -14381,4 +14381,1318 @@ if game.PlaceId == 574746640 then
 
 		local alpos = Instance.new("AlignPosition")
 		alpos.Attachment0 = att0
-		alpos.Attach
+		alpos.Attachment1 = att1
+		alpos.Parent = kitten.Torso
+		alpos.MaxForce = 999999
+		alpos.MaxVelocity = 999999
+		alpos.Responsiveness = 5000
+
+		local alort = Instance.new("AlignOrientation")
+		alort.Attachment0 = att0
+		alort.Attachment1 = att1
+		alort.Parent = kitten.Torso
+		alort.MaxTorque = 999999
+		alort.MaxAngularVelocity = 999999
+		alort.Responsiveness = 5000
+
+		local ExpTool = Instance.new("Tool")
+		ExpTool.Parent = speaker.Backpack
+		ExpTool.Name = "Explode"
+		ExpTool.CanBeDropped = false
+		ExpTool.RequiresHandle = false
+		ExpTool.Enabled = true
+
+		local Activated
+		local Died
+		local Stepped
+
+		local deactivationEvents = {}
+
+		local function deactivateSession(event)
+			deactivationEvents[event] = true
+			if event == "Died" and deactivationEvents["Activated"] then
+				return 0
+			end
+			task.spawn(function()
+				while isSessionActive do
+					hrp.CFrame = kitten.Torso.CFrame
+					task.wait(0.01)
+				end
+			end)
+			alpos:Destroy()
+			alort:Destroy()
+			ExpTool:Destroy()
+			if event == "Activated" then
+				kitten.Head:Destroy()
+			end
+			Activated:Disconnect()
+			Stepped:Disconnect()
+			isSessionActive = false
+			return 0
+		end
+
+		local function catNoclip()
+			for i, v in pairs(kitten:GetDescendants()) do
+				if v:IsA("BasePart") then
+					v.CanCollide = false
+				end
+			end
+		end
+
+		Activated = ExpTool.Activated:Once(function()
+			deactivateSession("Activated")
+		end)
+		Died = Humanoid.Died:Once(function()
+			deactivateSession("Died")
+		end)
+		Stepped = RunService.Stepped:Connect(catNoclip)
+
+		local function report()
+			while isSessionActive do
+				print(kitten.Torso.ReceiveAge)
+				task.wait(0.5)
+			end
+		end
+
+		--task.spawn(report)
+	end)
+end
+
+local hb = RunService.Heartbeat
+addcmd('tpwalk', {'teleportwalk', 'cframespeed', 'cspeed', 'cws', 'cwalkspeed', 'cframews', 'cframewalkspeed'}, function(args, speaker)
+	tpwalking = true
+	local chr = speaker.Character
+	local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
+	while tpwalking and chr and hum and hum.Parent do
+		local delta = hb:Wait()
+		if hum.MoveDirection.Magnitude > 0 then
+			if args[1] and isNumber(args[1]) then
+				chr:TranslateBy(hum.MoveDirection * tonumber(args[1]) * delta * 10)
+			else
+				chr:TranslateBy(hum.MoveDirection * delta * 10)
+			end
+		end
+	end
+end)
+
+addcmd('untpwalk', {'unteleportwalk', 'uncframespeed', 'uncspeed', 'uncws', 'uncwalkspeed', 'uncframews', 'uncframewalkspeed'}, function(args, speaker)
+	tpwalking = false
+end)
+
+local infinitypathtoolenabled = false
+addcmd('infinity',{},function(args,speaker)
+	if tools(speaker) then
+		if infinitypathtoolenabled then
+			infinitypathtool:Disconnect()
+			infinitypathtoolenabled = false
+		end
+
+		infinitypathtoolenabled = true
+		local theta = 0
+
+		local function calculateLemniscate(theta)
+			local x = math.cos(theta) / (.5 + math.sin(theta)^2)
+			local z = math.cos(theta) * math.sin(theta) / (.5 + math.sin(theta)^2)
+			return x, z
+		end
+
+		infinitypathtool = RunService.Heartbeat:Connect(function()
+			for i, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+				if v:IsA("Tool") then
+					theta = theta + 0.02
+
+					local X,Z = calculateLemniscate(theta)
+
+					v.Grip = CFrame.new(X, Z, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+					v.Parent = game.Players.LocalPlayer.Backpack
+					v.Parent = game.Players.LocalPlayer.Character
+				end
+			end
+		end)
+	else
+		notify('Tool Required','You need to have an item in your inventory to use this command')
+	end
+end)
+
+addcmd('uninfinity',{},function(args,speaker)
+	infinitypathtool:Disconnect()
+	infinitypathtoolenabled = false
+end)
+
+function bring(speaker,target,fast)
+	if tools(speaker) then
+		if target ~= nil then
+			local NormPos = getRoot(speaker.Character).CFrame
+			if not fast then
+				refresh(speaker)
+				task.wait()
+				repeat task.wait() until speaker.Character ~= nil and getRoot(speaker.Character)
+				task.wait(0.3)
+			end
+			local hrp = getRoot(speaker.Character)
+			attach(speaker,target)
+			repeat
+				task.wait()
+				hrp.CFrame = NormPos
+			until not getRoot(target.Character) or not getRoot(speaker.Character)
+			speaker.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = NormPos
+		end
+	else
+		notify('Tool Required','You need to have an item in your inventory to use this command')
+	end
+end
+
+
+
+function teleport(speaker,target,target2,fast)
+	if tools(speaker) then
+		if target ~= nil then
+			local NormPos = getRoot(speaker.Character).CFrame
+			if not fast then
+				refresh(speaker)
+				task.wait()
+				repeat task.wait() until speaker.Character ~= nil and getRoot(speaker.Character)
+				task.wait(0.3)
+			end
+			local hrp = getRoot(speaker.Character)
+			local hrp2 = getRoot(target2.Character)
+			attach(speaker,target)
+			repeat
+				task.wait()
+				hrp.CFrame = hrp2.CFrame
+			until not getRoot(target.Character) or not getRoot(speaker.Character)
+			task.wait(1)
+			speaker.CharacterAdded:Wait():WaitForChild("HumanoidRootPart").CFrame = NormPos
+		end
+	else
+		notify('Tool Required','You need to have an item in your inventory to use this command')
+	end
+end
+
+
+
+addcmd('spin',{},function(args, speaker)
+	local spinSpeed = 20
+	if args[1] and isNumber(args[1]) then
+		spinSpeed = args[1]
+	end
+	for i,v in pairs(getRoot(speaker.Character):GetChildren()) do
+		if v.Name == "Spinning" then
+			v:Destroy()
+		end
+	end
+	local Spin = Instance.new("BodyAngularVelocity")
+	Spin.Name = "Spinning"
+	Spin.Parent = getRoot(speaker.Character)
+	Spin.MaxTorque = Vector3.new(0, math.huge, 0)
+	Spin.AngularVelocity = Vector3.new(0,spinSpeed,0)
+end)
+
+addcmd('unspin',{},function(args, speaker)
+	for i,v in pairs(getRoot(speaker.Character):GetChildren()) do
+		if v.Name == "Spinning" then
+			v:Destroy()
+		end
+	end
+end)
+
+xrayEnabled = false
+xray = function()
+	for _, v in pairs(workspace:GetDescendants()) do
+		if v:IsA("BasePart") and not v.Parent:FindFirstChildWhichIsA("Humanoid") and not v.Parent.Parent:FindFirstChildWhichIsA("Humanoid") then
+			v.LocalTransparencyModifier = xrayEnabled and 0.5 or 0
+		end
+	end
+end
+
+addcmd("xray", {}, function(args, speaker)
+	xrayEnabled = true
+	xray()
+end)
+
+addcmd("unxray", {"noxray"}, function(args, speaker)
+	xrayEnabled = false
+	xray()
+end)
+
+addcmd("togglexray", {}, function(args, speaker)
+	xrayEnabled = not xrayEnabled
+	xray()
+end)
+
+addcmd("loopxray", {}, function(args, speaker)
+    if xrayLoop then
+        xrayLoop:Disconnect()
+    end
+    
+    xrayEnabled = true
+    xrayLoop = RunService.RenderStepped:Connect(function()
+        xray()
+    end)
+end)
+
+addcmd("unloopxray", {}, function(args, speaker)
+    if xrayLoop then
+        xrayLoop:Disconnect()
+        xrayLoop = nil
+        xrayEnabled = false
+        xray()
+    end
+end)
+
+staffRoles = {"mod", "admin", "staff", "dev", "founder", "owner", "supervis", "manager", "management", "executive", "president", "chairman", "chairwoman", "chairperson", "director"}
+
+getStaffRole = function(player)
+	local playerRole = player:GetRoleInGroup(game.CreatorId)
+	local result = {Role = playerRole, Staff = false}
+	for _, role in pairs(staffRoles) do
+		if string.find(string.lower(playerRole), role) then
+			result.Staff = true
+		end
+	end
+	return result
+end
+
+addcmd("staffwatch", {}, function(args, speaker)
+	if staffwatchjoin then
+		staffwatchjoin:Disconnect()
+	end
+	if game.CreatorType == Enum.CreatorType.Group then
+		local found = {}
+		staffwatchjoin = Players.PlayerAdded:Connect(function(player)
+			local result = getStaffRole(player)
+			if result.Staff then
+				notify("Staffwatch", formatUsername(player) .. " is a " .. result.Role)
+			end
+		end)
+		for _, player in pairs(Players:GetPlayers()) do
+			local result = getStaffRole(player)
+			if result.Staff then
+				table.insert(found, formatUsername(player) .. " is a " .. result.Role)
+			end
+		end
+		if #found > 0 then
+			notify("Staffwatch", table.concat(found, ",\n"))
+		else
+			notify("Staffwatch", "Enabled")
+		end
+	else
+		notify("Staffwatch", "Game is not owned by a Group")
+	end
+end)
+
+addcmd("unstaffwatch", {}, function(args, speaker)
+	if staffwatchjoin then
+		staffwatchjoin:Disconnect()
+	end
+	notify("Staffwatch", "Disabled")
+end)
+
+local walltpTouch = nil
+addcmd('walltp',{},function(args, speaker)
+	local torso
+	if r15(speaker) then
+		torso = speaker.Character.UpperTorso
+	else
+		torso = speaker.Character.Torso
+	end
+	local function touchedFunc(hit)
+		local Root = getRoot(speaker.Character)
+		if hit:IsA("BasePart") and hit.Position.Y > Root.Position.Y - speaker.Character:FindFirstChildOfClass('Humanoid').HipHeight then
+			local hitP = getRoot(hit.Parent)
+			if hitP ~= nil then
+				Root.CFrame = hit.CFrame * CFrame.new(Root.CFrame.lookVector.X,hitP.Size.Z/2 + speaker.Character:FindFirstChildOfClass('Humanoid').HipHeight,Root.CFrame.lookVector.Z)
+			elseif hitP == nil then
+				Root.CFrame = hit.CFrame * CFrame.new(Root.CFrame.lookVector.X,hit.Size.Y/2 + speaker.Character:FindFirstChildOfClass('Humanoid').HipHeight,Root.CFrame.lookVector.Z)
+			end
+		end
+	end
+	walltpTouch = torso.Touched:Connect(touchedFunc)
+end)
+
+addcmd('unwalltp',{'nowalltp'},function(args, speaker)
+	if walltpTouch then
+		walltpTouch:Disconnect()
+	end
+end)
+
+autoclicking = false
+addcmd('autoclick',{},function(args, speaker)
+	if mouse1press and mouse1release then
+		execCmd('unautoclick')
+		task.wait()
+		local clickDelay = 0.1
+		local releaseDelay = 0.1
+		if args[1] and isNumber(args[1]) then clickDelay = args[1] end
+		if args[2] and isNumber(args[2]) then releaseDelay = args[2] end
+		autoclicking = true
+		cancelAutoClick = UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+			if not gameProcessedEvent then
+				if (input.KeyCode == Enum.KeyCode.Backspace and UserInputService:IsKeyDown(Enum.KeyCode.Equals)) or (input.KeyCode == Enum.KeyCode.Equals and UserInputService:IsKeyDown(Enum.KeyCode.Backspace)) then
+					autoclicking = false
+					cancelAutoClick:Disconnect()
+				end
+			end
+		end)
+		notify('Auto Clicker',"Press [backspace] and [=] at the same time to stop")
+		repeat task.wait(clickDelay)
+			mouse1press()
+			task.wait(releaseDelay)
+			mouse1release()
+		until autoclicking == false
+	else
+		notify('Auto Clicker',"Your exploit doesn't have the ability to use the autoclick")
+	end
+end)
+
+addcmd('unautoclick',{'noautoclick'},function(args, speaker)
+	autoclicking = false
+	if cancelAutoClick then cancelAutoClick:Disconnect() end
+end)
+
+addcmd('mousesensitivity',{'ms'},function(args, speaker)
+	UserInputService.MouseDeltaSensitivity = args[1]
+end)
+
+local nameBox = nil
+local nbSelection = nil
+addcmd('hovername',{},function(args, speaker)
+	execCmd('unhovername')
+	task.wait()
+	nameBox = Instance.new("TextLabel")
+	nameBox.Name = randomString()
+	nameBox.Parent = PARENT
+	nameBox.BackgroundTransparency = 1
+	nameBox.Size = UDim2.new(0,200,0,30)
+	nameBox.Font = Enum.Font.Code
+	nameBox.TextSize = 16
+	nameBox.Text = ""
+	nameBox.TextColor3 = Color3.new(1, 1, 1)
+	nameBox.TextStrokeTransparency = 0
+	nameBox.TextXAlignment = Enum.TextXAlignment.Left
+	nameBox.ZIndex = 10
+	nbSelection = Instance.new('SelectionBox')
+	nbSelection.Name = randomString()
+	nbSelection.LineThickness = 0.03
+	nbSelection.Color3 = Color3.new(1, 1, 1)
+	local function updateNameBox()
+		local t
+		local target = IYMouse.Target
+
+		if target then
+			local humanoid = target.Parent:FindFirstChildOfClass("Humanoid") or target.Parent.Parent:FindFirstChildOfClass("Humanoid")
+			if humanoid then
+				t = humanoid.Parent
+			end
+		end
+
+		if t ~= nil then
+			local x = IYMouse.X
+			local y = IYMouse.Y
+			local xP
+			local yP
+			if IYMouse.X > 200 then
+				xP = x - 205
+				nameBox.TextXAlignment = Enum.TextXAlignment.Right
+			else
+				xP = x + 25
+				nameBox.TextXAlignment = Enum.TextXAlignment.Left
+			end
+			nameBox.Position = UDim2.new(0, xP, 0, y)
+			nameBox.Text = t.Name
+			nameBox.Visible = true
+			nbSelection.Parent = t
+			nbSelection.Adornee = t
+		else
+			nameBox.Visible = false
+			nbSelection.Parent = nil
+			nbSelection.Adornee = nil
+		end
+	end
+	nbUpdateFunc = IYMouse.Move:Connect(updateNameBox)
+end)
+
+addcmd('unhovername',{'nohovername'},function(args, speaker)
+	if nbUpdateFunc then
+		nbUpdateFunc:Disconnect()
+		nameBox:Destroy()
+		nbSelection:Destroy()
+	end
+end)
+
+addcmd('headsize',{},function(args, speaker)
+	local players = getPlayer(args[1], speaker)
+	for i,v in pairs(players) do
+		if Players[v] ~= speaker and Players[v].Character:FindFirstChild('Head') then
+			local sizeArg = tonumber(args[2])
+			local Size = Vector3.new(sizeArg,sizeArg,sizeArg)
+			local Head = Players[v].Character:FindFirstChild('Head')
+			if Head:IsA("BasePart") then
+				if not args[2] or sizeArg == 1 then
+					Head.Size = Vector3.new(2,1,1)
+				else
+					Head.Size = Size
+				end
+			end
+		end
+	end
+end)
+
+addcmd('hitbox',{},function(args, speaker)
+	local players = getPlayer(args[1], speaker)
+	for i,v in pairs(players) do
+		if Players[v] ~= speaker and Players[v].Character:FindFirstChild('HumanoidRootPart') then
+			local sizeArg = tonumber(args[2])
+			local Size = Vector3.new(sizeArg,sizeArg,sizeArg)
+			local Root = Players[v].Character:FindFirstChild('HumanoidRootPart')
+			if Root:IsA("BasePart") then
+				if not args[2] or sizeArg == 1 then
+					Root.Size = Vector3.new(2,1,1)
+					Root.Transparency = 0.4
+				else
+					Root.Size = Size
+					Root.Transparency = 0.4
+				end
+			end
+		end
+	end
+end)
+
+addcmd('stareat',{'stare'},function(args, speaker)
+	local players = getPlayer(args[1], speaker)
+	for i,v in pairs(players) do
+		if stareLoop then
+			stareLoop:Disconnect()
+		end
+		if not Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and Players[v].Character:FindFirstChild("HumanoidRootPart") then return end
+		local function stareFunc()
+			if Players.LocalPlayer.Character.PrimaryPart and Players:FindFirstChild(v) and Players[v].Character ~= nil and Players[v].Character:FindFirstChild("HumanoidRootPart") then
+				local chrPos=Players.LocalPlayer.Character.PrimaryPart.Position
+				local tPos=Players[v].Character:FindFirstChild("HumanoidRootPart").Position
+				local modTPos=Vector3.new(tPos.X,chrPos.Y,tPos.Z)
+				local newCF=CFrame.new(chrPos,modTPos)
+				Players.LocalPlayer.Character:SetPrimaryPartCFrame(newCF)
+			elseif not Players:FindFirstChild(v) then
+				stareLoop:Disconnect()
+			end
+		end
+
+		stareLoop = RunService.RenderStepped:Connect(stareFunc)
+	end
+end)
+
+addcmd('unstareat',{'unstare','nostare','nostareat'},function(args, speaker)
+	if stareLoop then
+		stareLoop:Disconnect()
+	end
+end)
+
+RolewatchData = {Group = 0, Role = "", Leave = false}
+RolewatchConnection = Players.PlayerAdded:Connect(function(player)
+	if RolewatchData.Group == 0 then return end
+	if player:IsInGroup(RolewatchData.Group) then
+		if tostring(player:GetRoleInGroup(RolewatchData.Group)):lower() == RolewatchData.Role:lower() then
+			if RolewatchData.Leave == true then
+				Players.LocalPlayer:Kick("\n\nRolewatch\nPlayer \"" .. tostring(player.Name) .. "\" has joined with the Role \"" .. RolewatchData.Role .. "\"\n")
+			else
+				notify("Rolewatch", "Player \"" .. tostring(player.Name) .. "\" has joined with the Role \"" .. RolewatchData.Role .. "\"")
+			end
+		end
+	end
+end)
+
+addcmd("rolewatch", {}, function(args, speaker)
+	local groupId = tonumber(args[1] or 0)
+	local roleName = args[2] and tostring(getstring(2))
+	if groupId and roleName then
+		RolewatchData.Group = groupId
+		RolewatchData.Role = roleName
+		notify("Rolewatch", "Watching Group ID \"" .. tostring(groupId) .. "\" for Role \"" .. roleName .. "\"")
+	end
+end)
+
+addcmd("rolewatchstop", {}, function(args, speaker)
+	RolewatchData.Group = 0
+	RolewatchData.Role = ""
+	RolewatchData.Leave = false
+	notify("Rolewatch", "Disabled")
+end)
+
+addcmd("rolewatchleave", {"unrolewatch"}, function(args, speaker)
+	RolewatchData.Leave = not RolewatchData.Leave
+	notify("Rolewatch", RolewatchData.Leave and "Leave has been Enabled" or "Leave has been Disabled")
+end)
+
+addcmd('removeterrain',{'rterrain','noterrain'},function(args, speaker)
+	workspace:FindFirstChildOfClass('Terrain'):Clear()
+end)
+
+addcmd('clearnilinstances',{'nonilinstances','cni'},function(args, speaker)
+	if getnilinstances then
+		for i,v in pairs(getnilinstances()) do
+			v:Destroy()
+		end
+	else
+		notify('Incompatible Exploit','Your exploit does not support this command (missing getnilinstances)')
+	end
+end)
+
+addcmd('destroyheight',{'dh'},function(args, speaker)
+	local dh = args[1] or -500
+	if isNumber(dh) then
+		workspace.FallenPartsDestroyHeight = dh
+	end
+end)
+
+addcmd('trip',{},function(args, speaker)
+	if speaker and speaker.Character and speaker.Character:FindFirstChildOfClass("Humanoid") and getRoot(speaker.Character) then
+		local hum = speaker.Character:FindFirstChildOfClass("Humanoid")
+		local root = getRoot(speaker.Character)
+		hum:ChangeState(0)
+		root.Velocity = root.CFrame.LookVector * 30
+	end
+end)
+
+local freezingua = nil
+frozenParts = {}
+addcmd('freezeunanchored',{'freezeua'},function(args, speaker)
+	if sethidden then
+		local badnames = {
+			"Head",
+			"UpperTorso",
+			"LowerTorso",
+			"RightUpperArm",
+			"LeftUpperArm",
+			"RightLowerArm",
+			"LeftLowerArm",
+			"RightHand",
+			"LeftHand",
+			"RightUpperLeg",
+			"LeftUpperLeg",
+			"RightLowerLeg",
+			"LeftLowerLeg",
+			"RightFoot",
+			"LeftFoot",
+			"Torso",
+			"Right Arm",
+			"Left Arm",
+			"Right Leg",
+			"Left Leg",
+			"HumanoidRootPart"
+		}
+		local function FREEZENOOB(v)
+			if v:IsA("BasePart" or "UnionOperation") and v.Anchored == false then
+				local BADD = false
+				for i = 1,#badnames do
+					if v.Name == badnames[i] then
+						BADD = true
+					end
+				end
+				if speaker.Character and v:IsDescendantOf(speaker.Character) then
+					BADD = true
+				end
+				if BADD == false then
+					for i,c in pairs(v:GetChildren()) do
+						if c:IsA("BodyPosition") or c:IsA("BodyGyro") then
+							c:Destroy()
+						end
+					end
+					if not simRadius then
+						execCmd('simulationradius')
+					end
+					local bodypos = Instance.new("BodyPosition")
+					bodypos.Parent = v
+					bodypos.Position = v.Position
+					bodypos.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+					local bodygyro = Instance.new("BodyGyro")
+					bodygyro.Parent = v
+					bodygyro.CFrame = v.CFrame
+					bodygyro.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+					if not table.find(frozenParts,v) then
+						table.insert(frozenParts,v)
+					end
+				end
+			end
+		end
+		for i,v in pairs(workspace:GetDescendants()) do
+			FREEZENOOB(v)
+		end
+		freezingua = workspace.DescendantAdded:Connect(FREEZENOOB)
+	else
+		notify('Incompatible Exploit','Your exploit does not support this command (missing sethiddenproperty)')
+	end
+end)
+
+addcmd('thawunanchored',{'thawua','unfreezeunanchored','unfreezeua'},function(args, speaker)
+	if sethidden then
+		if freezingua then
+			freezingua:Disconnect()
+		end
+		if not simRadius then
+			execCmd('simulationradius')
+		end
+		for i,v in pairs(frozenParts) do
+			for i,c in pairs(v:GetChildren()) do
+				if c:IsA("BodyPosition") or c:IsA("BodyGyro") then
+					c:Destroy()
+				end
+			end
+		end
+		frozenParts = {}
+	else
+		notify('Incompatible Exploit','Your exploit does not support this command (missing sethiddenproperty)')
+	end
+end)
+
+addcmd('chatspy', {}, function(args, speaker)
+	notify('Loading', 'Should be loaded in a second..')
+	loadstring(game:HttpGet("https://github.com/dehoisted/Chat-Spy/raw/main/source/main.lua"))()
+end)
+
+addcmd('tpunanchored',{'tpua'},function(args, speaker)
+	if sethidden then
+		local players = getPlayer(args[1], speaker)
+		for i,v in pairs(players) do
+			local Forces = {}
+			for _,part in pairs(workspace:GetDescendants()) do
+				if Players[v].Character:FindFirstChild('Head') and part:IsA("BasePart" or "UnionOperation" or "Model") and part.Anchored == false and not part:IsDescendantOf(speaker.Character) and part.Name == "Torso" == false and part.Name == "Head" == false and part.Name == "Right Arm" == false and part.Name == "Left Arm" == false and part.Name == "Right Leg" == false and part.Name == "Left Leg" == false and part.Name == "HumanoidRootPart" == false then
+					for i,c in pairs(part:GetChildren()) do
+						if c:IsA("BodyPosition") or c:IsA("BodyGyro") then
+							c:Destroy()
+						end
+					end
+					local ForceInstance = Instance.new("BodyPosition")
+					ForceInstance.Parent = part
+					ForceInstance.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+					table.insert(Forces, ForceInstance)
+					if not table.find(frozenParts,part) then
+						table.insert(frozenParts,part)
+					end
+				end
+			end
+			if not simRadius then
+				execCmd('simulationradius')
+			end
+			for i,c in pairs(Forces) do
+				c.Position = Players[v].Character.Head.Position
+			end
+		end
+	else
+		notify('Incompatible Exploit','Your exploit does not support this command (missing sethiddenproperty)')
+	end
+end)
+
+keycodeMap = {
+	["0"] = 0x30,
+	["1"] = 0x31,
+	["2"] = 0x32,
+	["3"] = 0x33,
+	["4"] = 0x34,
+	["5"] = 0x35,
+	["6"] = 0x36,
+	["7"] = 0x37,
+	["8"] = 0x38,
+	["9"] = 0x39,
+	["a"] = 0x41,
+	["b"] = 0x42,
+	["c"] = 0x43,
+	["d"] = 0x44,
+	["e"] = 0x45,
+	["f"] = 0x46,
+	["g"] = 0x47,
+	["h"] = 0x48,
+	["i"] = 0x49,
+	["j"] = 0x4A,
+	["k"] = 0x4B,
+	["l"] = 0x4C,
+	["m"] = 0x4D,
+	["n"] = 0x4E,
+	["o"] = 0x4F,
+	["p"] = 0x50,
+	["q"] = 0x51,
+	["r"] = 0x52,
+	["s"] = 0x53,
+	["t"] = 0x54,
+	["u"] = 0x55,
+	["v"] = 0x56,
+	["w"] = 0x57,
+	["x"] = 0x58,
+	["y"] = 0x59,
+	["z"] = 0x5A,
+	["enter"] = 0x0D,
+	["shift"] = 0x10,
+	["ctrl"] = 0x11,
+	["alt"] = 0x12,
+	["pause"] = 0x13,
+	["capslock"] = 0x14,
+	["spacebar"] = 0x20,
+	["space"] = 0x20,
+	["pageup"] = 0x21,
+	["pagedown"] = 0x22,
+	["end"] = 0x23,
+	["home"] = 0x24,
+	["left"] = 0x25,
+	["up"] = 0x26,
+	["right"] = 0x27,
+	["down"] = 0x28,
+	["insert"] = 0x2D,
+	["delete"] = 0x2E,
+	["f1"] = 0x70,
+	["f2"] = 0x71,
+	["f3"] = 0x72,
+	["f4"] = 0x73,
+	["f5"] = 0x74,
+	["f6"] = 0x75,
+	["f7"] = 0x76,
+	["f8"] = 0x77,
+	["f9"] = 0x78,
+	["f10"] = 0x79,
+	["f11"] = 0x7A,
+	["f12"] = 0x7B,
+}
+autoKeyPressing = false
+cancelAutoKeyPress = nil
+
+addcmd('autokeypress',{'keypress'},function(args, speaker)
+	if keypress and keyrelease and args[1] then
+		local code = keycodeMap[args[1]:lower()]
+		if not code then notify('Auto Key Press',"Invalid key") return end
+		execCmd('unautokeypress')
+		task.wait()
+		local clickDelay = 0.1
+		local releaseDelay = 0.1
+		if args[2] and isNumber(args[2]) then clickDelay = args[2] end
+		if args[3] and isNumber(args[3]) then releaseDelay = args[3] end
+		autoKeyPressing = true
+		cancelAutoKeyPress = UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+			if not gameProcessedEvent then
+				if (input.KeyCode == Enum.KeyCode.Backspace and UserInputService:IsKeyDown(Enum.KeyCode.Equals)) or (input.KeyCode == Enum.KeyCode.Equals and UserInputService:IsKeyDown(Enum.KeyCode.Backspace)) then
+					autoKeyPressing = false
+					cancelAutoKeyPress:Disconnect()
+				end
+			end
+		end)
+		notify('Auto Key Press',"Press [backspace] and [=] at the same time to stop")
+		repeat task.wait(clickDelay)
+			keypress(code)
+			task.wait(releaseDelay)
+			keyrelease(code)
+		until autoKeyPressing == false
+		if cancelAutoKeyPress then cancelAutoKeyPress:Disconnect() keyrelease(code) end
+	else
+		notify('Auto Key Press',"Your exploit doesn't have the ability to use auto key press")
+	end
+end)
+
+addcmd('unautokeypress',{'noautokeypress','unkeypress','nokeypress'},function(args, speaker)
+	autoKeyPressing = false
+	if cancelAutoKeyPress then cancelAutoKeyPress:Disconnect() end
+end)
+
+addcmd('addplugin',{'plugin'},function(args, speaker)
+	addPlugin(getstring(1))
+end)
+
+addcmd('removeplugin',{'deleteplugin'},function(args, speaker)
+	deletePlugin(getstring(1))
+end)
+
+addcmd('reloadplugin',{},function(args, speaker)
+	local pluginName = getstring(1)
+	deletePlugin(pluginName)
+	task.wait(1)
+	addPlugin(pluginName)
+end)
+
+addcmd('removecmd',{'deletecmd'},function(args, speaker)
+	removecmd(args[1])
+end)
+
+addcmd('joinjobid',{'jjobid', 'jjid'},function(args, speaker)
+	if args[1] then 
+		TeleportService:TeleportToPlaceInstance(game.PlaceId,args[1])
+	else
+		notify('Argument error', 'Missing arg 1 - JobId expected')
+	end
+end)
+
+addcmd('toolview',{'tview'},function(args, speaker)
+	local s, e = pcall(function()
+		local pl = Players:FindFirstChild(getPlayer(args[1], speaker)[1])
+		if not pl then return notify('Argument error', 'Invalid argument passed') end
+		local t, chartool = {}, pl.Character:FindFirstChildOfClass("Tool")
+
+		for _, v in pl.Backpack:GetChildren() do
+			if not v:IsA("Tool") then continue end
+			table.insert(t, tostring(v))
+		end
+
+		if chartool then 
+			notify(("%s's tools"):format(tostring(pl)), tostring(chartool).. ", " ..table.concat(t, ", "))
+		else
+			notify(("%s's tools"):format(tostring(pl)), table.concat(t, ", "))
+		end
+	end)
+	print(e)
+end)
+
+if IsOnMobile then
+	local QuickCapture = Instance.new("TextButton")
+	local UICorner = Instance.new("UICorner")
+	QuickCapture.Name = randomString()
+	QuickCapture.Parent = PARENT
+	QuickCapture.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
+	QuickCapture.BackgroundTransparency = 0.14
+	QuickCapture.Position = UDim2.new(0.489, 0, 0, 0)
+	QuickCapture.Size = UDim2.new(0, 32, 0, 33)
+	QuickCapture.Font = Enum.Font.SourceSansBold
+	QuickCapture.Text = "IYR"
+	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
+	QuickCapture.TextSize = 20.000
+	QuickCapture.TextWrapped = true
+	QuickCapture.Draggable = true
+	UICorner.Name = randomString()
+	UICorner.CornerRadius = UDim.new(0.5, 0)
+	UICorner.Parent = QuickCapture
+	QuickCapture.MouseButton1Click:Connect(function()
+		Cmdbar:CaptureFocus()
+		maximizeHolder()
+	end)
+	table.insert(shade1, QuickCapture)
+	table.insert(text1, QuickCapture)
+end
+
+updateColors(currentShade1,shade1)
+updateColors(currentShade2,shade2)
+updateColors(currentShade3,shade3)
+updateColors(currentText1,text1)
+updateColors(currentText2,text2)
+updateColors(currentScroll,scroll)
+
+if PluginsTable ~= nil or PluginsTable ~= {} then
+	FindPlugins(PluginsTable)
+end
+
+-- Events
+eventEditor.RegisterEvent("OnExecute")
+eventEditor.RegisterEvent("OnSpawn",{
+	{Type="Player",Name="Player Filter ($1)"}
+})
+eventEditor.RegisterEvent("OnDied",{
+	{Type="Player",Name="Player Filter ($1)"}
+})
+eventEditor.RegisterEvent("OnDamage",{
+	{Type="Player",Name="Player Filter ($1)"},
+	{Type="Number",Name="Below Health ($2)"}
+})
+eventEditor.RegisterEvent("OnKilled",{
+	{Type="Player",Name="Victim Player ($1)"},
+	{Type="Player",Name="Killer Player ($2)",Default = 1}
+})
+eventEditor.RegisterEvent("OnJoin",{
+	{Type="Player",Name="Player Filter ($1)",Default = 1}
+})
+eventEditor.RegisterEvent("OnLeave",{
+	{Type="Player",Name="Player Filter ($1)",Default = 1}
+})
+eventEditor.RegisterEvent("OnChatted",{
+	{Type="Player",Name="Player Filter ($1)",Default = 1},
+	{Type="String",Name="Message Filter ($2)"}
+})
+
+function hookCharEvents(plr,instant)
+	task.spawn(function()
+		local char = plr.Character
+		if not char then return end
+
+		local humanoid = char:WaitForChild("Humanoid",10)
+		if not humanoid then return end
+
+		local oldHealth = humanoid.Health
+		humanoid.HealthChanged:Connect(function(health)
+			local change = math.abs(oldHealth - health)
+			if oldHealth > health then
+				eventEditor.FireEvent("OnDamage",plr.Name,tonumber(health))
+			end
+			oldHealth = health
+		end)
+
+		humanoid.Died:Connect(function()
+			eventEditor.FireEvent("OnDied",plr.Name)
+
+			local killedBy = humanoid:FindFirstChild("creator")
+			if killedBy and killedBy.Value and killedBy.Value.Parent then
+				eventEditor.FireEvent("OnKilled",plr.Name,killedBy.Name)
+			end
+		end)
+	end)
+end
+
+Players.PlayerAdded:Connect(function(plr)
+	eventEditor.FireEvent("OnJoin",plr.Name)
+	plr.Chatted:Connect(function(msg) eventEditor.FireEvent("OnChatted",tostring(plr),msg) end)
+	plr.CharacterAdded:Connect(function() eventEditor.FireEvent("OnSpawn",tostring(plr)) hookCharEvents(plr) end)
+	JoinLog(plr)
+	ChatLog(plr)
+	if ESPenabled then
+		createESP(plr.Name)
+	end
+end)
+
+for _,plr in pairs(Players:GetPlayers()) do
+	pcall(function()
+		plr.CharacterAdded:Connect(function() eventEditor.FireEvent("OnSpawn",tostring(plr)) hookCharEvents(plr) end)
+		hookCharEvents(plr)
+	end)
+end
+
+if spawnCmds and #spawnCmds > 0 then
+	for i,v in pairs(spawnCmds) do
+		eventEditor.AddCmd("OnSpawn",{v.COMMAND or "",{0},v.DELAY or 0})
+	end
+	updatesaves()
+end
+
+if loadedEventData then eventEditor.LoadData(loadedEventData) end
+eventEditor.Refresh()
+
+eventEditor.FireEvent("OnExecute")
+
+if aliases and #aliases > 0 then
+	local cmdMap = {}
+	for i,v in pairs(cmds) do
+		cmdMap[v.NAME:lower()] = v
+		for _,alias in pairs(v.ALIAS) do
+			cmdMap[alias:lower()] = v
+		end
+	end
+	for i = 1, #aliases do
+		local cmd = string.lower(aliases[i].CMD)
+		local alias = string.lower(aliases[i].ALIAS)
+		if cmdMap[cmd] then
+			customAlias[alias] = cmdMap[cmd]
+		end
+	end
+	refreshaliases()
+end
+
+IYMouse.Move:Connect(checkTT)
+
+local function iyonloadstuff(shouldpopupannouncement)
+	local success, latestVersionInfo = pcall(function() 
+		local versionJson = game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/master/version')
+		return HttpService:JSONDecode(versionJson)
+	end)
+
+	if success then
+		if currentVersion ~= latestVersionInfo.Version then
+			notify('Outdated','Get the new version by executing it again (or rejoin if keepiy is enabled)')
+		end
+
+		if shouldpopupannouncement then
+			if latestVersionInfo.Announcement and latestVersionInfo.Announcement ~= '' then
+				local AnnGUI = Instance.new("Frame")
+				local background = Instance.new("Frame")
+				local TextBox = Instance.new("TextLabel")
+				local shadow = Instance.new("Frame")
+				local PopupText = Instance.new("TextLabel")
+				local Exit = Instance.new("TextButton")
+				local ExitImage = Instance.new("ImageLabel")
+	
+				AnnGUI.Name = randomString()
+				AnnGUI.Parent = PARENT
+				AnnGUI.Active = true
+				AnnGUI.BackgroundTransparency = 1
+				AnnGUI.Position = UDim2.new(0.5, -180, 0, -500)
+				AnnGUI.Size = UDim2.new(0, 360, 0, 20)
+				AnnGUI.ZIndex = 10
+	
+				background.Name = "background"
+				background.Parent = AnnGUI
+				background.Active = true
+				background.BackgroundColor3 = currentShade1
+				background.BorderSizePixel = 0
+				background.Position = UDim2.new(0, 0, 0, 20)
+				background.Size = UDim2.new(0, 360, 0, 150)
+				background.ZIndex = 10
+	
+				TextBox.Parent = background
+				TextBox.BackgroundTransparency = 1
+				TextBox.Position = UDim2.new(0, 5, 0, 5)
+				TextBox.Size = UDim2.new(0, 350, 0, 140)
+				TextBox.Font = Enum.Font.SourceSans
+				TextBox.TextSize = 18
+				TextBox.TextWrapped = true
+				TextBox.Text = latestVersionInfo.Announcement
+				TextBox.TextColor3 = currentText1
+				TextBox.TextXAlignment = Enum.TextXAlignment.Left
+				TextBox.TextYAlignment = Enum.TextYAlignment.Top
+				TextBox.ZIndex = 10
+	
+				shadow.Name = "shadow"
+				shadow.Parent = AnnGUI
+				shadow.BackgroundColor3 = currentShade2
+				shadow.BorderSizePixel = 0
+				shadow.Size = UDim2.new(0, 360, 0, 20)
+				shadow.ZIndex = 10
+	
+				PopupText.Name = "PopupText"
+				PopupText.Parent = shadow
+				PopupText.BackgroundTransparency = 1
+				PopupText.Size = UDim2.new(1, 0, 0.95, 0)
+				PopupText.ZIndex = 10
+				PopupText.Font = Enum.Font.SourceSans
+				PopupText.TextSize = 14
+				PopupText.Text = "Server Announcement"
+				PopupText.TextColor3 = currentText1
+				PopupText.TextWrapped = true
+	
+				Exit.Name = "Exit"
+				Exit.Parent = shadow
+				Exit.BackgroundTransparency = 1
+				Exit.Position = UDim2.new(1, -20, 0, 0)
+				Exit.Size = UDim2.new(0, 20, 0, 20)
+				Exit.Text = ""
+				Exit.ZIndex = 10
+	
+				ExitImage.Parent = Exit
+				ExitImage.BackgroundColor3 = Color3.new(1, 1, 1)
+				ExitImage.BackgroundTransparency = 1
+				ExitImage.Position = UDim2.new(0, 5, 0, 5)
+				ExitImage.Size = UDim2.new(0, 10, 0, 10)
+				ExitImage.Image = "rbxassetid://5054663650"
+				ExitImage.ZIndex = 10
+	
+				task.wait(1)
+				AnnGUI:TweenPosition(UDim2.new(0.5, -180, 0, 150), "InOut", "Quart", 0.5, true, nil)
+	
+				Exit.MouseButton1Click:Connect(function()
+					AnnGUI:TweenPosition(UDim2.new(0.5, -180, 0, -500), "InOut", "Quart", 0.5, true, nil)
+					task.wait(0.6)
+					AnnGUI:Destroy()
+				end)
+			end
+		end
+	end
+end
+task.spawn(function()
+	iyonloadstuff(true)
+	while task.wait() do
+		iyonloadstuff()
+		task.wait(1000)
+	end
+end)
+
+task.spawn(function()
+	task.wait()
+	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
+	Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.3)
+	task.wait(1)
+	local OutInfo = TweenInfo.new(1.6809, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+	TweenService:Create(Logo, OutInfo, {ImageTransparency = 1}):Play()
+	TweenService:Create(IntroBackground, OutInfo, {BackgroundTransparency = 1}):Play()
+	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.2)
+	task.wait(0.2)
+	Logo:Destroy()
+	Credits:Destroy()
+	IntroBackground:Destroy()
+	minimizeHolder()
+	if IsOnMobile then
+		notify("Unstable Device", "On mobile, Infinite Yield Reborn has a lot of bugs. It's recommended to use a PC executor")
+		if game.PlaceId == 574746640 then
+			task.wait(3)
+			notify("4nn1's Place", "Game Detected! Some commands were added/changed/removed")
+		end
+	else
+		if game.PlaceId == 574746640 then
+			notify("4nn1's Place", "Game Detected! Some commands were added/changed/removed")
+		end
+	end
+end)
+
+
+task.defer(function()
+	local hf = hookfunction or function() end
+	Plugins.ButtonLabel.Text = "Manage Plugins" .. " (x" .. #PluginsTable .. ")"
+	Aliases.ButtonLabel.Text = "Edit Aliases" .. " (x" .. #aliases .. ")"
+	Positions.ButtonLabel.Text = "Edit/Goto Waypoints" .. " (x" .. #WayPoints .. ")"
+	Keybinds.ButtonLabel.Text = "Edit Keybinds" .. " (x" .. #binds .. ")"
+	local old
+	old = hf(table.remove, function(...)
+		old(...)
+		local t = ({ ... })[1]
+		if t == binds then
+			Keybinds.ButtonLabel.Text = "Edit Keybinds" .. " (x" .. #binds .. ")"
+		elseif t == WayPoints then
+			Positions.ButtonLabel.Text = "Edit/Goto Waypoints" .. " (x" .. #WayPoints .. ")"
+		elseif t == aliases then
+			Aliases.ButtonLabel.Text = "Edit Aliases" .. " (x" .. #aliases .. ")"
+		elseif t == PluginsTable then
+			Plugins.ButtonLabel.Text = "Manage Plugins" .. " (x" .. #PluginsTable .. ")"
+		end
+	end)
+	setmetatable(binds, {
+		__newindex = function(_, index, value)
+			rawset(_, index, value)
+			Keybinds.ButtonLabel.Text = "Edit Keybinds" .. " (x" .. #binds .. ")"
+		end,
+	})
+	setmetatable(WayPoints, {
+		__newindex = function(_, index, value)
+			rawset(_, index, value)
+			Positions.ButtonLabel.Text = "Edit/Goto Waypoints" .. " (x" .. #WayPoints .. ")"
+		end,
+	})
+	setmetatable(aliases, {
+		__newindex = function(_, index, value)
+			rawset(_, index, value)
+			Aliases.ButtonLabel.Text = "Edit Aliases" .. " (x" .. #aliases .. ")"
+		end,
+	})
+	setmetatable(PluginsTable, {
+		__newindex = function(_, index, value)
+			rawset(_, index, value)
+			Plugins.ButtonLabel.Text = "Manage Plugins" .. " (x" .. #PluginsTable .. ")"
+		end,
+	})
+
+	function getCount()
+		repeat
+			wait()
+		until eventEditor.SaveData() ~= "[]"
+		local sd = eventEditor.SaveData()
+		local data = game:GetService("HttpService"):JSONDecode(sd)
+		local count = 0
+		for i, v in pairs(data) do
+			for i, v in pairs(v) do
+				count += 1
+			end
+		end
+		return count
+	end
+
+	EventBind.ButtonLabel.Text = "Edit Event Binds" .. " (x" .. getCount() .. ")"
+
+	eventEditor.SetOnEdited(function()
+		updatesaves()
+		EventBind.ButtonLabel.Text = "Edit Event Binds" .. " (x" .. getCount() .. ")"
+	end)
+end)
+
+local endTime = tick()
+local elapsedTime = endTime - startTime
+
+local TweenService = game:GetService("TweenService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local screenGuiLogo = Instance.new("ScreenGui")
+screenGuiLogo.Parent = player:WaitForChild("PlayerGui")
+screenGuiLogo.Name = "ImageFadeGui"
+screenGuiLogo.DisplayOrder = 10^6
+screenGuiLogo.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local sound = Instance.new("Sound")
+sound.Parent = screenGuiLogo
+sound.SoundId = "rbxassetid://8795831946"
+sound.Volume = 1
+sound.Looped = false
+sound:Play()
+
+local imageIDs = { "rbxassetid://17645082538" }
+local credits = { "Edge // Zwolf // Moon // Toon // _Real // Ry" }
+local loadTimeMessage = "IYR LOADED IN " .. string.format("%.20f", elapsedTime) .. " SECONDS"
+
+local imageLabels = {}
+local positions = {
+    UDim2.new(0.5, -563 / 2, 0.1, -563 / 2), -- top
+    UDim2.new(0.5, -563 / 2, 0.9, -563 / 2), -- bottom
+    UDim2.new(0.1, -563 / 2, 0.5, -563 / 2), -- left
+    UDim2.new(0.9, -563 / 2, 0.5, -563 / 2)  -- right
+}
+local moveGoals = {
+    UDim2.new(0.5, -563 / 2, 0.5, -563 / 2), -- to center from top
+    UDim2.new(0.5, -563 / 2, 0.5, -563 / 2), -- to center from bottom
+    UDim2.new(0.5, -563 / 2, 0.5, -563 / 2), -- to center from left
+    UDim2.new(0.5, -563 / 2, 0.5, -563 / 2)  -- to center from right
+}
+
+local moveDuration = 1.5
+local fadeDuration = 1.5
+local moveTweenInfo = TweenInfo.new(moveDuration, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+local fadeTweenInfo = TweenInfo.new(fadeDuration, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
+
+for i = 1, 4 do
+    local imageLabel = Instance.new("ImageLabel")
+    imageLabel.Parent = screenGuiLogo
+    imageLabel.Name = "IYRLOGO" .. i
+    imageLabel.Size = UDim2.new(0, 563, 0, 563)
+    imageLabel.Position = positions[i]
+    imageLabel.Image = imageIDs[1]
+    imageLabel.BackgroundTransparency = 1
+    imageLabel.ImageTransparency = 1
+    imageLabel.ScaleType = Enum.ScaleType.Stretch
+    imageLabel.ZIndex = 10^6
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Name = "Credits"
+    textLabel.Parent = screenGuiLogo
+    textLabel.BackgroundTransparency = 1
+    textLabel.BorderSizePixel = 0
+    textLabel.Size = UDim2.new(0, 560, 0, -40)
+    textLabel.Font = Enum.Font.Code
+    textLabel.FontSize = Enum.FontSize.Size18
+    textLabel.Text = credits[1]
+    textLabel.TextColor3 = Color3.new(1, 1, 1)
+    textLabel.TextTransparency = 1
+    textLabel.ZIndex = 10^6 + 1
+
+    textLabel.Position = UDim2.new(imageLabel.Position.X.Scale, imageLabel.Position.X.Offset, imageLabel.Position.Y.Scale + 563 / screenGuiLogo.AbsoluteSize.Y, imageLabel.Position.Y.Offset + imageLabel.Size.Y.Offset + 10)
+
+    local moveGoal = { Position = moveGoals[i] }
+    local moveTween = TweenService:Create(imageLabel, moveTweenInfo, moveGoal)
+
+    local moveTextGoal = {
+        Position = UDim2.new(
+            moveGoals[i].X.Scale,
+            moveGoals[i].X.Offset,
+            moveGoals[i].Y.Scale + 563 / screenGuiLogo.AbsoluteSize.Y,
+            moveGoals[i].Y.Offset + 10
+        )
+    }
+    local moveTextTween = TweenService:Create(textLabel, moveTweenInfo, moveTextGoal)
+
+    local fadeInGoal = { ImageTransparency = 0 }
+    local fadeOutGoal = { ImageTransparency = 1 }
+
+    local fadeInTween = TweenService:Create(imageLabel, fadeTweenInfo, fadeInGoal)
+    local fadeInTextTween = TweenService:Create(textLabel, fadeTweenInfo, { TextTransparency = 0 })
+    local fadeOutTween = TweenService:Create(imageLabel, fadeTweenInfo, fadeOutGoal)
+    local fadeOutTextTween = TweenService:Create(textLabel, fadeTweenInfo, { TextTransparency = 1 })
+
+    table.insert(imageLabels, {imageLabel, textLabel, moveTween, moveTextTween, fadeInTween, fadeInTextTween, fadeOutTween, fadeOutTextTween})
+end
+
+local function fadeInAndMove()
+    for _, labelData in ipairs(imageLabels) do
+        local imageLabel, textLabel, moveTween, moveTextTween, fadeInTween, fadeInTextTween, fadeOutTween, fadeOutTextTween = unpack(labelData)
+        fadeInTween:Play()
+        fadeInTextTween:Play()
+        moveTween:Play()
+        moveTextTween:Play()
+        moveTween.Completed:Connect(
+            function()
+                wait(1)
+                textLabel.Text = loadTimeMessage
+                fadeOutTween:Play()
+                fadeOutTextTween:Play()
+                fadeOutTween.Completed:Connect(
+                    function()
+                        screenGuiLogo:Destroy()
+                    end
+                )
+            end
+        )
+    end
+end
+
+fadeInAndMove()
