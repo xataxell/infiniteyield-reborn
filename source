@@ -8797,7 +8797,7 @@ addcmd('setfpscap', {'fpscap', 'maxfps'}, function(args, speaker)
 	end
 end)
 
-addcmd("printglobals", {"printgs", 'getglobals', 'getgs'}, function(args, speaker)
+addcmd("printglobals", {"printg", 'getglobals', 'getg'}, function(args, speaker)
     for k, v in pairs(getgenv()) do
        print(k, v)
     end
