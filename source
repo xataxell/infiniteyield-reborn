@@ -6453,7 +6453,7 @@ addcmd('clienttoken', {'ctoken'}, function(args, speaker)
         notify("Missing UNC(s)", "No clipboard functions found.")
         return
     end
-    if not everyWebsocket then
+    if not everyWebSocket then
         notify("Missing WebSockets", "No WebSocket functions found.")
         return
     end
