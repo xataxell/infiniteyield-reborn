@@ -12669,46 +12669,6 @@ addcmd("facebang", {"facerape", "facefuck"}, function(args, speaker)
 	end
 end)
 
-addcmd("earbang", {"earrape", "earfuck"}, function(args, speaker)
-    if args[1] then
-        local players = getPlayer(args[1], speaker)
-        for _, v in pairs(players) do
-            execCmd("unbang")
-            task.wait()
-            isbanging = true
-            local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-
-            bangAnim = Instance.new("Animation")
-            bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
-            bang = humanoid:LoadAnimation(bangAnim)
-            bang:Play(0.1, 1, 1)
-            bang:AdjustSpeed(args[3] or 2)
-
-            bangDied = humanoid.Died:Connect(function()
-                bang:Stop()
-                bangAnim:Destroy()
-                bangDied:Disconnect()
-                isbanging = false
-            end)
-
-            local bangplr = Players[v].Name
-            local offsetDirection = args[2] == "left" and -1.1 or 1.1
-            local bangOffset = CFrame.new(offsetDirection, 2.3, -1.1)
-
-            while task.wait() do
-                if isbanging == false then
-                    break
-                end
-                local otherRoot = getTorso(Players[bangplr].Character)
-                if otherRoot then
-                    getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffset * CFrame.Angles(0, math.pi, 0)
-                    getRoot(speaker.Character).Velocity = Vector3.zero
-                end
-            end
-        end
-    end
-end)
-
 local isBlowing = false
 
 addcmd("blower", {'blow', 'blowbang', 'blowjob'}, function(args, speaker)
@@ -12977,11 +12937,26 @@ end)
 addcmd("unbackpack", {"detach"}, function(_, speaker)
     isAttached = false
 
-    for _, anim in pairs(animations) do
-        if anim then
-            anim:Stop()
-            anim:Destroy()
-        end
+    if animations.anim_1 then
+        animations.anim_1:Stop()
+        animations.anim_1:Destroy()
+        animations.anim_1 = nil
+    end
+
+    if animations.anim_2 then
+        animations.anim_2:Stop()
+        animations.anim_2:Destroy()
+        animations.anim_2 = nil
+    end
+
+    if animations.attachAnim_1 then
+        animations.attachAnim_1:Destroy()
+        animations.attachAnim_1 = nil
+    end
+
+    if animations.attachAnim_2 then
+        animations.attachAnim_2:Destroy()
+        animations.attachAnim_2 = nil
     end
 
     for _, conn in pairs(connections) do
@@ -13003,6 +12978,11 @@ addcmd("unbackpack", {"detach"}, function(_, speaker)
 
     local humanoid = speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid")
     local root = humanoid and getRoot(speaker.Character)
+    
+    if humanoid then
+        humanoid.Sit = false
+    end
+
     if root then
         root.Velocity = Vector3.zero
     end
