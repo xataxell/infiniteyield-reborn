@@ -12636,49 +12636,73 @@ addcmd("bang", {"rape"}, function(args, speaker)
 	end
 end)
 
-addcmd("earbang", {"earrape", "siderape", "sidebang"}, function(args, speaker)
+addcmd("facebang", {"facerape", "facefuck"}, function(args, speaker)
+	if args[1] then
+		local players = getPlayer(args[1], speaker)
+		for _, v in pairs(players) do
+			execCmd("unbang")
+			task.wait()
+			isbanging = true
+			local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+			bangAnim = Instance.new("Animation")
+			bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
+			bang = humanoid:LoadAnimation(bangAnim)
+			bang:Play(0.1, 1, 1)
+			bang:AdjustSpeed(args[2] or 2)
+			bangDied = humanoid.Died:Connect(function()
+				bang:Stop()
+				bangAnim:Destroy()
+				bangDied:Disconnect()
+				isbanging = false
+			end)
+			local bangplr = Players[v].Name
+			local bangOffet = CFrame.new(0, 2.3, -1.1)
+			while task.wait() do
+				if isbanging == false then
+					break
+				end
+				local otherRoot = getTorso(Players[bangplr].Character)
+				getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffet * CFrame.Angles(0,3.15,0)
+				getRoot(speaker.Character).Velocity = Vector3.new(0,0,0)
+			end
+		end
+	end
+end)
+
+addcmd("earbang", {"earrape", "earfuck"}, function(args, speaker)
     if args[1] then
-        local targetPlayers = getPlayer(args[1], speaker)
-        for _, target in pairs(targetPlayers) do
+        local players = getPlayer(args[1], speaker)
+        for _, v in pairs(players) do
             execCmd("unbang")
             task.wait()
             isbanging = true
-
             local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-            local bangAnim = Instance.new("Animation")
-            bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
 
-            local bang = humanoid:LoadAnimation(bangAnim)
+            bangAnim = Instance.new("Animation")
+            bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
+            bang = humanoid:LoadAnimation(bangAnim)
             bang:Play(0.1, 1, 1)
             bang:AdjustSpeed(args[3] or 2)
 
-            bangDiedConnection = humanoid.Died:Connect(function()
+            bangDied = humanoid.Died:Connect(function()
                 bang:Stop()
                 bangAnim:Destroy()
-                bangDiedConnection:Disconnect()
+                bangDied:Disconnect()
                 isbanging = false
             end)
 
-            local targetPlayerName = Players[target].Name
+            local bangplr = Players[v].Name
+            local offsetDirection = args[2] == "left" and -1.1 or 1.1
+            local bangOffset = CFrame.new(offsetDirection, 2.3, -1.1)
 
             while task.wait() do
                 if isbanging == false then
                     break
                 end
-
-                local targetCharacter = Players[targetPlayerName].Character
-                if targetCharacter then
-                    local targetRoot = getTorso(targetCharacter)
-                    local speakerRoot = getRoot(speaker.Character)
-
-                    if targetRoot and speakerRoot then
-                        local offset = args[2] == "left" and Vector3.new(-1.1, 0, 0) or Vector3.new(1.1, 0, 0)
-
-                        local lookAt = (targetRoot.Position - speakerRoot.Position).Unit
-
-                        speakerRoot.CFrame = CFrame.new(targetRoot.Position + offset, targetRoot.Position)
-                        speakerRoot.Velocity = Vector3.zero
-                    end
+                local otherRoot = getTorso(Players[bangplr].Character)
+                if otherRoot then
+                    getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffset * CFrame.Angles(0, math.pi, 0)
+                    getRoot(speaker.Character).Velocity = Vector3.zero
                 end
             end
         end
