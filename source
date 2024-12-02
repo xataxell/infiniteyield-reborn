@@ -12894,6 +12894,7 @@ addcmd("unhug", {"unkiss", "unbiden"}, function(args, speaker)
     end
     ishugging = false
 end)
+
 local isAttached = false
 local animations = {
     attachAnim_1 = nil,
@@ -12920,8 +12921,9 @@ addcmd("backpack", {"attach"}, function(args, speaker)
             local root = humanoid and getRoot(speaker.Character)
 
             if humanoid and root then
+                humanoid.Sit = true
+
                 if humanoid.RigType == Enum.HumanoidRigType.R6 then
-                    humanoid.Sit = true
                     animations.attachAnim_1 = Instance.new("Animation")
                     animations.attachAnim_2 = Instance.new("Animation")
                     animations.attachAnim_1.AnimationId = "rbxassetid://225975820"
@@ -12935,8 +12937,6 @@ addcmd("backpack", {"attach"}, function(args, speaker)
 
                     animations.anim_1:AdjustSpeed(args[2] or 1)
                     animations.anim_2:AdjustSpeed(args[2] or 1)
-                else
-                    humanoid.Sit = true
                 end
 
                 connections.attachDied = humanoid.Died:Connect(function()
@@ -12964,6 +12964,8 @@ addcmd("backpack", {"attach"}, function(args, speaker)
                         root.Velocity = Vector3.zero
                     end
                 end
+
+                execCmd("unbackpack")
             else
                 notify("backpack", "Character not found")
                 isAttached = false
@@ -12991,7 +12993,6 @@ addcmd("unbackpack", {"detach"}, function(_, speaker)
     animations = {
         attachAnim_1 = nil,
         attachAnim_2 = nil,
-        sitAnim = nil,
         anim_1 = nil,
         anim_2 = nil,
     }
