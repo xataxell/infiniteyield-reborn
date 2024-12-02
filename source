@@ -12685,43 +12685,6 @@ addcmd("earbang", {"earrape", "siderape", "sidebang"}, function(args, speaker)
     end
 end)
 
-addcmd("earbang", {"earrape", "siderape", 'sidebang'}, function(args, speaker)
-    if args[1] then
-        local targetPlayers = getPlayer(args[1], speaker)
-        for _, target in pairs(targetPlayers) do
-            execCmd("unbang")
-            task.wait()
-            isbanging = true
-
-            local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-            local bangAnim = Instance.new("Animation")
-            bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
-
-            local bang = humanoid:LoadAnimation(bangAnim)
-            bang:Play(0.1, 1, 1)
-            bang:AdjustSpeed(args[3] or 2)
-
-            bangDiedConnection = humanoid.Died:Connect(function()
-                bang:Stop()
-                bangAnim:Destroy()
-                bangDiedConnection:Disconnect()
-                isbanging = false
-            end)
-
-            local targetPlayerName = Players[target].Name
-
-            while task.wait() do
-                if isbanging == false then
-                    break
-                end
-                local targetRoot = getTorso(Players[targetPlayerName].Character)
-                getRoot(speaker.Character).CFrame = targetRoot.CFrame * CFrame.new(args[2] == "left" and -1.1 or 1.1, 0, 0)
-                getRoot(speaker.Character).Velocity = Vector3.new(0, 0, 0)
-            end
-        end
-    end
-end)
-
 local isBlowing = false
 
 addcmd("blower", {'blow', 'blowbang', 'blowjob'}, function(args, speaker)
