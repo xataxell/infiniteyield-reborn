@@ -12919,7 +12919,7 @@ addcmd("backpack", {"attach"}, function(args, speaker)
 
             if humanoid and root then
                 if humanoid.RigType == Enum.HumanoidRigType.R6 then
-					humanoid.Sit = true
+                    humanoid.Sit = true
                     animations.sitAnim = Instance.new("Animation")
                     animations.sitAnim.AnimationId = "http://www.roblox.com/asset/?id=178130996"
 
@@ -12945,7 +12945,7 @@ addcmd("backpack", {"attach"}, function(args, speaker)
                 end)
 
                 local attachPlayerName = Players[target].Name
-                local backOffset = CFrame.new(0, 0, -1)
+                local backOffset = CFrame.new(0, 0, 1)
 
                 connections.jumpConnection = humanoid.Jumping:Connect(function(active)
                     if active and isAttached then
@@ -12965,7 +12965,6 @@ addcmd("backpack", {"attach"}, function(args, speaker)
                         root.Velocity = Vector3.zero
                     end
                 end
-
                 execCmd("unbackpack")
             else
                 notify("R6 or R15 Required", "This command requires either the R6 or R15 rig type")
@@ -12976,7 +12975,9 @@ addcmd("backpack", {"attach"}, function(args, speaker)
 end)
 
 addcmd("unbackpack", {"detach"}, function(_, speaker)
-    -- Stop animations
+    local humanoid = speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid")
+    if not humanoid then return end
+
     for _, anim in pairs(animations) do
         if anim then
             anim:Stop()
@@ -12984,21 +12985,18 @@ addcmd("unbackpack", {"detach"}, function(_, speaker)
         end
     end
 
-    -- Disconnect connections
     for _, conn in pairs(connections) do
         if conn then
             conn:Disconnect()
         end
     end
 
-    -- Reset variables
     animations = {
         attachAnim_1 = nil,
         attachAnim_2 = nil,
         sitAnim = nil,
         anim_1 = nil,
-        anim_2 = nil,
-        sit = nil
+        anim_2 = nil
     }
     connections = {
         attachDied = nil,
@@ -13006,9 +13004,7 @@ addcmd("unbackpack", {"detach"}, function(_, speaker)
     }
     isAttached = false
 
-    -- Reset velocity
-    local humanoid = speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid")
-    local root = humanoid and getRoot(speaker.Character)
+    local root = getRoot(speaker.Character)
     if root then
         root.Velocity = Vector3.zero
     end
