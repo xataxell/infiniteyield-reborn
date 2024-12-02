@@ -12672,13 +12672,10 @@ addcmd("earbang", {"earrape", "siderape", "sidebang"}, function(args, speaker)
                     local speakerRoot = getRoot(speaker.Character)
 
                     if targetRoot and speakerRoot then
-                        -- Calculate the offset position
                         local offset = args[2] == "left" and Vector3.new(-1.1, 0, 0) or Vector3.new(1.1, 0, 0)
 
-                        -- Calculate the facing direction
                         local lookAt = (targetRoot.Position - speakerRoot.Position).Unit
 
-                        -- Update the speaker's position and orientation
                         speakerRoot.CFrame = CFrame.new(targetRoot.Position + offset, targetRoot.Position)
                         speakerRoot.Velocity = Vector3.zero
                     end
