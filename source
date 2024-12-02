@@ -12967,7 +12967,7 @@ addcmd("backpack", {"attach"}, function(args, speaker)
                 end
                 execCmd("unbackpack")
             else
-                notify("R6 or R15 Required", "This command requires either the R6 or R15 rig type")
+                notify("Backpack", "Something went wrong.")
                 isAttached = false
             end
         end
