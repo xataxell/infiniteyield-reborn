@@ -12636,40 +12636,7 @@ addcmd("bang", {"rape"}, function(args, speaker)
 	end
 end)
 
-addcmd("facebang", {"facerape", "facefuck"}, function(args, speaker)
-	if args[1] then
-		local players = getPlayer(args[1], speaker)
-		for _, v in pairs(players) do
-			execCmd("unbang")
-			task.wait()
-			isbanging = true
-			local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
-			bangAnim = Instance.new("Animation")
-			bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
-			bang = humanoid:LoadAnimation(bangAnim)
-			bang:Play(0.1, 1, 1)
-			bang:AdjustSpeed(args[2] or 2)
-			bangDied = humanoid.Died:Connect(function()
-				bang:Stop()
-				bangAnim:Destroy()
-				bangDied:Disconnect()
-				isbanging = false
-			end)
-			local bangplr = Players[v].Name
-			local bangOffet = CFrame.new(0, 2.3, -1.1)
-			while task.wait() do
-				if isbanging == false then
-					break
-				end
-				local otherRoot = getTorso(Players[bangplr].Character)
-				getRoot(speaker.Character).CFrame = otherRoot.CFrame * bangOffet * CFrame.Angles(0,3.15,0)
-				getRoot(speaker.Character).Velocity = Vector3.new(0,0,0)
-			end
-		end
-	end
-end)
-
-addcmd("sidebang", {"sideface", "siderape"}, function(args, speaker)
+addcmd("earbang", {"earrape", "siderape", "sidebang"}, function(args, speaker)
     if args[1] then
         local targetPlayers = getPlayer(args[1], speaker)
         for _, target in pairs(targetPlayers) do
@@ -12695,7 +12662,59 @@ addcmd("sidebang", {"sideface", "siderape"}, function(args, speaker)
             local targetPlayerName = Players[target].Name
 
             while task.wait() do
-                if not isbanging then
+                if isbanging == false then
+                    break
+                end
+
+                local targetCharacter = Players[targetPlayerName].Character
+                if targetCharacter then
+                    local targetRoot = getTorso(targetCharacter)
+                    local speakerRoot = getRoot(speaker.Character)
+
+                    if targetRoot and speakerRoot then
+                        -- Calculate the offset position
+                        local offset = args[2] == "left" and Vector3.new(-1.1, 0, 0) or Vector3.new(1.1, 0, 0)
+
+                        -- Calculate the facing direction
+                        local lookAt = (targetRoot.Position - speakerRoot.Position).Unit
+
+                        -- Update the speaker's position and orientation
+                        speakerRoot.CFrame = CFrame.new(targetRoot.Position + offset, targetRoot.Position)
+                        speakerRoot.Velocity = Vector3.zero
+                    end
+                end
+            end
+        end
+    end
+end)
+
+addcmd("earbang", {"earrape", "siderape", 'sidebang'}, function(args, speaker)
+    if args[1] then
+        local targetPlayers = getPlayer(args[1], speaker)
+        for _, target in pairs(targetPlayers) do
+            execCmd("unbang")
+            task.wait()
+            isbanging = true
+
+            local humanoid = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+            local bangAnim = Instance.new("Animation")
+            bangAnim.AnimationId = not r15(speaker) and "rbxassetid://148840371" or "rbxassetid://5918726674"
+
+            local bang = humanoid:LoadAnimation(bangAnim)
+            bang:Play(0.1, 1, 1)
+            bang:AdjustSpeed(args[3] or 2)
+
+            bangDiedConnection = humanoid.Died:Connect(function()
+                bang:Stop()
+                bangAnim:Destroy()
+                bangDiedConnection:Disconnect()
+                isbanging = false
+            end)
+
+            local targetPlayerName = Players[target].Name
+
+            while task.wait() do
+                if isbanging == false then
                     break
                 end
                 local targetRoot = getTorso(Players[targetPlayerName].Character)
@@ -12891,7 +12910,6 @@ addcmd("unhug", {"unkiss", "unbiden"}, function(args, speaker)
     end
     ishugging = false
 end)
-
 local isAttached = false
 local animations = {
     attachAnim_1 = nil,
@@ -12920,9 +12938,6 @@ addcmd("backpack", {"attach"}, function(args, speaker)
             if humanoid and root then
                 if humanoid.RigType == Enum.HumanoidRigType.R6 then
                     humanoid.Sit = true
-                    animations.sitAnim = Instance.new("Animation")
-                    animations.sitAnim.AnimationId = "http://www.roblox.com/asset/?id=178130996"
-
                     animations.attachAnim_1 = Instance.new("Animation")
                     animations.attachAnim_2 = Instance.new("Animation")
                     animations.attachAnim_1.AnimationId = "rbxassetid://225975820"
@@ -12945,7 +12960,7 @@ addcmd("backpack", {"attach"}, function(args, speaker)
                 end)
 
                 local attachPlayerName = Players[target].Name
-                local backOffset = CFrame.new(0, 0, 1)
+                local backOffset = CFrame.new(0, 0, 1) * CFrame.Angles(0, math.pi, 0)
 
                 connections.jumpConnection = humanoid.Jumping:Connect(function(active)
                     if active and isAttached then
@@ -12961,13 +12976,12 @@ addcmd("backpack", {"attach"}, function(args, speaker)
 
                     local targetRoot = getRoot(targetPlayer.Character)
                     if targetRoot and root then
-                        root.CFrame = targetRoot.CFrame * backOffset * CFrame.Angles(0, math.pi, 0)
+                        root.CFrame = targetRoot.CFrame * backOffset
                         root.Velocity = Vector3.zero
                     end
                 end
-                execCmd("unbackpack")
             else
-                notify("Backpack", "Something went wrong.")
+                notify("backpack", "Character not found")
                 isAttached = false
             end
         end
@@ -12975,31 +12989,32 @@ addcmd("backpack", {"attach"}, function(args, speaker)
 end)
 
 addcmd("unbackpack", {"detach"}, function(_, speaker)
-    if animations.anim_1 then animations.anim_1:Stop() end
-    if animations.anim_2 then animations.anim_2:Stop() end
-    if animations.sitAnim then animations.sitAnim:Stop() end
+    isAttached = false
 
-    if animations.attachAnim_1 then animations.attachAnim_1:Destroy() end
-    if animations.attachAnim_2 then animations.attachAnim_2:Destroy() end
-    if animations.sitAnim then animations.sitAnim:Destroy() end
+    for _, anim in pairs(animations) do
+        if anim then
+            anim:Stop()
+            anim:Destroy()
+        end
+    end
 
-    if connections.attachDied then connections.attachDied:Disconnect() end
-    if connections.jumpConnection then connections.jumpConnection:Disconnect() end
+    for _, conn in pairs(connections) do
+        if conn then
+            conn:Disconnect()
+        end
+    end
 
     animations = {
         attachAnim_1 = nil,
         attachAnim_2 = nil,
         sitAnim = nil,
         anim_1 = nil,
-        anim_2 = nil
+        anim_2 = nil,
     }
-
     connections = {
         attachDied = nil,
-        jumpConnection = nil
+        jumpConnection = nil,
     }
-
-    isAttached = false
 
     local humanoid = speaker.Character and speaker.Character:FindFirstChildWhichIsA("Humanoid")
     local root = humanoid and getRoot(speaker.Character)
