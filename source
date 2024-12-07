@@ -12179,7 +12179,7 @@ end)
 
 addcmd('solaraexplorer', {'solaradex'}, function(args, speaker)
 	notify('Loading', 'Hold on a sec')
-	(loadstring or load)(game:HttpGet("https://raw.githubusercontent.com/ryxeleron/infiniteyield-reborn/master/Elements/SolaraDex"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/ryxeleron/infiniteyield-reborn/master/Elements/Dex"))()
 end)
 
 addcmd('secureexplorer', {'securedex', "bypasseddex"}, function(args, speaker)
