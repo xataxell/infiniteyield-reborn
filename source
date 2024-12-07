@@ -13355,36 +13355,50 @@ end)
 
 
 simRadius = false
-addcmd('simulationradius',{'simradius','setsimradius'},function(args, speaker)
-	if sethidden then		
-		simRadLoop = game:GetService('RunService').Stepped:Connect(function()
-			if setsimulation then
-				setsimulation(1e308, 1/0)
-			else	
-				sethidden(speaker,"MaximumSimulationRadius",1/0)
-				sethidden(speaker,"SimulationRadius", 1e308)
-			end
-		end)
-		simRadius = true
-	else
-		notify('Incompatible Exploit','Your exploit does not support this command (missing sethiddenproperty)')
-	end
+addcmd('simulationradius', {'simradius', 'setsimradius'}, function(args, speaker)
+    if sethidden then
+        local success, err = pcall(function()
+            simRadLoop = game:GetService('RunService').Stepped:Connect(function()
+                if setsimulation then
+                    setsimulation(1e308, 1 / 0)
+                else
+                    sethidden(speaker, "MaximumSimulationRadius", 1 / 0)
+                    sethidden(speaker, "SimulationRadius", 1e308)
+                end
+            end)
+        end)
+
+        if success then
+            simRadius = true
+        else
+            notify('Error', 'Failed to set simulation radius: ' .. tostring(err))
+        end
+    else
+        notify('Incompatible Exploit', 'Your exploit does not support this command (missing sethiddenproperty)')
+    end
 end)
 
-addcmd('nosimulationradius',{'nosimradius','unsimradius'},function(args, speaker)
-	if sethidden then		
-		if simRadLoop then simRadLoop:Disconnect() end
-		wait()
-		if setsimulation then
-			setsimulation(139,139)
-		else	
-			sethidden(speaker,"MaximumSimulationRadius",139)
-			sethidden(speaker,"SimulationRadius", 139)
-		end
-		simRadius = false
-	else
-		notify('Incompatible Exploit','Your exploit does not support this command (missing sethiddenproperty)')
-	end
+addcmd('nosimulationradius', {'nosimradius', 'unsimradius'}, function(args, speaker)
+    if sethidden then
+        local success, err = pcall(function()
+            if simRadLoop then simRadLoop:Disconnect() end
+            task.wait()
+            if setsimulation then
+                setsimulation(139, 139)
+            else
+                sethidden(speaker, "MaximumSimulationRadius", 139)
+                sethidden(speaker, "SimulationRadius", 139)
+            end
+        end)
+
+        if success then
+            simRadius = false
+        else
+            notify('Error', 'Failed to reset simulation radius: ' .. tostring(err))
+        end
+    else
+        notify('Incompatible Exploit', 'Your exploit does not support this command (missing sethiddenproperty)')
+    end
 end)
 
 addcmd('grabtools', {}, function(args, speaker)
