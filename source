@@ -8453,16 +8453,20 @@ addcmd('disable',{},function(args, speaker)
 	end
 end)
 
-addcmd("report", {},function(args, speaker)
-	local players = getPlayer(args[1], speaker)
-	for _, rplayer in pairs(players) do
-		local rreason = args[2] or "Bullying"
-		local adinfo = args[3] or "He is breaking Roblox TOS."
-
-		Players:ReportAbuse(game.Players[rplayer], rreason, adinfo)
-
-		notify("Report Abuse", "Reported "..rplayer.." for "..rreason..". ["..adinfo.."]")
-	end
+addcmd("report", {}, function(args, speaker)
+    local players = getPlayer(args[1], speaker)
+    for _, rplayer in pairs(players) do
+        local rreason = args[2] or "Bullying"
+        local adinfo = args[3] or "He is breaking Roblox TOS."
+        
+        local success, err = pcall(function()
+            Players:ReportAbuse(game.Players[rplayer], rreason, adinfo)
+        end)
+        
+        if not success then
+            notify("Report Abuse Failed", "Failed to report " .. tostring(rplayer) .. ". Error: " .. tostring(err))
+        end
+    end
 end)
 
 local invisGUIS = {}
@@ -10654,11 +10658,21 @@ end)
 end)
 
 addcmd("promptr6", {}, function(args, speaker)
-    promptNewRig(speaker, "R6")
+    local success, err = pcall(function()
+        promptNewRig(speaker, "R6")
+    end)
+    if not success then
+        notify("Prompt", "Failed to prompt: " .. tostring(err))
+    end
 end)
 
 addcmd("promptr15", {}, function(args, speaker)
-    promptNewRig(speaker, "R15")
+    local success, err = pcall(function()
+        promptNewRig(speaker, "R15")
+    end)
+    if not success then
+        notify("Prompt", "Failed to prompt: " .. tostring(err))
+    end
 end)
 
 addcmd('age',{},function(args, speaker)
@@ -11788,8 +11802,10 @@ addcmd('animspeedloop', {'loopanimspeed'}, function(args, speaker)
                 end
             end
         end)
+    --[[
     else
         notify('Error', 'Humanoid not found, try respawning?')
+	]]
     end
 end)
 
