@@ -69,7 +69,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyie
 - **Developer:** [FurryBoy](https://discordapp.com/users/773291558492438578)
 - **Developer:** [AwesomeDudeIsHere](https://github.com/AwesomeDudeIsHere)
 - **Developer:** [CasualDev](https://discordapp.com/users/1095404503647391754)
-- **Developer:** [Azula.cs](https://api.infiniteyieldreborn.xyz/)
+- **Developer:** [Azula.cs](https://api.infiniteyieldreborn.xyz/) (inactive)
 
 ### IYR Contributors
 - **Contributor:** [Ry](https://github.com/ryxeleron)
