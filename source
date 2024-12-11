@@ -4694,8 +4694,10 @@ CMDs[#CMDs + 1] = {NAME = 'bang / rape [player] [speed]', DESC = 'Fucks someone 
 CMDs[#CMDs + 1] = {NAME = 'facebang / facefuck / facerape [player] [speed]', DESC = 'Fucks someone in the face (NSFW)'}
 CMDs[#CMDs + 1] = {NAME = 'blow / blower / blowjob [player] [speed]', DESC = 'Fucks someone in the face (NSFW)'}
 CMDs[#CMDs + 1] = {NAME = 'unblow / unblower / unblowjob [player] [speed]', DESC = 'Another variant of facebang (NSFW)'}
-CMDs[#CMDs + 1] = {NAME = 'unbang / unrape / unfacefuck / unfacebang / unfacerape', DESC = 'Stops the rape.'}
 CMDs[#CMDs + 1] = {NAME = 'chokeon / suckon [player] [lower / upper]', DESC = 'Chokes someones private part(s) (NSFW)'}
+CMDs[#CMDs + 1] = {NAME = 'masturbate / jerkoff / meatbeat [speed]', DESC = 'Masturbates. (NSFW)'}
+CMDs[#CMDs + 1] = {NAME = 'unmasturbate / stopjerkoff / stopmeatbeat', DESC = 'Masturbates. (NSFW)'}
+CMDs[#CMDs + 1] = {NAME = 'unbang / unrape / unfacefuck / unfacebang / unfacerape', DESC = 'Stops the rape.'}
 CMDs[#CMDs + 1] = {NAME = 'unchokeon / unsuckon', DESC = 'Stops the choking.'}
 CMDs[#CMDs + 1] = {NAME = 'hug / kiss / biden [player] [front / back]', DESC = 'Hugs someone.'}
 CMDs[#CMDs + 1] = {NAME = 'unhug / unkiss / unbiden', DESC = 'Stops the hugging.'}
@@ -13233,6 +13235,26 @@ addcmd("unblower", {'unblow', 'unblowbang', 'unblowjob'}, function()
     end
 end)
 
+addcmd("unmasturbate", {"stopjerkoff", "stopmeatbeat"}, function(args, speaker)
+    if loopConnection1 then loopConnection1:Disconnect() end
+    if loopConnection2 then loopConnection2:Disconnect() end
+
+    if mstrbt_1 and mstrbt_2 then
+        mstrbt_1:Stop()
+        mstrbt_2:Stop()
+        mstrbt_1.Animation:Destroy()
+        mstrbt_2.Animation:Destroy()
+        mstrbt_1, mstrbt_2 = nil, nil
+    end
+
+    if mstrbtDied then
+        mstrbtDied:Disconnect()
+        mstrbtDied = nil
+    end
+
+    ismasturbating = false
+end)
+
 addcmd('carpet',{},function(args, speaker)
 	local players = getPlayer(args[1], speaker)
 	if not r15(speaker) then
@@ -13259,26 +13281,6 @@ addcmd('carpet',{},function(args, speaker)
 	else
 		notify('R6 Required','This command requires the r6 rig type')
 	end
-end)
-
-addcmd("unmasturbate", {"stopjerkoff", "stopmeatbeat"}, function(args, speaker)
-    if loopConnection1 then loopConnection1:Disconnect() end
-    if loopConnection2 then loopConnection2:Disconnect() end
-
-    if mstrbt_1 and mstrbt_2 then
-        mstrbt_1:Stop()
-        mstrbt_2:Stop()
-        mstrbt_1.Animation:Destroy()
-        mstrbt_2.Animation:Destroy()
-        mstrbt_1, mstrbt_2 = nil, nil
-    end
-
-    if mstrbtDied then
-        mstrbtDied:Disconnect()
-        mstrbtDied = nil
-    end
-
-    ismasturbating = false
 end)
 
 addcmd('uncarpet',{'nocarpet'},function(args, speaker)
