@@ -7939,7 +7939,7 @@ addcmd("tweenfly",{},function(args, LocalPlayer)
 	end
 end)
 
-addcmd("untweenfly",{"notweenfly"},"Stops you from flying",function()
+addcmd("untweenfly",{"notweenfly"},function()
 	stopFlying()
 end)
 
