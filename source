@@ -7899,8 +7899,7 @@ local mobilefly = function(speaker, vfly)
 end
 
 addcmd('fly',{},function(args, speaker)
-    execCmd('untweenfly//unfly//unvfly//uncfly')
-    wait(2)
+    execCmd('untweenfly\\unfly\\unvfly\\uncfly')
 	if not IsOnMobile then
 		NOFLY()
 		task.wait()
@@ -7923,7 +7922,7 @@ addcmd('flyspeed',{'flysp', 'tweenflyspeed', 'tweenflysp', 'vflysp','vehicleflys
 end)
 
 addcmd("tweenfly",{"tfly", 'twfly'},function(args, LocalPlayer)
-    execCmd('untweenfly//unfly//unvfly//uncfly')
+    execCmd('untweenfly\\unfly\\unvfly\\uncfly')
     wait()
 	flySpeed = tonumber(args[1]) or 1
 	if isOnMobile then
@@ -7939,7 +7938,7 @@ addcmd('unfly',{'nofly','novfly','unvehiclefly','novehiclefly','unvfly', 'notwee
 end)
 
 addcmd('vfly',{'vehiclefly'},function(args, speaker)
-    execCmd('untweenfly//unfly//unvfly//uncfly')
+    execCmd('untweenfly\\unfly\\unvfly\\uncfly')
     wait()
 	if not IsOnMobile then
 		NOFLY()
