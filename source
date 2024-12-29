@@ -26,7 +26,7 @@ local startTime = tick()
   ]]
 
 if IY_LOADED and not _G.IY_DEBUG == true then
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/scriptblox/uselessscriptthatexistsinthisrepoiwin'))()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/master/uselessscriptthatexistsinthisrepoiwin'))()
 	return
 end
 
@@ -45,7 +45,7 @@ if not game:IsLoaded() then
 	notLoaded:Destroy()
 end
 
-currentVersion = '6.3.5'
+currentVersion = '6.3.7'
 
 -- Go to line 12602 for 4nn1's Place stuff
 -- For _Real: Add more useless stuff and also add more bang-type commands. (NON-NSFW)
@@ -6377,7 +6377,7 @@ local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if KeepInfYield and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/scriptblox/source'))()")
+		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/master/source'))()")
 	end
 end)
 
@@ -15896,7 +15896,7 @@ IYMouse.Move:Connect(checkTT)
 
 local function iyonloadstuff(shouldpopupannouncement)
 	local success, latestVersionInfo = pcall(function() 
-		local versionJson = game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/scriptblox/version')
+		local versionJson = game:HttpGet('https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/master/version')
 		return HttpService:JSONDecode(versionJson)
 	end)
 
