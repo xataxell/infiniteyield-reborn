@@ -11,7 +11,7 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/master/source"))()
 ```
 
-## IYStore x IYR (NFSW Plugins Removed / Reorganized)
+## IYStore x IYR (Debloated / No NSFW)
 
 ```lua
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RyXeleron/infiniteyield-reborn/refs/heads/master/Infinite%20Store"))()
