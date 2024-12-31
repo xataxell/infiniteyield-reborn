@@ -46,6 +46,7 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/RyXeleron/infiniteyi
 - Trimmed down unused or broken commands
 - Now includes counters for Plugins, Aliases, Keybinds, and Waypoints
 - Actually has an OnLeave detection.
+- Being the source of the main IY's updates (ehhh maybe, i've saw them adding shits from mine before :sob:)
 
 ![image](https://github.com/user-attachments/assets/fee6dd58-e438-47ab-b4a3-1f14f2a2d80b)
 
