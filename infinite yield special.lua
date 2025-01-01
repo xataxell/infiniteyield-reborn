@@ -1,4 +1,16 @@
---// 
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--// SECRET SUICIDE (FB_REAL) COMMAND, EXECUTE FOR A SUPRISE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 if IY_LOADED and not _G.IY_DEBUG == true then
     -- error("Infinite Yield is already running!", 0)
@@ -207,7 +219,7 @@ Title.BorderSizePixel = 0
 Title.Size = UDim2.new(0, 250, 0, 20)
 Title.Font = Enum.Font.SourceSans
 Title.TextSize = 18
-Title.Text = 'Infinite Yield X'
+Title.Text = 'fb_real suicide FE v2.0.25'
 
 do
 	local emoji = ({
